@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="navigation padded">
+    <%= link_to t('.previous', default: 'Previous'), deputy_path(@previous_id), class: 'btn btn-primary' %>
+    <%= link_to t('.home', default: 'Home'), root_path, class: 'btn btn-success' %>
+    <%= link_to t('.next', default: 'Next'), deputy_path(@next_id), class: 'btn btn-primary' %>
+  </div>
+  <div class="profile">
+    <h1>
+      <%= "#{@deputy.civ} #{@deputy.firstname} #{@deputy.lastname}" %>
+    </h1>
+    <p>
+      Born on <%= @deputy.birthday.strftime('%B %d, %Y') %> in the department of <%= @deputy.birthdep %>
+    </p>
+    <p>
+      Job: <%= @deputy.job.label %> (<%= @deputy.job.category %> | <%= @deputy.job.family %>)
+    </p>
+  </div>
+</div>

@@ -9,11 +9,19 @@ namespace :deputies do
 
     def create_job_instance(deputy)
       job = deputy['profession']
-      attributes = {
-        label: job['libelleCourant'],
-        category: job['socProcINSEE']['catSocPro'],
-        family: job['socProcINSEE']['famSocPro']
-      }
+      if job['libelleCourant'].nil?
+        attributes = {
+          label: 'NR',
+          category: 'NR',
+          family: 'NR'
+        }
+      else
+        attributes = {
+          label: job['libelleCourant'],
+          category: job['socProcINSEE']['catSocPro'],
+          family: job['socProcINSEE']['famSocPro']
+        }
+      end
       Job.create(attributes)
     end
 
@@ -61,25 +69,50 @@ namespace :deputies do
       attributes = {
         label: address['typeLibelle'],
         value: address['valElec'],
-        deputy_id: Deputy.last
+        deputy_id: Deputy.last.id
       }
       EAddress.create(attributes)
     end
 
     def create_phone_instance(address)
+      if Address.find_by_original_tag(address['adresseDeRattachement'])
+        attached = Address.find_by_original_tag(address['adresseDeRattachement'])
+      elsif Address.where(deputy_id: Deputy.last.id).where(label: 'NR') != []
+        attached = Address.where(deputy_id: Deputy.last.id).where(label: 'NR').first
+      else
+        attributes = {
+          label: 'NR',
+          description: 'NR',
+          value: 'NR',
+          more_info: 'NR',
+          postcode: 'NR',
+          city: 'NR',
+          original_tag: 'NR',
+          deputy_id: Deputy.last.id
+        }
+        Address.create(attributes)
+        attached = Address.last
+      end
       attributes = {
         label: address['typeLibelle'],
         value: address['numeroTelephone'],
-        address_id: Address.find_by_original_tag(address['adresseDeRattachement']).id
+        address_id: attached.id
       }
       Phone.create(attributes)
     end
 
     def run
-      deputy = open_json['export']['acteurs']['acteur'].first
-      create_job_instance(deputy)
-      create_deputy_instance(deputy)
-      dispatch_address_info(deputy)
+      puts 'Seed starting'
+      x = 1
+      open_json['export']['acteurs']['acteur'].each do |deputy|
+        print "Seeding deputy ##{x}: "
+        create_job_instance(deputy)
+        create_deputy_instance(deputy)
+        dispatch_address_info(deputy)
+        puts "done"
+        x += 1
+      end
+      puts "Done!"
     end
 
     run
