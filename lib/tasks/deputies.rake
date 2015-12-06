@@ -61,7 +61,7 @@ namespace :deputies do
       attributes = {
         label: address['typeLibelle'],
         value: address['valElec'],
-        deputy_id: Deputy.last
+        deputy_id: Deputy.last.id
       }
       EAddress.create(attributes)
     end
