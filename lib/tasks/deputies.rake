@@ -9,11 +9,19 @@ namespace :deputies do
 
     def create_job_instance(deputy)
       job = deputy['profession']
-      attributes = {
-        label: job['libelleCourant'],
-        category: job['socProcINSEE']['catSocPro'],
-        family: job['socProcINSEE']['famSocPro']
-      }
+      if job['libelleCourant'].nil?
+        attributes = {
+          label: 'NR',
+          category: 'NR',
+          family: 'NR'
+        }
+      else
+        attributes = {
+          label: job['libelleCourant'],
+          category: job['socProcINSEE']['catSocPro'],
+          family: job['socProcINSEE']['famSocPro']
+        }
+      end
       Job.create(attributes)
     end
 
