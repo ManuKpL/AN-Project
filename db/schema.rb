@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206155318) do
+ActiveRecord::Schema.define(version: 20151206161056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,9 +23,6 @@ ActiveRecord::Schema.define(version: 20151206155318) do
     t.string   "more_info"
     t.string   "postcode"
     t.string   "city"
-    t.string   "phone"
-    t.string   "phone_2"
-    t.string   "fax"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "original_tag"
@@ -80,6 +77,16 @@ ActiveRecord::Schema.define(version: 20151206155318) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "phones", force: :cascade do |t|
+    t.string   "label"
+    t.string   "value"
+    t.integer  "address_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "phones", ["address_id"], name: "index_phones_on_address_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -103,4 +110,5 @@ ActiveRecord::Schema.define(version: 20151206155318) do
   add_foreign_key "deputies", "jobs"
   add_foreign_key "e_coordinates", "deputies"
   add_foreign_key "e_coordinates", "e_addresses"
+  add_foreign_key "phones", "addresses"
 end
