@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def home
-    @deputy = Deputy.first
+    @deputy = Deputy.order(:lastname).first
   end
 end
