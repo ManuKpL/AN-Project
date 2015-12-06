@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206142110) do
+ActiveRecord::Schema.define(version: 20151206142752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,23 @@ ActiveRecord::Schema.define(version: 20151206142110) do
 
   add_index "deputies", ["job_id"], name: "index_deputies_on_job_id", using: :btree
 
+  create_table "e_addresses", force: :cascade do |t|
+    t.string   "label"
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "e_coordinates", force: :cascade do |t|
+    t.integer  "deputy_id"
+    t.integer  "e_address_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "e_coordinates", ["deputy_id"], name: "index_e_coordinates_on_deputy_id", using: :btree
+  add_index "e_coordinates", ["e_address_id"], name: "index_e_coordinates_on_e_address_id", using: :btree
+
   create_table "jobs", force: :cascade do |t|
     t.string   "label"
     t.string   "category"
@@ -82,4 +99,6 @@ ActiveRecord::Schema.define(version: 20151206142110) do
   add_foreign_key "coordinates", "addresses"
   add_foreign_key "coordinates", "deputies"
   add_foreign_key "deputies", "jobs"
+  add_foreign_key "e_coordinates", "deputies"
+  add_foreign_key "e_coordinates", "e_addresses"
 end
