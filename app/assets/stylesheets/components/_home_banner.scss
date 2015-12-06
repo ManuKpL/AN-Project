@@ -1,0 +1,28 @@
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  z-index: 0;
+  color: white;
+  background-image: image-url('home_banner.jpg');
+  background-size: cover;
+  background-position: center;
+  &-shadow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: linear-gradient(75deg, rgba(46,86,134,0.4) 30%, rgba(50,90,140,0.3) 70%);
+  }
+  &-content {
+    z-index: 2;
+  }
+  &-menu {
+    display: flex;
+    justify-content: space-between;
+  }
+}
