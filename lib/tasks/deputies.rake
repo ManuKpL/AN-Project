@@ -2,19 +2,8 @@ namespace :deputies do
 
   desc 'open AN JSON and seed DB'
   task :seed => :environment do
-    def run
-      deputy = open_json['export']['acteurs']['acteur'].first
-      create_job_instance(deputy)
-      create_deputy_instance(deputy)
-      dispatch_address_info(deputy)
-    end
-
-    run
-
-    private
-
     def open_json
-      filepath = '../../app/data/AMO10_deputes_actifs_mandats_actifs_organes_XIV.json'
+      filepath = 'app/data/AMO10_deputes_actifs_mandats_actifs_organes_XIV.json'
       JSON.parse(File.open(filepath).read)
     end
 
@@ -36,7 +25,8 @@ namespace :deputies do
         lastname: status['ident']['nom'],
         birthday: status['infoNaissance']['dateNais'],
         birthdep: status['infoNaissance']['depNais'],
-        job_id: Job.last
+        job_id: Job.last.id,
+        original_tag: deputy['uid']['#text']
       }
       Deputy.create(attributes)
     end
@@ -46,7 +36,7 @@ namespace :deputies do
       deputy['adresses']['adresse'].each do |e|
         create_address_instance(e) unless e['intitule'].nil?
         create_e_address_instance(e) unless e['valElec'].nil?
-        phone << e unless e['typeLibelle'].match(/télé/).nil?
+        phone << e unless e['typeLibelle'].match(/Télé/).nil?
       end
       phone.each do |e|
         create_phone_instance(e)
@@ -62,7 +52,7 @@ namespace :deputies do
         postcode: address['codePostal'],
         city: address['ville'],
         original_tag: address['uid'],
-        deputy_id: Deputy.last
+        deputy_id: Deputy.last.id
       }
       Address.create(attributes)
     end
@@ -80,9 +70,18 @@ namespace :deputies do
       attributes = {
         label: address['typeLibelle'],
         value: address['numeroTelephone'],
-        address_id: Address.find_by_original_tag(address['adresseDeRattachement'])
+        address_id: Address.find_by_original_tag(address['adresseDeRattachement']).id
       }
       Phone.create(attributes)
     end
+
+    def run
+      deputy = open_json['export']['acteurs']['acteur'].first
+      create_job_instance(deputy)
+      create_deputy_instance(deputy)
+      dispatch_address_info(deputy)
+    end
+
+    run
   end
 end
