@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206161056) do
+ActiveRecord::Schema.define(version: 20151206161813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,17 +26,10 @@ ActiveRecord::Schema.define(version: 20151206161056) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "original_tag"
-  end
-
-  create_table "coordinates", force: :cascade do |t|
     t.integer  "deputy_id"
-    t.integer  "address_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
-  add_index "coordinates", ["address_id"], name: "index_coordinates_on_address_id", using: :btree
-  add_index "coordinates", ["deputy_id"], name: "index_coordinates_on_deputy_id", using: :btree
+  add_index "addresses", ["deputy_id"], name: "index_addresses_on_deputy_id", using: :btree
 
   create_table "deputies", force: :cascade do |t|
     t.string   "civ"
@@ -57,17 +50,10 @@ ActiveRecord::Schema.define(version: 20151206161056) do
     t.string   "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "e_coordinates", force: :cascade do |t|
     t.integer  "deputy_id"
-    t.integer  "e_address_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
   end
 
-  add_index "e_coordinates", ["deputy_id"], name: "index_e_coordinates_on_deputy_id", using: :btree
-  add_index "e_coordinates", ["e_address_id"], name: "index_e_coordinates_on_e_address_id", using: :btree
+  add_index "e_addresses", ["deputy_id"], name: "index_e_addresses_on_deputy_id", using: :btree
 
   create_table "jobs", force: :cascade do |t|
     t.string   "label"
@@ -105,10 +91,8 @@ ActiveRecord::Schema.define(version: 20151206161056) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "coordinates", "addresses"
-  add_foreign_key "coordinates", "deputies"
+  add_foreign_key "addresses", "deputies"
   add_foreign_key "deputies", "jobs"
-  add_foreign_key "e_coordinates", "deputies"
-  add_foreign_key "e_coordinates", "e_addresses"
+  add_foreign_key "e_addresses", "deputies"
   add_foreign_key "phones", "addresses"
 end
