@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206142752) do
+ActiveRecord::Schema.define(version: 20151206155318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(version: 20151206142752) do
     t.string   "phone"
     t.string   "phone_2"
     t.string   "fax"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "original_tag"
   end
 
   create_table "coordinates", force: :cascade do |t|
@@ -47,8 +48,9 @@ ActiveRecord::Schema.define(version: 20151206142752) do
     t.date     "birthday"
     t.string   "birthdep"
     t.integer  "job_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "original_tag"
   end
 
   add_index "deputies", ["job_id"], name: "index_deputies_on_job_id", using: :btree
