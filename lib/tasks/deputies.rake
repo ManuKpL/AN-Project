@@ -76,10 +76,11 @@ namespace :deputies do
     end
 
     def run
-      deputy = open_json['export']['acteurs']['acteur'].first
-      create_job_instance(deputy)
-      create_deputy_instance(deputy)
-      dispatch_address_info(deputy)
+      open_json['export']['acteurs']['acteur'].each do |deputy|
+        create_job_instance(deputy)
+        create_deputy_instance(deputy)
+        dispatch_address_info(deputy)
+      end
     end
 
     run
