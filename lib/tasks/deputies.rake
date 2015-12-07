@@ -51,17 +51,30 @@ namespace :deputies do
       end
     end
 
+    def set_value(address)
+      if address['nomRue'].nil?
+        return 'NR'
+      elsif address['numeroRue'].nil?
+        return address['nomRue']
+      else
+        return "#{address['numeroRue']}, #{address['nomRue']}"
+      end
+    end
+
     def create_address_instance(address)
       attributes = {
         label: address['typeLibelle'],
         description: address['intitule'],
-        value: "#{address['numeroRue']}, #{address['nomRue']}",
+        value: set_value(address),
         more_info: address['complementAdresse'],
         postcode: address['codePostal'],
         city: address['ville'],
         original_tag: address['uid'],
         deputy_id: Deputy.last.id
       }
+      attributes[:value].chop! if attributes[:value][-1] == ","
+      attributes[:description].chop! if attributes[:description][-1] == ","
+      attributes[:more_info].chop! if attributes[:more_info] != nil && attributes[:more_info][-1] == ","
       Address.create(attributes)
     end
 
