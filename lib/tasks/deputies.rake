@@ -55,13 +55,15 @@ namespace :deputies do
       attributes = {
         label: address['typeLibelle'],
         description: address['intitule'],
-        value: "#{address['numeroRue']}, #{address['nomRue']}",
+        value: "#{address['numeroRue']}, #{address['nomRue'].gsub(',','')}",
         more_info: address['complementAdresse'],
         postcode: address['codePostal'],
         city: address['ville'],
         original_tag: address['uid'],
         deputy_id: Deputy.last.id
       }
+      attributes['value'] = 'NR' if attributes['value'] == ","
+      attributes['more_info'].chop! if attributes['more_info'][-1] == ","
       Address.create(attributes)
     end
 

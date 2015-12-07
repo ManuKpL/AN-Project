@@ -16,20 +16,26 @@
     </p>
     <h3>Addresses</h3>
     <% @deputy.addresses.order(:label).each do |address| %>
-      <h4>
-        <%= address.label %>: <%= address.description %>
-      </h4>
-      <p>
-        <%= address.value %>
-      </p>
-      <% unless address.more_info.nil? %>
+      <% if address.label == 'NR' %>
+        <h4>
+          No associated address
+        </h4>
+      <% else %>
+        <h4>
+          <%= address.label %>: <%= address.description %>
+        </h4>
         <p>
-          <%= address.more_info %>
+          <%= address.value %>
+        </p>
+        <% unless address.more_info.nil? %>
+          <p>
+            <%= address.more_info %>
+          </p>
+        <% end %>
+        <p>
+          <%= address.postcode %> <%= address.city %>
         </p>
       <% end %>
-      <p>
-        <%= address.postcode %> <%= address.city %>
-      </p>
       <% unless address.phones.empty? %>
         <% address.phones.each do |e| %>
           <p>
