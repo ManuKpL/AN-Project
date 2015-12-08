@@ -7,7 +7,11 @@ class DeputiesController < ApplicationController
       ids_list << e.id
     end
     @previous_id = Deputy.find(ids_list[ids_list.find_index(params[:id].to_i) - 1])
-    @next_id = Deputy.find(ids_list[ids_list.find_index(params[:id].to_i) + 1])
+    if ids_list[ids_list.find_index(params[:id].to_i) + 1]
+      @next_id = Deputy.find(ids_list[ids_list.find_index(params[:id].to_i) + 1])
+    else
+      @next_id = Deputy.find(ids_list.first)
+    end
   end
 
   private
