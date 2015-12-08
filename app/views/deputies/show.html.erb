@@ -5,6 +5,7 @@
     <%= link_to t('.next', default: 'Next'), deputy_path(@next_id), class: 'btn btn-primary' %>
   </div>
   <div class="profile">
+    <%= image_tag("http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg") %>
     <h1>
       <%= "#{@deputy.civ} #{@deputy.firstname} #{@deputy.lastname}" %>
     </h1>
