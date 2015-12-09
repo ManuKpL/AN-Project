@@ -1,0 +1,12 @@
+.home-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-item: center;
+  max-width: 520px;
+  z-index: 2;
+  &-items {
+    flex: 0 0 36px;
+    margin: 2px;
+  }
+}
