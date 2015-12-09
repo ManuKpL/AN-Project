@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   resources :deputies, only: :show
 
   devise_for :users

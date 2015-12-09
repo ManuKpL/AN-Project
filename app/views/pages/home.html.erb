@@ -4,7 +4,14 @@
     <h1>AN Project</h1>
     <div class="banner-menu">
       <%= link_to t('.browse', default: 'Browse'), deputy_path(@deputy), class: "btn btn-primary btn-lg" %>
-      <%= link_to t('.login', default: 'Login'), new_user_session_path, class: "btn btn-info btn-lg" %>
+      <% if user_signed_in? %>
+        <% if current_user.admin? %>
+          <%= link_to t('.admin', default: 'Admin'), admin_root_path, class: "btn btn-success btn-lg" %>
+        <% end %>
+        <%= link_to t('.logout', default: 'Log out'), destroy_user_session_path, method: :delete, class: "btn btn-warning btn-lg" %>
+      <% else %>
+        <%= link_to t('.login', default: 'Login'), new_user_session_path, class: "btn btn-info btn-lg" %>
+      <% end %>
     </div>
   </div>
 </div>
