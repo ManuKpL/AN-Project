@@ -14,4 +14,9 @@
       <% end %>
     </div>
   </div>
+  <div class="home-list padded">
+    <% ('A'..'Z').to_a.each do |letter| %>
+      <%= link_to letter, '#', class: 'home-list-items btn btn-primary' %>
+    <% end %>
+  </div>
 </div>
