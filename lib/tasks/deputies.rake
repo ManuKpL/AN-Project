@@ -149,7 +149,10 @@ namespace :deputies do
       CSV.foreach(filepath, csv_options) do |row|
         print "Seeding deputy ##{x}: "
         deputy = Deputy.where(lastname: row['Nom'], firstname: row['Prénom']).first
-        deputy.screen_name = row['At'] unless deputy.nil?
+        unless deputy.nil?
+          deputy.screen_name = row['At']
+          deputy.save
+        end
         puts 'done'
         x += 1
       end
