@@ -22,7 +22,12 @@ namespace :deputies do
           family: job['socProcINSEE']['famSocPro']
         }
       end
-      Job.create(attributes)
+      if Job.where(attributes).empty?
+        Job.create(attributes)
+        @job = Job.last
+      else
+        @job = Job.where(attributes).first
+      end
     end
 
     def create_deputy_instance(deputy)
@@ -33,7 +38,7 @@ namespace :deputies do
         lastname: status['ident']['nom'],
         birthday: status['infoNaissance']['dateNais'],
         birthdep: status['infoNaissance']['depNais'],
-        job_id: Job.last.id,
+        job_id: @job.id,
         original_tag: deputy['uid']['#text']
       }
       Deputy.create(attributes)
