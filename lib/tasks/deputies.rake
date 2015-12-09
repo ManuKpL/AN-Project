@@ -1,3 +1,5 @@
+require 'csv'
+
 namespace :deputies do
 
   desc 'open AN JSON and seed DB'
@@ -127,10 +129,31 @@ namespace :deputies do
         create_job_instance(deputy)
         create_deputy_instance(deputy)
         dispatch_address_info(deputy)
-        puts "done"
+        puts 'done'
         x += 1
       end
-      puts "Done!"
+      puts 'Done!'
+    end
+
+    run
+  end
+
+  desc 'open my CSV and seed screen_names'
+  task :twitter => :environment do
+
+    def run
+      puts 'Seed starting'
+      x = 1
+      csv_options = { col_sep: ',', quote_char: '"', headers: :first_row }
+      filepath = 'app/data/screen_names.csv'
+      CSV.foreach(filepath, csv_options) do |row|
+        print "Seeding deputy ##{x}: "
+        deputy = Deputy.where(lastname: row['Nom'], firstname: row['Prénom']).first
+        deputy.screen_name = row['At'] unless deputy.nil?
+        puts 'done'
+        x += 1
+      end
+      puts 'Done!'
     end
 
     run
