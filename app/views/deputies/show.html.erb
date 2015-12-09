@@ -16,6 +16,13 @@
       <%= "#{@deputy.civ} #{@deputy.firstname} #{@deputy.lastname}" %>
     </h1>
     <p>
+      <% if @deputy.screen_name.nil? %>
+        No Twitter account
+      <% else %>
+        <%= link_to "@#{@deputy.screen_name}", "https://twitter.com/#{@deputy.screen_name}", target: "_blank" %>
+      <% end %>
+    </p>
+    <p>
       Born on <%= @deputy.birthday.strftime('%B %d, %Y') %> in the department of <%= @deputy.birthdep %>
     </p>
     <p>
