@@ -7,9 +7,10 @@ ActiveAdmin.register Deputy do
     column :civ
     column :firstname
     column :lastname
-    column :original_tag
     column :screen_name
+    column :original_tag
     column :job
+    column :updated_at
     actions
   end
 end
