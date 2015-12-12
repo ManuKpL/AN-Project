@@ -1,35 +1,48 @@
 <div class="container">
+  <!-- flexbox version -->
+  <div class="profile-card">
+    <div class="profile-card-initial-ldouble profile-card-initial-ldouble-container">
+      <div class="profile-card-initial bg-dark-blue">
+        <%= @deputy.lastname[0] %>
+      </div>
+      <!-- <div class='profile-picture' style='background-image: url("<%#= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg"%>")'></div> -->
+      <div class="profile-picture-container">
+        <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg", class: "profile-picture" %>
+      </div>
+    </div>
+    <%= link_to deputy_path(@previous_id), class: 'profile-card-initial profile-card-initial-ldouble bg-black' do %>
+      <i class="fa fa-arrow-left"></i>
+      <%= "#{@previous_id.civ} #{@previous_id.firstname} #{@previous_id.lastname}" %>
+    <% end %>
+    <%= link_to root_path, class: 'profile-card-initial profile-card-initial-hdouble bg-blue' do %>
+      <i class="fa fa-university"></i>
+    <% end %>
+    <%= link_to deputy_path(@next_id), class: 'profile-card-initial profile-card-initial-ldouble bg-black' do %>
+      <%= "#{@next_id.civ} #{@next_id.firstname} #{@next_id.lastname}" %>
+      <i class="fa fa-arrow-right"></i>
+    <% end %>
+    <% if @deputy.screen_name.nil? %>
+      <div class="profile-card-initial profile-card-initial-ldouble bg-black">
+        ?
+      </div>
+    <% else %>
+      <%= link_to "https://twitter.com/#{@deputy.screen_name}", target: '_blank', class: 'profile-card-initial profile-card-initial-ldouble bg-grey' do %>
+        <%= "@#{@deputy.screen_name}" %>
+      <% end %>
+    <% end %>
+  </div>
   <div class="navigation margin-top">
     <%= link_to deputy_path(@previous_id), class: 'btn navigation-btn' do %>
       <i class="fa fa-arrow-left"></i>
       <%= "#{@previous_id.civ} #{@previous_id.firstname} #{@previous_id.lastname}" %>
     <% end %>
-    <%= link_to t('.home', default: 'Home'), root_path, class: 'btn navigation-btn navigation-btn-lg' %>
+    <%= link_to root_path, class: 'btn navigation-btn navigation-btn-lg' do %>
+      <i class="fa fa-university"></i>
+    <% end %>
     <%= link_to deputy_path(@next_id), class: 'btn navigation-btn' do %>
       <%= "#{@next_id.civ} #{@next_id.firstname} #{@next_id.lastname}" %>
       <i class="fa fa-arrow-right"></i>
     <% end %>
-  </div>
-  <!-- flexbox version -->
-  <div class="profile-card">
-    <div class="profile-card-content">
-      <div class="profile-card-initial profile-card-initial-hdouble bg-blue">
-        H
-      </div>
-      <div class="profile-card-initial-ldouble profile-card-initial-ldouble-container">
-        <div class="profile-picture" style="background-image: url('<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>')"></div>
-        <div class="profile-card-initial bg-dark-blue">
-          <%= @deputy.lastname[0] %>
-        </div>
-      </div>
-      <div class="profile-card-initial profile-card-initial-ldouble bg-black">
-        <% if @deputy.screen_name.nil? %>
-          ?
-        <% else %>
-          <%= link_to "@#{@deputy.screen_name}", "https://twitter.com/#{@deputy.screen_name}", target: "_blank" %>
-        <% end %>
-      </div>
-    </div>
   </div>
   <div class="profile">
     <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>

@@ -3,23 +3,22 @@
   padding: 2em;
   box-shadow: 1px 1px 1px rgb(230,230,230);
   &-picture {
-    width: 200px;
-    height: 200px;
-    background-position: center;
-    background-size: cover;
-    margin: 5px;
+    margin: 3.5px 22px;
+    &-container {
+      width: 200px;
+      height: 200px;
+      background-color: rgb(20,20,20);
+      margin: 5px;
+    }
   }
   &-card {
-    position: relative;
-    margin: 200px 0;
+    margin: 200px auto;
+    width: 90%;
     align-items: center;
-    &-content {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      height: 420px;
-      width: 420px;
-    }
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 420px;
     &-initial {
       height: 200px;
       width: 200px;
@@ -28,9 +27,6 @@
       text-align: center;
       line-height: 200px;
       margin: 5px;
-      a {
-        color: white;
-      }
       &-ldouble {
         width: 400px;
         font-size: 32px;
@@ -45,6 +41,14 @@
       &-hdouble {
         line-height: 410px;
         height: 410px;
+      }
+    }
+    a {
+      color: white;
+      &:hover {
+        text-decoration: none;
+        background-color: rgb(150,150,150);
+        color: rgb(80,80,80);
       }
     }
   }
