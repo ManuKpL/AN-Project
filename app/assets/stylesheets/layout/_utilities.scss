@@ -27,3 +27,9 @@
 .bg-dark-blue {
   background: #3b5998;
 }
+
+body {
+  background-image: image-url('animus.jpg');
+  background-size: cover;
+  min-height: 100vh;
+}

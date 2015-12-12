@@ -10,8 +10,29 @@
       <i class="fa fa-arrow-right"></i>
     <% end %>
   </div>
+  <!-- flexbox version -->
+  <div class="profile-card">
+    <div class="profile-card-content">
+      <div class="profile-card-initial profile-card-initial-hdouble bg-blue">
+        H
+      </div>
+      <div class="profile-card-initial-ldouble profile-card-initial-ldouble-container">
+        <div class="profile-picture" style="background-image: url('<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>')"></div>
+        <div class="profile-card-initial bg-dark-blue">
+          <%= @deputy.lastname[0] %>
+        </div>
+      </div>
+      <div class="profile-card-initial profile-card-initial-ldouble bg-black">
+        <% if @deputy.screen_name.nil? %>
+          ?
+        <% else %>
+          <%= link_to "@#{@deputy.screen_name}", "https://twitter.com/#{@deputy.screen_name}", target: "_blank" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
   <div class="profile">
-    <%= image_tag("http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg") %>
+    <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>
     <h1>
       <%= "#{@deputy.civ} #{@deputy.firstname} #{@deputy.lastname}" %>
     </h1>
