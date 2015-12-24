@@ -5,9 +5,7 @@
       <div class="profile-card-initial bg-dark-blue">
         <%= @deputy.lastname[0] %>
       </div>
-      <!-- <div class='profile-picture' style='background-image: url("<%#= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg"%>")'></div> -->
-      <div class="profile-picture-container">
-        <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg", class: "profile-picture" %>
+      <div class="profile-picture" style='background-image: url(<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>)'>
       </div>
     </div>
     <%= link_to deputy_path(@previous_id), class: 'profile-card-initial profile-card-initial-ldouble bg-black' do %>
