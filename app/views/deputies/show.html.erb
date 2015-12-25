@@ -62,9 +62,9 @@
             </h3>
           <% end %>
           <% if @deputy.screen_name.nil? %>
-            <div class="profile-card-element bg-blue">
+            <div class="profile-card-element" id='no-twitter-account'>
               <h3>
-                ?
+                <i class="fa fa-twitter"></i>
               </h3>
             </div>
           <% else %>
