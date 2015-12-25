@@ -1,6 +1,6 @@
-$base-size: 48%;
-$base-margin: 1%;
-$double-size: 98%;
+$base-margin: 2%;
+$base-size: 50% - $base-margin * 2;
+$double-size: 100% - $base-margin * 2;
 
 #nav {
   flex-direction: column;
@@ -31,6 +31,7 @@ $double-size: 98%;
       margin: $base-margin;
       height: $base-size;
       width: $base-size;
+      border-radius: 3px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -65,6 +66,7 @@ $double-size: 98%;
       width: $base-size;
       height: $base-size;
       margin: $base-margin;
+      border-radius: 3px;
       position: relative;
       background: linear-gradient(0deg, rgb(254,254,255) 10%, #9DB8D3 80%);
     }
