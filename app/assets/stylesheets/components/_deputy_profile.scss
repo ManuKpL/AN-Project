@@ -1,3 +1,6 @@
+$base-size: 100px;
+$base-margin: 5px;
+
 .profile {
   background-color: white;
   padding: 2em;
@@ -5,31 +8,35 @@
   &-picture {
     background-size: cover;
     baclground-position: center;
-    width: 100px;
-    height: 100px;
-    margin: 5px;
+    width: $base-size;
+    height: $base-size;
+    margin: $base-margin;
   }
   &-card {
-    margin: 100px auto;
+    margin: 100px 0px;
     width: 520px;
     align-items: center;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    height: 220px;
+    height: $base-size * 2 + $base-margin * 4;
     &-initial {
-      height: 100px;
-      width: 100px;
+      width: $base-size;
       color: white;
-      font-size: 40px;
       text-align: center;
-      line-height: 100px;
-      margin: 5px;
-      &-ldouble {
-        width: 200px;
-        font-size: 14px;
+      margin: $base-margin;
+      height: $base-size;
+      line-height: $base-size;
+      h3 {
+        font-size: 40px;
+        margin: 0px;
+        line-height: inherit;
+      }
+      &-wdouble {
+        width: ($base-size + $base-margin) * 2;
+        font-size: 16px;
         &-container {
-          width: 210px;
+          width: $base-size * 2 + $base-margin * 4;
           display: flex;
           flex-direction: row;
           justify-content: center;
@@ -37,8 +44,8 @@
         }
       }
       &-hdouble {
-        line-height: 210px;
-        height: 210px;
+        height: ($base-size + $base-margin) * 2;
+        line-height: ($base-size + $base-margin) * 2;
       }
     }
     a {
