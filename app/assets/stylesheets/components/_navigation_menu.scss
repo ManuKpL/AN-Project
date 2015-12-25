@@ -8,9 +8,11 @@
   &-btn {
     padding: 0px 6px 0px 6px;
     margin: 12px;
+    flex: 0 0 200px;
     &-lg {
       font-size: 18px;
       font-weight: bold;
+      flex: 0 0 200px;
     }
   }
   a {
