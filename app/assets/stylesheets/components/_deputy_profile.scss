@@ -1,51 +1,47 @@
-$base-size: 100px;
-$base-margin: 5px;
+$base-size: 48%;
+$base-margin: 1%;
+$double-size: 98%;
+
+#nav {
+  flex-direction: column;
+}
+
+.my-col {
+  padding-left: 0px;
+  padding-right: 0px;
+}
 
 .profile {
-  background-color: white;
-  padding: 2em;
-  box-shadow: 1px 1px 1px rgb(230,230,230);
-  &-picture {
-    background-size: cover;
-    baclground-position: center;
-    width: $base-size;
-    height: $base-size;
-    margin: $base-margin;
+  &-element {
+    position: relative;
+    height: 0;
+    padding-top: 100%;
   }
   &-card {
-    margin: 100px 0px;
-    width: 520px;
     align-items: center;
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    height: $base-size * 2 + $base-margin * 4;
-    &-initial {
+    &-element {
       width: $base-size;
-      color: white;
-      text-align: center;
       margin: $base-margin;
       height: $base-size;
-      line-height: $base-size;
+      width: $base-size;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
       h3 {
         font-size: 40px;
         margin: 0px;
-        line-height: inherit;
+      }
+      p {
+        font-size: 22px;
       }
       &-wdouble {
-        width: ($base-size + $base-margin) * 2;
-        font-size: 16px;
-        &-container {
-          width: $base-size * 2 + $base-margin * 4;
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          margin: 0px;
-        }
+        width: $double-size;
       }
       &-hdouble {
-        height: ($base-size + $base-margin) * 2;
-        line-height: ($base-size + $base-margin) * 2;
+        height: $double-size;
       }
     }
     a {
@@ -56,5 +52,21 @@ $base-margin: 5px;
         color: rgb(80,80,80);
       }
     }
+  }
+  &-picture {
+    background-repeat: no-repeat;
+    background-position: center;
+    &-filling-bg {
+      width: $base-size;
+      height: $base-size;
+      margin: $base-margin;
+      position: relative;
+      background: linear-gradient(0deg, rgb(254,254,255) 10%, #9DB8D3 80%);
+    }
+  }
+  &-page {
+    background-color: white;
+    padding: 2em;
+    box-shadow: 1px 1px 1px rgb(230,230,230);
   }
 }
