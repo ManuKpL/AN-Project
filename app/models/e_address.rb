@@ -1,5 +1,5 @@
 class EAddress < ActiveRecord::Base
   belongs_to :deputy
 
-  validates :deputy_id, presence: true
+  validates_presence_of :deputy_id, :label, :value
 end

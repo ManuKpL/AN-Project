@@ -1,5 +1,5 @@
 class Phone < ActiveRecord::Base
   belongs_to :address
 
-  validates :address_id, presence: true
+  validates_presence_of :address_id, :label, :value
 end

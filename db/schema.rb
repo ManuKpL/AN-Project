@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208232143) do
+ActiveRecord::Schema.define(version: 20151226203717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 20151208232143) do
 
   add_index "addresses", ["deputy_id"], name: "index_addresses_on_deputy_id", using: :btree
 
+  create_table "circonscriptions", force: :cascade do |t|
+    t.string   "former_region"
+    t.string   "department"
+    t.integer  "department_num"
+    t.integer  "circo_num"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "deputies", force: :cascade do |t|
     t.string   "civ"
     t.string   "firstname"
@@ -57,8 +66,10 @@ ActiveRecord::Schema.define(version: 20151208232143) do
     t.datetime "updated_at",   null: false
     t.string   "original_tag"
     t.string   "screen_name"
+    t.integer  "group_id"
   end
 
+  add_index "deputies", ["group_id"], name: "index_deputies_on_group_id", using: :btree
   add_index "deputies", ["job_id"], name: "index_deputies_on_job_id", using: :btree
 
   create_table "e_addresses", force: :cascade do |t|
@@ -71,12 +82,59 @@ ActiveRecord::Schema.define(version: 20151208232143) do
 
   add_index "e_addresses", ["deputy_id"], name: "index_e_addresses_on_deputy_id", using: :btree
 
+  create_table "functions", force: :cascade do |t|
+    t.string   "original_tag"
+    t.date     "starting_date"
+    t.string   "status"
+    t.string   "organe_type"
+    t.integer  "deputy_id"
+    t.integer  "organe_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "functions", ["deputy_id"], name: "index_functions_on_deputy_id", using: :btree
+  add_index "functions", ["organe_id"], name: "index_functions_on_organe_id", using: :btree
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "sigle"
+    t.integer  "organe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "groups", ["organe_id"], name: "index_groups_on_organe_id", using: :btree
+
   create_table "jobs", force: :cascade do |t|
     t.string   "label"
     t.string   "category"
     t.string   "family"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "mandates", force: :cascade do |t|
+    t.integer  "deputy_id"
+    t.string   "original_tag"
+    t.string   "substitute_original_tag"
+    t.date     "starting_date"
+    t.string   "reason"
+    t.integer  "circonscription_id"
+    t.integer  "seat_num"
+    t.string   "hatvp_page"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "mandates", ["circonscription_id"], name: "index_mandates_on_circonscription_id", using: :btree
+  add_index "mandates", ["deputy_id"], name: "index_mandates_on_deputy_id", using: :btree
+
+  create_table "organes", force: :cascade do |t|
+    t.string   "original_tag"
+    t.string   "label"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "current",      default: true
   end
 
   create_table "phones", force: :cascade do |t|
@@ -109,7 +167,13 @@ ActiveRecord::Schema.define(version: 20151208232143) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "addresses", "deputies"
+  add_foreign_key "deputies", "groups"
   add_foreign_key "deputies", "jobs"
   add_foreign_key "e_addresses", "deputies"
+  add_foreign_key "functions", "deputies"
+  add_foreign_key "functions", "organes"
+  add_foreign_key "groups", "organes"
+  add_foreign_key "mandates", "circonscriptions"
+  add_foreign_key "mandates", "deputies"
   add_foreign_key "phones", "addresses"
 end
