@@ -2,5 +2,5 @@ class Address < ActiveRecord::Base
   belongs_to :deputy
   has_many :phones
 
-  validates :deputy_id, presence: true
+  validates_presence_of :deputy_id, :label, :value
 end
