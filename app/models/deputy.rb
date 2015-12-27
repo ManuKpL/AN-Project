@@ -10,4 +10,5 @@ class Deputy < ActiveRecord::Base
   has_many :organes, through: :functions
 
   validates_presence_of :job_id, :group_id, :civ, :firstname, :lastname, :original_tag
+  validates_uniqueness_of :original_tag
 end
