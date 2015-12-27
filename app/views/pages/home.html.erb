@@ -16,7 +16,7 @@
   </div>
   <div class="home-list padded">
     <% ('A'..'Z').to_a.each do |letter| %>
-      <%= link_to letter, deputies_path(search: letter), class: 'home-list-items btn btn-primary' %>
+      <%= link_to letter, deputies_path(search: letter), class: "home-list-item btn btn-primary#{check_status(letter)}" %>
     <% end %>
   </div>
 </div>
