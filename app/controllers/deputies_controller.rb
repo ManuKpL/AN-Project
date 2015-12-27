@@ -1,5 +1,6 @@
 class DeputiesController < ApplicationController
   before_action :set_deputy, only: :show
+  before_action :set_group, only: :index
 
   def show
     ids_list = []
@@ -15,12 +16,16 @@ class DeputiesController < ApplicationController
   end
 
   def index
-    raise
+    redirect_to root_path if @deputies.empty?
   end
 
   private
 
   def set_deputy
     @deputy = Deputy.find(params[:id].to_i)
+  end
+
+  def set_group
+    @deputies = Deputy.where('lastname LIKE ?', "#{params[:search]}%").order(:lastname)
   end
 end
