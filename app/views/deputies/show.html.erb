@@ -56,7 +56,7 @@
       <div class="profile-element">
         <div class="profile-card cover-position">
 
-          <%= link_to '#', class: 'profile-card-element profile-card-element-wdouble bg-dark-blue' do %>
+          <%= link_to deputies_path(search: @deputy.group.sigle), class: 'profile-card-element profile-card-element-wdouble bg-dark-blue' do %>
             <h3>
               <%= @deputy.group.sigle %>
             </h3>
