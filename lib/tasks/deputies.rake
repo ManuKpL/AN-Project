@@ -1,9 +1,14 @@
 require 'csv'
 
 namespace :deputies do
+  desc 'seed DB by calling all deputies rake tasks'
+  task :seed => :environment
+    Rake::Task['deputies:deputies'].invoke
+    Rake::Task['deputies:twitter'].invoke
+  end
 
   desc 'open AN JSON and seed DB'
-  task :seed => :environment do
+  task :deputies => :environment do
     def open_json
       filepath = 'app/data/AMO10_deputes_actifs_mandats_actifs_organes_XIV.json'
       JSON.parse(File.open(filepath).read)
@@ -133,7 +138,6 @@ namespace :deputies do
         x += 1
       end
       puts 'Done!'
-      Rake::Task['deputies:twitter'].invoke
     end
 
     run
