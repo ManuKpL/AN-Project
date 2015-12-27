@@ -58,10 +58,10 @@
 
           <%= link_to '#', class: 'profile-card-element profile-card-element-wdouble bg-dark-blue' do %>
             <h3>
-              LR
+              <%= @deputy.group.sigle %>
             </h3>
           <% end %>
-          <% if @deputy.screen_name.nil? %>
+          <% if @deputy.screen_name.length == 0 %>
             <div class="profile-card-element" id='no-twitter-account'>
               <h3>
                 <i class="fa fa-twitter"></i>
@@ -109,7 +109,7 @@
       <%= "#{@deputy.civ} #{@deputy.firstname} #{@deputy.lastname}" %>
     </h1>
     <p>
-      <% if @deputy.screen_name.nil? %>
+      <% if @deputy.screen_name.length == 0 %>
         No Twitter account
       <% else %>
         <%= link_to "@#{@deputy.screen_name}", "https://twitter.com/#{@deputy.screen_name}", target: "_blank" %>
