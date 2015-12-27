@@ -6,6 +6,21 @@
       <% end %>
     </div>
   </div>
-  <h1><%= @deputies.first.lastname %></h1>
-  <h1><%= @deputies.last.lastname %></h1>
+  <div class="deputies-list">
+    <% @deputies.each do |deputy| %>
+      <%= link_to deputy_path(deputy.id), class: 'list-card' do %>
+        <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{deputy.original_tag[2..-1]}.jpg", class: 'list-card-picture' %>
+        <p class="list-card-name">
+          <%= "#{deputy.civ} #{deputy.firstname} #{deputy.lastname}" %>
+        </p>
+        <p class="list-card-sigle">
+          <%= deputy.group.sigle %>
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+  <% deputy = @deputies.first %>
 </div>
+
+
+
