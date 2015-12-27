@@ -3,6 +3,8 @@ namespace :mandates do
   task :seed => :environment do
     Rake::Task['mandates:mandates'].invoke
     Rake::Task['mandates:organes'].invoke
+    Rake::Task['mandates:groups'].invoke
+    # Rake::Task['mandates:functions'].invoke
   end
 
   desc 'open AN JSON and seed organes'
@@ -101,5 +103,119 @@ namespace :mandates do
     end
 
     run
+  end
+
+  desc 'open AN JSON and seed GP for each deputy'
+  task :groups => :environment do
+    def open_json
+      filepath = 'app/data/AMO10_deputes_actifs_mandats_actifs_organes_XIV.json'
+      JSON.parse(File.open(filepath).read)
+    end
+
+    def find_organe_instance(mandate)
+      Organe.find_by(original_tag: mandate['organes']['organeRef'])
+    end
+
+    def find_deputy_instance(deputy)
+      Deputy.find_by(original_tag: deputy['uid']['#text'])
+    end
+
+    def siglify(label)
+      if label == 'Écologiste'
+        return label
+      else
+        result = []
+        label.scan(/[\wàÀâÂäÄéÉèÈêÊëËìÌîÎïÏòÒôÔöÖùÙûÛüÜ]+/).each do |word|
+          result << word[0].capitalize if word.length > 2 && word != 'des'
+        end
+        return result.join('')
+      end
+    end
+
+    def find_group_instance(organe)
+      attributes = {
+        sigle: siglify(organe.label),
+        organe_id: organe.id
+      }
+      if Group.where(attributes).empty?
+        Group.create(attributes)
+        return Group.last
+      else
+        return Group.where(attributes).first
+      end
+    end
+
+    def run
+      puts 'Seed starting'
+      x = 1
+      open_json['export']['acteurs']['acteur'].each do |deputy|
+        print "Seeding for deputy ##{x}. "
+        deputy['mandats']['mandat'].each do |mandate|
+          organe = find_organe_instance(mandate)
+          if mandate['typeOrgane'] == 'GP' && organe.current && mandate['infosQualite']['codeQualite'] != 'Président'
+            print "Creating GP: "
+            deputy_instance = find_deputy_instance(deputy)
+            deputy_instance.group_id = find_group_instance(organe).id
+            deputy_instance.save
+            puts 'done'
+          end
+        end
+        x += 1
+      end
+      puts 'Done!'
+    end
+
+    run
+  end
+
+  desc 'open AN JSON and seed functions other than mandates and GP'
+  task :functions => :environment do
+    def open_json
+      filepath = 'app/data/AMO10_deputes_actifs_mandats_actifs_organes_XIV.json'
+      JSON.parse(File.open(filepath).read)
+    end
+
+    def find_deputy_instance(deputy)
+      Deputy.find_by(original_tag: deputy['uid']['#text'])
+    end
+
+    def find_organe_instance(function)
+      Organe.find_by(original_tag: function['organes']['organeRef'])
+    end
+
+    def create_function_instance(function, deputy)
+      attributes = {
+        original_tag: function['uid'],
+        starting_date: function['dateDebut'],
+        status: function['infosQualite']['libQualiteSex'],
+        organe_type: function['typeOrgane'],
+        deputy_id: find_deputy_instance(deputy).id,
+        organe_id: find_organe_instance(function).id
+      }
+      Function.create(attributes)
+    end
+
+    def run
+      puts 'Seed starting'
+      x = 1
+      open_json['export']['acteurs']['acteur'].each do |deputy|
+        print "Seeding for deputy ##{x}: "
+        y = 1
+        deputy['mandats']['mandat'].each do |function|
+          if function['election'].nil? || function['election']['lieu']['region'].nil?
+            unless mandate['typeOrgane'] == 'GP' && find_organe_instance(mandate).current && mandate['infosQualite']['codeQualite'] != 'Président'
+              create_function_instance(function, deputy)
+              y += 1
+            end
+          end
+        end
+        puts "#{y} functions done"
+        x += 1
+      end
+      puts 'Done!'
+    end
+
+    # NB: not a priority
+    # run
   end
 end
