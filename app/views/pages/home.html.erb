@@ -3,20 +3,27 @@
   <div class="banner-content">
     <h1>AN Project</h1>
     <div class="banner-menu">
-      <%= link_to t('.browse', default: 'Browse'), deputy_path(@deputy), class: "btn btn-primary btn-lg" %>
+      <%= link_to t('.browse', default: 'Browse'), deputy_path(@deputy), class: "btn btn-primary btn-lg banner-menu-item" %>
       <% if user_signed_in? %>
         <% if current_user.admin? %>
-          <%= link_to t('.admin', default: 'Admin'), admin_root_path, class: "btn btn-success btn-lg" %>
+          <%= link_to t('.admin', default: 'Admin'), admin_root_path, class: "btn btn-success btn-lg banner-menu-item" %>
         <% end %>
-        <%= link_to t('.logout', default: 'Log out'), destroy_user_session_path, method: :delete, class: "btn btn-warning btn-lg" %>
+        <%= link_to t('.logout', default: 'Log out'), destroy_user_session_path, method: :delete, class: "btn btn-warning btn-lg banner-menu-item" %>
       <% else %>
-        <%= link_to t('.login', default: 'Login'), new_user_session_path, class: "btn btn-info btn-lg" %>
+        <%= link_to t('.login', default: 'Login'), new_user_session_path, class: "btn btn-info btn-lg banner-menu-item" %>
       <% end %>
     </div>
+    <div class="padded">
+      <div class="home-list">
+        <% ('A'..'Z').to_a.each do |letter| %>
+          <%= link_to letter, deputies_path(search: letter), class: "home-list-item btn btn-primary #{check_status(letter)}" %>
+        <% end %>
+      </div>
+      <div class="home-list">
+        <% @groups.each do |group| %>
+          <%= link_to group.sigle, deputies_path(search: group.sigle), class: "btn btn-primary#{check_status(group.sigle)}" %>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <!-- <div class="home-list padded"> -->
-    <%# ('A'..'Z').to_a.each do |letter| %>
-      <%#= link_to letter, '#', class: 'home-list-items btn btn-primary' %>
-    <%# end %>
-  <!-- </div> -->
 </div>

@@ -8,12 +8,12 @@
   background-image: image-url('home_banner.jpg');
   background-size: cover;
   background-position: center;
+  position: relative;
   &-shadow {
     position: absolute;
     top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    height: 100%;
+    width: 100%;
     background: linear-gradient(75deg, rgba(46,86,134,0.4) 30%, rgba(50,90,140,0.3) 70%);
   }
   &-content {
@@ -22,9 +22,19 @@
   &-menu {
     display: flex;
     justify-content: space-between;
+    &-item {
+      margin-top: 1px;
+      min-width: 110px;
+    }
   }
   h1 {
     font-size: 100px;
     margin-bottom: 50px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .banner-menu {
+    flex-direction: column;
   }
 }

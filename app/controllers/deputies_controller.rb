@@ -1,5 +1,7 @@
 class DeputiesController < ApplicationController
-  before_action :set_deputy
+  before_action :set_deputy, only: :show
+  before_action :set_group, only: :index
+  helper_method :check_status
 
   def show
     ids_list = []
@@ -14,9 +16,30 @@ class DeputiesController < ApplicationController
     end
   end
 
+  def index
+    redirect_to root_path if @deputies.empty?
+  end
+
   private
 
   def set_deputy
     @deputy = Deputy.find(params[:id].to_i)
+  end
+
+  def set_group
+    if params[:search].length == 1
+      @deputies = Deputy.where('lastname LIKE ?', "#{params[:search]}%").order(:lastname)
+    else
+      @deputies = Deputy.where(group_id: Group.find_by(sigle: params[:search]).id).order(:lastname)
+    end
+    @groups = Group.order(:sigle)
+  end
+
+  def check_status(element)
+    if element.length == 1 && Deputy.where('lastname LIKE ?', "#{element}%").empty?
+      " disabled"
+    elsif element == params[:search]
+      " btn-success"
+    end
   end
 end

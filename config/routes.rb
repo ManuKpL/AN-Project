@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
-  resources :deputies, only: :show
+  resources :deputies, only: [:show, :index]
 
   devise_for :users
   root to: 'pages#home'
