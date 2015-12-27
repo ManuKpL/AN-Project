@@ -1,5 +1,5 @@
 class DeputiesController < ApplicationController
-  before_action :set_deputy
+  before_action :set_deputy, only: :show
 
   def show
     ids_list = []
@@ -12,6 +12,10 @@ class DeputiesController < ApplicationController
     else
       @next_id = Deputy.find(ids_list.first)
     end
+  end
+
+  def index
+    raise
   end
 
   private
