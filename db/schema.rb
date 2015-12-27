@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151226203717) do
+ActiveRecord::Schema.define(version: 20151227144235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 20151226203717) do
     t.string   "hatvp_page"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.boolean  "substitute"
   end
 
   add_index "mandates", ["circonscription_id"], name: "index_mandates_on_circonscription_id", using: :btree

@@ -1,4 +1,9 @@
 namespace :mandates do
+  desc 'seed DB by calling all mandates rake tasks'
+  task :seed => :environment do
+    Rake::Task['mandates:mandates'].invoke
+    Rake::Task['mandates:organes'].invoke
+  end
 
   desc 'open AN JSON and seed organes'
   task :organes => :environment do
@@ -7,16 +12,11 @@ namespace :mandates do
       JSON.parse(File.open(filepath).read)
     end
 
-    def find_current_organes
-      open_json['export']['organes']['organe'].select do |e|
-        e['viMoDe']['dateFin'].nil?
-      end
-    end
-
     def create_organe_instance(organe)
       attributes = {
         original_tag: organe['uid'],
-        label: organe['libelle']
+        label: organe['libelle'],
+        current: organe['viMoDe']['dateFin'].nil?
       }
       Organe.create(attributes)
     end
@@ -24,7 +24,7 @@ namespace :mandates do
     def run
       puts 'Seed starting'
       x = 1
-      find_current_organes.each do |organe|
+      open_json['export']['organes']['organe'].each do |organe|
         print "Seeding organe ##{x}: "
         create_organe_instance(organe)
         puts 'done'
@@ -36,4 +36,70 @@ namespace :mandates do
     run
   end
 
+  desc 'open AN JSON and seed deputies mandates'
+  task :mandates => :environment do
+    def open_json
+      filepath = 'app/data/AMO10_deputes_actifs_mandats_actifs_organes_XIV.json'
+      JSON.parse(File.open(filepath).read)
+    end
+
+    def find_deputy_instance(deputy)
+      Deputy.find_by(original_tag: deputy['uid']['#text'])
+    end
+
+    def find_circonscription_instance(mandate)
+      location = mandate['election']['lieu']
+      attributes = {
+        former_region: location['region'],
+        department: location['departement'],
+        department_num: location['numDepartement'],
+        circo_num: location['numCirco']
+      }
+      if Circonscription.where(attributes).empty?
+        Circonscription.create(attributes)
+        return Circonscription.last
+      else
+        return Circonscription.where(attributes).first
+      end
+    end
+
+    def create_mandate_instance(mandate, deputy)
+      if mandate['suppleants'].nil?
+        substitute_tag = mandate['mandature']['mandatRemplaceRef']
+      else
+        substitute_tag = mandate['suppleants']['suppleant']['suppleantRef']
+      end
+      attributes = {
+        deputy_id: find_deputy_instance(deputy).id,
+        original_tag: mandate['uid'],
+        substitute: mandate['mandature']['mandatRemplaceRef'].nil?,
+        substitute_original_tag: substitute_tag,
+        starting_date: mandate['dateDebut'],
+        reason: mandate['election']['causeMandat'],
+        circonscription_id: find_circonscription_instance(mandate).id,
+        seat_num: mandate['mandature']['placeHemicycle'].to_i,
+        hatvp_page: mandate['InfosHorsSIAN']['HATVP_URI']
+      }
+      Mandate.create(attributes)
+    end
+
+    def run
+      puts 'Seed starting'
+      x = 1
+      open_json['export']['acteurs']['acteur'].each do |deputy|
+        print "Seeding for deputy ##{x}. "
+        deputy['mandats']['mandat'].each do |mandate|
+          unless mandate['election'].nil? || mandate['election']['lieu']['region'].nil?
+            print "Creating mandate: "
+            create_mandate_instance(mandate, deputy)
+            puts 'done'
+          end
+        end
+        x += 1
+      end
+      puts 'Done!'
+    end
+
+    run
+  end
 end

@@ -1,9 +1,14 @@
 require 'csv'
 
 namespace :deputies do
+  desc 'seed DB by calling all deputies rake tasks'
+  task :seed => :environment do
+    Rake::Task['deputies:deputies'].invoke
+    Rake::Task['deputies:twitter'].invoke
+  end
 
   desc 'open AN JSON and seed DB'
-  task :seed => :environment do
+  task :deputies => :environment do
     def open_json
       filepath = 'app/data/AMO10_deputes_actifs_mandats_actifs_organes_XIV.json'
       JSON.parse(File.open(filepath).read)
@@ -142,12 +147,12 @@ namespace :deputies do
   task :twitter => :environment do
 
     def run
-      puts 'Seed starting'
+      puts 'Twitter seed starting'
       x = 1
       csv_options = { col_sep: ',', quote_char: '"', headers: :first_row }
       filepath = 'app/data/screen_names.csv'
       CSV.foreach(filepath, csv_options) do |row|
-        print "Seeding deputy ##{x}: "
+        print "Twitter for deputy ##{x}: "
         deputy = Deputy.where(lastname: row['Nom'], firstname: row['Prénom']).first
         unless deputy.nil?
           deputy.screen_name = row['At']
@@ -155,6 +160,29 @@ namespace :deputies do
         end
         puts 'done'
         x += 1
+      end
+      puts 'Done!'
+    end
+
+    run
+  end
+
+  desc 'save the modified values in another CSV'
+  task :save => :environment do
+
+    def run
+      puts 'Saving...'
+      csv_options = { col_sep: ',', force_quotes: true, quote_char: '"' }
+      filepath = 'app/data/screen_names.csv'
+      CSV.open(filepath, 'wb', csv_options) do |row|
+        row << ['Prénom', 'Nom', 'At']
+        x = 1
+        Deputy.order(:lastname).each do |deputy|
+          print "Saving deputy ##{x}: "
+          row << [deputy.firstname, deputy.lastname, deputy.screen_name]
+          puts 'done'
+          x += 1
+        end
       end
       puts 'Done!'
     end

@@ -9,5 +9,7 @@ class Deputy < ActiveRecord::Base
   has_many :circonscriptions, through: :mandates
   has_many :organes, through: :functions
 
-  validates_presence_of :job_id, :group_id, :civ, :firstname, :lastname, :original_tag
+  # TO DO validates presence of group_id
+  validates_presence_of :job_id, :civ, :firstname, :lastname, :original_tag
+  validates_uniqueness_of :original_tag
 end
