@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  before_action :set_groups, only: :home
   helper_method :check_status
 
   def home
@@ -8,7 +9,11 @@ class PagesController < ApplicationController
 
   private
 
-  def check_status(letter)
-    Deputy.where('lastname LIKE ?', "#{letter}%").empty? ? " disabled" : ""
+  def check_status(element)
+    "disabled" if element.length == 1 && Deputy.where('lastname LIKE ?', "#{element}%").empty?
+  end
+
+  def set_groups
+    @groups = Group.order(:sigle)
   end
 end

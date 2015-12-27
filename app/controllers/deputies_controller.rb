@@ -27,13 +27,18 @@ class DeputiesController < ApplicationController
   end
 
   def set_group
-    @deputies = Deputy.where('lastname LIKE ?', "#{params[:search]}%").order(:lastname)
+    if params[:search].length == 1
+      @deputies = Deputy.where('lastname LIKE ?', "#{params[:search]}%").order(:lastname)
+    else
+      @deputies = Deputy.where(group_id: Group.find_by(sigle: params[:search]).id).order(:lastname)
+    end
+    @groups = Group.order(:sigle)
   end
 
-  def check_status(letter)
-    if Deputy.where('lastname LIKE ?', "#{letter}%").empty?
+  def check_status(element)
+    if element.length == 1 && Deputy.where('lastname LIKE ?', "#{element}%").empty?
       " disabled"
-    elsif letter == params[:search]
+    elsif element == params[:search]
       " btn-success"
     end
   end
