@@ -2,7 +2,7 @@ require 'csv'
 
 namespace :deputies do
   desc 'seed DB by calling all deputies rake tasks'
-  task :seed => :environment
+  task :seed => :environment do
     Rake::Task['deputies:deputies'].invoke
     Rake::Task['deputies:twitter'].invoke
   end
