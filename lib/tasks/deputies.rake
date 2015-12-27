@@ -161,4 +161,27 @@ namespace :deputies do
 
     run
   end
+
+  desc 'save the modified values in another CSV'
+  task :save => :environment do
+
+    def run
+      puts 'Saving...'
+      csv_options = { col_sep: ',', force_quotes: true, quote_char: '"' }
+      filepath = 'app/data/screen_names.csv'
+      CSV.open(filepath, 'wb', csv_options) do |row|
+        row << ['Prénom', 'Nom', 'At']
+        x = 1
+        Deputy.order(:lastname).each do |deputy|
+          print "Saving deputy ##{x}: "
+          row << [deputy.firstname, deputy.lastname, deputy.screen_name]
+          puts 'done'
+          x += 1
+        end
+      end
+      puts 'Done!'
+    end
+
+    run
+  end
 end
