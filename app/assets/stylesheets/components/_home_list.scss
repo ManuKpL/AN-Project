@@ -2,11 +2,12 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  align-item: center;
-  max-width: 520px;
+  width: 75%;
+  max-width: 600px;
   z-index: 2;
   &-items {
-    flex: 0 0 36px;
+    flex: 0 0 40px;
     margin: 2px;
+    line-height: 28px;
   }
 }
