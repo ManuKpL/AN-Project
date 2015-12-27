@@ -7,16 +7,11 @@ namespace :mandates do
       JSON.parse(File.open(filepath).read)
     end
 
-    def find_current_organes
-      open_json['export']['organes']['organe'].select do |e|
-        e['viMoDe']['dateFin'].nil?
-      end
-    end
-
     def create_organe_instance(organe)
       attributes = {
         original_tag: organe['uid'],
-        label: organe['libelle']
+        label: organe['libelle'],
+        current: organe['viMoDe']['dateFin'].nil?
       }
       Organe.create(attributes)
     end
@@ -24,7 +19,7 @@ namespace :mandates do
     def run
       puts 'Seed starting'
       x = 1
-      find_current_organes.each do |organe|
+      open_json['export']['organes']['organe'].each do |organe|
         print "Seeding organe ##{x}: "
         create_organe_instance(organe)
         puts 'done'
