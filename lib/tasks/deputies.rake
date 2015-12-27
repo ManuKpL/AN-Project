@@ -133,6 +133,7 @@ namespace :deputies do
         x += 1
       end
       puts 'Done!'
+      Rake::Task['deputies:twitter'].invoke
     end
 
     run
@@ -142,12 +143,12 @@ namespace :deputies do
   task :twitter => :environment do
 
     def run
-      puts 'Seed starting'
+      puts 'Twitter seed starting'
       x = 1
       csv_options = { col_sep: ',', quote_char: '"', headers: :first_row }
       filepath = 'app/data/screen_names.csv'
       CSV.foreach(filepath, csv_options) do |row|
-        print "Seeding deputy ##{x}: "
+        print "Twitter for deputy ##{x}: "
         deputy = Deputy.where(lastname: row['Nom'], firstname: row['Prénom']).first
         unless deputy.nil?
           deputy.screen_name = row['At']
