@@ -1,19 +1,9 @@
 class DeputiesController < ApplicationController
-  before_action :set_deputy, only: :show
+  before_action :set_deputy, :set_previous_and_next
   before_action :set_group, only: :index
   helper_method :check_status
 
   def show
-    ids_list = []
-    Deputy.order(:lastname).each do |e|
-      ids_list << e.id
-    end
-    @previous_id = Deputy.find(ids_list[ids_list.find_index(params[:id].to_i) - 1])
-    if ids_list[ids_list.find_index(params[:id].to_i) + 1]
-      @next_id = Deputy.find(ids_list[ids_list.find_index(params[:id].to_i) + 1])
-    else
-      @next_id = Deputy.find(ids_list.first)
-    end
   end
 
   def index
@@ -23,7 +13,24 @@ class DeputiesController < ApplicationController
   private
 
   def set_deputy
-    @deputy = Deputy.find(params[:id].to_i)
+    if params[:id]
+      @deputy = Deputy.find(params[:id].to_i)
+    else
+      @deputy = Deputy.first
+    end
+  end
+
+  def set_previous_and_next
+    ids_list = []
+    Deputy.order(:lastname).each do |e|
+      ids_list << e.id
+    end
+    @previous_id = Deputy.find(ids_list[ids_list.find_index(@deputy.id) - 1])
+    if ids_list[ids_list.find_index(@deputy.id) + 1]
+      @next_id = Deputy.find(ids_list[ids_list.find_index(@deputy.id) + 1])
+    else
+      @next_id = Deputy.find(ids_list.first)
+    end
   end
 
   def set_group
