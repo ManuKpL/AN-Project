@@ -27,8 +27,12 @@ class DeputiesController < ApplicationController
   end
 
   def set_group
-    if params[:search].length == 1
-      @deputies = Deputy.where('lastname LIKE ?', "#{params[:search]}%").order(:lastname)
+    if params[:search].nil?
+      @deputies = []
+    elsif params[:search].length == 1
+      @deputies = Deputy.where('lastname LIKE ?', "#{params[:search].capitalize}%").order(:lastname)
+    elsif Group.find_by(sigle: params[:search]).nil?
+      @deputies = []
     else
       @deputies = Deputy.where(group_id: Group.find_by(sigle: params[:search]).id).order(:lastname)
     end
@@ -38,7 +42,7 @@ class DeputiesController < ApplicationController
   def check_status(element)
     if element.length == 1 && Deputy.where('lastname LIKE ?', "#{element}%").empty?
       " disabled"
-    elsif element == params[:search]
+    elsif element == params[:search].capitalize || element == params[:search].upcase
       " btn-success"
     end
   end
