@@ -37,7 +37,5 @@
 }
 
 body {
-  background-image: image-url('animus.jpg');
-  background-size: cover;
-  min-height: 100vh;
+  background: linear-gradient(25deg, rgb(200,200,200) 30%, rgb(240,240,240) 70%);
 }
