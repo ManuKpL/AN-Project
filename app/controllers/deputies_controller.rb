@@ -26,10 +26,12 @@ class DeputiesController < ApplicationController
   end
 
   def set_group
-    if params[:search].nil? || Group.find_by(sigle: params[:search]).nil?
+    if params[:search].nil?
       @deputies = Deputy.order(:lastname)
     elsif params[:search].length == 1
       @deputies = Deputy.where('lastname LIKE ?', "#{params[:search].capitalize}%").order(:lastname)
+    elsif Group.find_by(sigle: params[:search]).nil?
+      @deputies = Deputy.order(:lastname)
     else
       @deputies = Deputy.where(group_id: Group.find_by(sigle: params[:search]).id).order(:lastname)
     end
