@@ -11,7 +11,8 @@
               <%= @deputy.lastname[0] %>
             </h3>
           <% end %>
-          <div class="profile-picture-filling-bg">
+          <div class="profile-picture-filling-bg" style='background-image: url(<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>)'>
+            <div class="profile-picture-filling-bg-shadow cover-position"></div>
             <div class="profile-picture cover-position" style='background-image: url(<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>)'></div>
           </div>
           <div class="profile-card-element profile-card-element-wdouble bg-black">

@@ -68,7 +68,11 @@ $double-size: 100% - $base-margin * 2;
       margin: $base-margin;
       border-radius: 3px;
       position: relative;
-      background: linear-gradient(0deg, rgb(254,254,255) 10%, #9DB8D3 80%);
+      background-size: cover;
+      background-position: center;
+      &-shadow {
+        background-color: rgba(200,200,200,0.7);
+      }
     }
   }
   &-page {
