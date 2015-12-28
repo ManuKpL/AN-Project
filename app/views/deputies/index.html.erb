@@ -6,11 +6,11 @@
       <% end %>
     </div>
     <div class="home-list">
-      <% @groups.each do |group| %>
-        <%= link_to group.sigle, deputies_path(search: group.sigle), class: "btn btn-primary#{check_status(group.sigle)}" %>
-      <% end %>
-      <%= link_to root_path, class: 'btn btn-primary' do %>
+      <%= link_to root_path, class: 'home-list-group btn btn-primary' do %>
         <i class="fa fa-home"></i>
+      <% end %>
+      <% @groups.each do |group| %>
+        <%= link_to group.sigle, deputies_path(search: group.sigle), class: "home-list-group btn btn-primary#{check_status(group.sigle)}" %>
       <% end %>
     </div>
   </div>

@@ -1,7 +1,7 @@
 .home-list {
   display: flex;
   justify-content: center;
-  margin: auto;
+  margin: 15px auto;
   flex-wrap: wrap;
   max-width: 600px;
   z-index: 2;
@@ -9,5 +9,8 @@
     flex: 0 0 40px;
     margin: 2px;
     line-height: 28px;
+  }
+  &-group {
+    margin: 2px;
   }
 }
