@@ -49,6 +49,13 @@ $double-size: 100% - $base-margin * 2;
       &-hdouble {
         height: $double-size;
       }
+      &-nav {
+        cursor: pointer;
+        &:hover {
+          background-color: rgb(150,150,150);
+          color: rgb(80,80,80);
+        }
+      }
     }
     a {
       color: white;

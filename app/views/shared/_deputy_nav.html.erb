@@ -7,7 +7,7 @@
 
           <%= link_to deputies_path(search: @deputy.lastname[0]), class: 'profile-card-element bg-dark-blue' do %>
             <h3>
-              <%= @deputy.lastname[0] %>
+              <%= @deputy.lastname[0].capitalize %>
             </h3>
           <% end %>
           <div class="profile-picture-filling-bg" style='background-image: url(<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>)'>
@@ -35,16 +35,31 @@
               <i class="fa fa-home"></i>
             </h3>
           <% end %>
-          <%= link_to deputy_path(@previous_id), class: 'profile-card-element bg-grey' do %>
-            <h3>
-              <i class="fa fa-arrow-left"></i>
-            </h3>
+
+          <% if params[:action] == 'index' %>
+            <div class="profile-card-element profile-card-element-nav bg-grey" class="close" data-dismiss="modal" data-toggle="modal" data-target="#deputy_nav_modal_<%= @previous_id.id %>" data-deputy=<%= @previous_id.id %>>
+              <h3>
+                <i class="fa fa-arrow-left"></i>
+              </h3>
+            </div>
+            <div class="profile-card-element profile-card-element-nav bg-grey" class="close" data-dismiss="modal" data-toggle="modal" data-target="#deputy_nav_modal_<%= @next_id.id %>" data-deputy=<%= @next_id.id %>>
+              <h3>
+                <i class="fa fa-arrow-right"></i>
+              </h3>
+            </div>
+          <% else %>
+            <%= link_to deputy_path(@previous_id), class: 'profile-card-element bg-grey' do %>
+              <h3>
+                <i class="fa fa-arrow-left"></i>
+              </h3>
+            <% end %>
+            <%= link_to deputy_path(@next_id), class: 'profile-card-element bg-grey' do %>
+              <h3>
+                <i class="fa fa-arrow-right"></i>
+              </h3>
+            <% end %>
           <% end %>
-          <%= link_to deputy_path(@next_id), class: 'profile-card-element bg-grey' do %>
-            <h3>
-              <i class="fa fa-arrow-right"></i>
-            </h3>
-          <% end %>
+
 
         </div>
       </div>

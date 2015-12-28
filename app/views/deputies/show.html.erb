@@ -8,7 +8,7 @@
 
           <%= link_to deputies_path(search: @deputy.lastname[0]), class: 'profile-card-element bg-dark-blue' do %>
             <h3>
-              <%= @deputy.lastname[0] %>
+              <%= @deputy.lastname[0].capitalize %>
             </h3>
           <% end %>
           <div class="profile-picture-filling-bg" style='background-image: url(<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>)'>
