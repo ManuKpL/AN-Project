@@ -1,104 +1,99 @@
-<!-- bootstrap version -->
-  <div class="row">
-    <!-- id -->
-    <div class="col-xs-12 col-sm-4 my-col">
-      <div class="profile-element">
-        <div class="profile-card cover-position">
+<!-- id -->
+<div class="col-xs-12 col-sm-4 my-col">
+  <div class="profile-element">
+    <div class="profile-card cover-position">
 
-          <%= link_to deputies_path(search: @deputy.lastname[0]), class: 'profile-card-element bg-dark-blue' do %>
-            <h3>
-              <%= @deputy.lastname[0].capitalize %>
-            </h3>
-          <% end %>
-          <div class="profile-picture-filling-bg" style='background-image: url(<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>)'>
-            <div class="profile-picture-filling-bg-shadow cover-position"></div>
-            <div class="profile-picture cover-position" style='background-image: url(<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>)'></div>
-          </div>
-          <div class="profile-card-element profile-card-element-wdouble bg-black">
-            <p>
-              <%= "#{@deputy.civ} #{@deputy.firstname} #{@deputy.lastname}" %>
-            </p>
-          </div>
-
-        </div>
+      <%= link_to deputies_path(search: @deputy.lastname[0]), class: 'profile-card-element bg-dark-blue' do %>
+        <h3>
+          <%= @deputy.lastname[0].capitalize %>
+        </h3>
+      <% end %>
+      <div class="profile-picture-filling-bg" style='background-image: url(<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>)'>
+        <div class="profile-picture-filling-bg-shadow cover-position"></div>
+        <div class="profile-picture cover-position" style='background-image: url(<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>)'></div>
       </div>
-    </div>
-    <!-- id -->
-
-    <!-- nav -->
-    <div class="col-xs-12 col-sm-4 my-col">
-      <div class="profile-element">
-        <div class="profile-card cover-position" id='nav'>
-
-          <%= link_to root_path, class: 'profile-card-element profile-card-element-hdouble bg-blue' do %>
-            <h3>
-              <i class="fa fa-home"></i>
-            </h3>
-          <% end %>
-
-          <% if params[:action] == 'index' %>
-            <div class="profile-card-element profile-card-element-nav bg-grey" class="close" data-dismiss="modal" data-toggle="modal" data-target="#deputy_nav_modal_<%= @previous_id.id %>" data-deputy=<%= @previous_id.id %>>
-              <h3>
-                <i class="fa fa-arrow-left"></i>
-              </h3>
-            </div>
-            <div class="profile-card-element profile-card-element-nav bg-grey" class="close" data-dismiss="modal" data-toggle="modal" data-target="#deputy_nav_modal_<%= @next_id.id %>" data-deputy=<%= @next_id.id %>>
-              <h3>
-                <i class="fa fa-arrow-right"></i>
-              </h3>
-            </div>
-          <% else %>
-            <%= link_to deputy_path(@previous_id), class: 'profile-card-element bg-grey' do %>
-              <h3>
-                <i class="fa fa-arrow-left"></i>
-              </h3>
-            <% end %>
-            <%= link_to deputy_path(@next_id), class: 'profile-card-element bg-grey' do %>
-              <h3>
-                <i class="fa fa-arrow-right"></i>
-              </h3>
-            <% end %>
-          <% end %>
-
-
-        </div>
+      <div class="profile-card-element profile-card-element-wdouble bg-black">
+        <p>
+          <%= "#{@deputy.civ} #{@deputy.firstname} #{@deputy.lastname}" %>
+        </p>
       </div>
+
     </div>
-    <!-- nav -->
-
-    <!-- info -->
-    <div class="col-xs-12 col-sm-4 my-col">
-      <div class="profile-element">
-        <div class="profile-card cover-position">
-
-          <%= link_to deputies_path(search: @deputy.group.sigle), class: 'profile-card-element profile-card-element-wdouble bg-dark-blue' do %>
-            <h3>
-              <%= @deputy.group.sigle %>
-            </h3>
-          <% end %>
-          <% if @deputy.screen_name.length == 0 %>
-            <div class="profile-card-element" id='no-twitter-account'>
-              <h3>
-                <i class="fa fa-twitter"></i>
-              </h3>
-            </div>
-          <% else %>
-            <%= link_to "https://twitter.com/#{@deputy.screen_name}", target: '_blank', class: 'profile-card-element bg-blue' do %>
-              <h3>
-                <i class="fa fa-twitter"></i>
-              </h3>
-            <% end %>
-          <% end %>
-          <%= link_to "http://www2.assemblee-nationale.fr/deputes/fiche/OMC_#{@deputy.original_tag}", target: '_blank', class: "profile-card-element bg-black" do %>
-            <h3>
-              <i class="fa fa-university"></i>
-            </h3>
-          <% end %>
-
-        </div>
-      </div>
-    </div>
-    <!-- info -->
-
   </div>
-<!-- bootstrap version -->
+</div>
+<!-- id -->
+
+<!-- nav -->
+<div class="col-xs-12 col-sm-4 my-col">
+  <div class="profile-element">
+    <div class="profile-card cover-position" id='nav'>
+
+      <%= link_to root_path, class: 'profile-card-element profile-card-element-hdouble bg-blue' do %>
+        <h3>
+          <i class="fa fa-home"></i>
+        </h3>
+      <% end %>
+
+      <% if params[:action] == 'index' %>
+        <div class="profile-card-element profile-card-element-nav bg-grey"data-dismiss="modal" data-toggle="modal" data-target="#deputy_nav_modal_<%= @previous_id.id %>" data-deputy=<%= @previous_id.id %>>
+          <h3>
+            <i class="fa fa-arrow-left"></i>
+          </h3>
+        </div>
+        <div class="profile-card-element profile-card-element-nav bg-grey" data-dismiss="modal" data-toggle="modal" data-target="#deputy_nav_modal_<%= @next_id.id %>" data-deputy=<%= @next_id.id %>>
+          <h3>
+            <i class="fa fa-arrow-right"></i>
+          </h3>
+        </div>
+      <% else %>
+        <%= link_to deputy_path(@previous_id), class: 'profile-card-element bg-grey' do %>
+          <h3>
+            <i class="fa fa-arrow-left"></i>
+          </h3>
+        <% end %>
+        <%= link_to deputy_path(@next_id), class: 'profile-card-element bg-grey' do %>
+          <h3>
+            <i class="fa fa-arrow-right"></i>
+          </h3>
+        <% end %>
+      <% end %>
+
+
+    </div>
+  </div>
+</div>
+<!-- nav -->
+
+<!-- info -->
+<div class="col-xs-12 col-sm-4 my-col">
+  <div class="profile-element">
+    <div class="profile-card cover-position">
+
+      <%= link_to deputies_path(search: @deputy.group.sigle), class: 'profile-card-element profile-card-element-wdouble bg-dark-blue' do %>
+        <h3>
+          <%= @deputy.group.sigle %>
+        </h3>
+      <% end %>
+      <% if @deputy.screen_name.length == 0 %>
+        <div class="profile-card-element" id='no-twitter-account'>
+          <h3>
+            <i class="fa fa-twitter"></i>
+          </h3>
+        </div>
+      <% else %>
+        <%= link_to "https://twitter.com/#{@deputy.screen_name}", target: '_blank', class: 'profile-card-element bg-blue' do %>
+          <h3>
+            <i class="fa fa-twitter"></i>
+          </h3>
+        <% end %>
+      <% end %>
+      <%= link_to "http://www2.assemblee-nationale.fr/deputes/fiche/OMC_#{@deputy.original_tag}", target: '_blank', class: "profile-card-element bg-black" do %>
+        <h3>
+          <i class="fa fa-university"></i>
+        </h3>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+<!-- info -->

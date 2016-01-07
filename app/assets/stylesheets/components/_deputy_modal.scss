@@ -1,11 +1,17 @@
-.deputy_modal {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &-content {
-    width: 75%;
-    max-height: 90vh;
-    max-width: 1000px;
+.deputy-modal-row {
+  padding: 0 13px;
+}
+
+.modal-content {
+  width: 75%;
+  max-width: 1000px;
+  margin: 20vh auto;
+}
+
+@media screen and (max-width: 768px) {
+  .modal-content {
+    width: 60%;
+    margin: 1% auto;
+    height: 98%;
   }
 }
