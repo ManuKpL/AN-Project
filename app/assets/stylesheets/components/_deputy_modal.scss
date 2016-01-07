@@ -8,3 +8,10 @@
   margin: 20vh auto;
 }
 
+@media screen and (max-width: 768px) {
+  .modal-content {
+    width: 60%;
+    margin: 1% auto;
+    height: 98%;
+  }
+}

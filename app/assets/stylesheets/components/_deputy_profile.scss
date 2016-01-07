@@ -42,6 +42,7 @@ $double-size: 100% - $base-margin * 2;
       }
       p {
         font-size: 22px;
+        margin: 0 10px;
       }
       &-wdouble {
         width: $double-size;
@@ -86,5 +87,16 @@ $double-size: 100% - $base-margin * 2;
     background-color: white;
     padding: 2em;
     box-shadow: 1px 1px 1px rgb(230,230,230);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile-card-element {
+    p {
+      font-size: 18px;
+    }
+    h3 {
+      font-size: 35px;
+    }
   }
 }
