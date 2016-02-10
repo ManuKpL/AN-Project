@@ -9,7 +9,6 @@ class DeputiesController < ApplicationController
   end
 
   def index
-    redirect_to root_path if @deputies.length == 577
   end
 
   private
@@ -28,14 +27,20 @@ class DeputiesController < ApplicationController
   end
 
   def set_group
+    # pas de search = accueil
+    # search invalide = accueil
+    # search String 1 car = recherche par initiale
+    # search String 2+ car = recherche par groupe OU par département...
     if params[:search].nil?
-      @deputies = Deputy.order(:lastname)
-    elsif params[:search].length == 1
-      @deputies = Deputy.where('lastname LIKE ?', "#{params[:search].capitalize}%").order(:lastname)
-    elsif Group.find_by(sigle: params[:search]).nil?
-      @deputies = Deputy.order(:lastname)
+      redirect_to root_path
     else
-      @deputies = Deputy.where(group_id: Group.find_by(sigle: params[:search]).id).order(:lastname)
+      if params[:search].length == 1
+        @deputies = Deputy.where('lastname LIKE ?', "#{params[:search].capitalize}%").order(:lastname)
+      elsif Group.find_by(sigle: params[:search]).nil?
+        redirect_to root_path
+      else
+        @deputies = Deputy.where(group_id: Group.find_by(sigle: params[:search]).id).order(:lastname)
+      end
     end
     @groups = Group.order(:sigle)
   end
