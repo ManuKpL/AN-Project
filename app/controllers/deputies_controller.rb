@@ -4,6 +4,8 @@ class DeputiesController < ApplicationController
   helper_method :check_status, :set_next, :set_previous
 
   def show
+    @mandate = @deputy.mandates.last
+    @circo = @mandate.circonscription
   end
 
   def index

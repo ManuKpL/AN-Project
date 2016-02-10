@@ -90,6 +90,13 @@ $double-size: 100% - $base-margin * 2;
   }
 }
 
+#picture-linking {
+  z-index: 5;
+  &:hover {
+    background-color: rgba(80,80,80,0.4);
+  }
+}
+
 @media screen and (max-width: 768px) {
   .profile-card-element {
     p {
