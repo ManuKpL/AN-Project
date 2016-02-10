@@ -32,13 +32,14 @@ class DeputiesController < ApplicationController
 
   def set_group
     search = params[:search]
+    search = "Écologiste" if %w(ecologiste écologiste ECOLOGISTE).include?(params[:search])
     if search.nil?
       redirect_to root_path
     else
       if search.length == 1 && search.to_i == 0 && search != "0"
         @deputies = Deputy.where('lastname LIKE ?', "#{search.capitalize}%").order(:lastname)
-      elsif Group.all.map(&:sigle).include?(search)
-        @deputies = Deputy.where(group_id: Group.find_by(sigle: params[:search]).id).order(:lastname)
+      elsif Group.all.map(&:sigle).include?(search) || Group.all.map(&:sigle).include?(search.upcase!)
+        @deputies = Deputy.where(group_id: Group.find_by(sigle: search).id).order(:lastname)
       elsif Circonscription.all.map(&:department_num).include?(search) || (search.length == 1 && search.to_i >= 1)
         search = "0#{search}" if search.length == 1 && search.to_i >= 1
         @deputies = []
