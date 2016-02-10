@@ -9,6 +9,7 @@ class DeputiesController < ApplicationController
   end
 
   def index
+    redirect_to root_path if @deputies.length == 577
   end
 
   private
@@ -32,12 +33,12 @@ class DeputiesController < ApplicationController
     # search String 1 car = recherche par initiale
     # search String 2+ car = recherche par groupe OU par département...
     if params[:search].nil?
-      redirect_to root_path
+      @deputies = Deputy.order(:lastname)
     else
       if params[:search].length == 1
         @deputies = Deputy.where('lastname LIKE ?', "#{params[:search].capitalize}%").order(:lastname)
       elsif Group.find_by(sigle: params[:search]).nil?
-        redirect_to root_path
+        @deputies = Deputy.order(:lastname)
       else
         @deputies = Deputy.where(group_id: Group.find_by(sigle: params[:search]).id).order(:lastname)
       end
