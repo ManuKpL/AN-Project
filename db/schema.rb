@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20151227144235) do
   create_table "circonscriptions", force: :cascade do |t|
     t.string   "former_region"
     t.string   "department"
-    t.integer  "department_num"
+    t.string   "department_num"
     t.integer  "circo_num"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
