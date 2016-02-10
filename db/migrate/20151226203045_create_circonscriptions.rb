@@ -3,7 +3,7 @@ class CreateCirconscriptions < ActiveRecord::Migration
     create_table :circonscriptions do |t|
       t.string :former_region
       t.string :department
-      t.integer :department_num
+      t.string :department_num
       t.integer :circo_num
 
       t.timestamps null: false
