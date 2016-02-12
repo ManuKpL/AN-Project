@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   private
 
   def check_status(element)
-    "disabled" if element.length == 1 && Deputy.where('lastname LIKE ?', "#{element}%").empty?
+    " disabled" if element.length == 1 && Deputy.where('lastname LIKE ?', "#{element}%").empty?
   end
 
   def set_groups

@@ -1,0 +1,13 @@
+<div class="home-list">
+  <% ('A'..'Z').to_a.each do |letter| %>
+    <%= link_to letter, deputies_path(search: letter), class: "home-list-item btn btn-primary#{check_status(letter)}" %>
+  <% end %>
+</div>
+<div class="home-list">
+  <%= link_to root_path, class: 'home-list-group btn btn-primary' do %>
+    <i class="fa fa-home"></i>
+  <% end %>
+  <% @groups.each do |group| %>
+    <%= link_to group.sigle, deputies_path(search: group.sigle), class: "home-list-group btn btn-primary#{check_status(group.sigle)}" %>
+  <% end %>
+</div>
