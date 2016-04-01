@@ -4,8 +4,10 @@
   <% end %>
 </div>
 <div class="home-list">
-  <%= link_to root_path, class: 'home-list-group btn btn-primary' do %>
-    <i class="fa fa-home"></i>
+  <% unless params['action'] == 'home' %>
+    <%= link_to root_path, class: 'home-list-group btn btn-primary' do %>
+      <i class="fa fa-home"></i>
+    <% end %>
   <% end %>
   <% @groups.each do |group| %>
     <%= link_to group.sigle, deputies_path(search: group.sigle), class: "home-list-group btn btn-primary#{check_status(group.sigle)}" %>
