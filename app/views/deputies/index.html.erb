@@ -11,12 +11,14 @@
         <% @next_id = set_next(deputy) %>
         <div class="list-card" data-toggle="modal" data-target="#deputy_nav_modal_<%= deputy.id %>" data-deputy=<%= deputy.id %>>
           <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{deputy.original_tag[2..-1]}.jpg", class: 'list-card-picture' %>
+          <div class="list-card-text">
             <p class="list-card-name">
               <%= "#{deputy.civ} #{deputy.firstname} #{deputy.lastname}" %>
             </p>
             <p class="list-card-sigle">
               <%= deputy.group.sigle %>
             </p>
+          </div>
         </div>
     <!-- MODAL -->
     <div class="modal" id="deputy_nav_modal_<%= deputy.id %>" tabindex="-1" aria-labelledby="Deputy navigation">
