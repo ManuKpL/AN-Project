@@ -4,7 +4,7 @@ class DeputiesController < ApplicationController
     set_deputy
     set_previous_and_next
   end
-  helper_method :check_status, :set_next, :set_previous
+  helper_method :check_status, :set_next, :set_previous, :is_current_page?
 
   def show
     @mandate = @deputy.mandates.last
@@ -68,10 +68,10 @@ class DeputiesController < ApplicationController
   end
 
   def check_status(element)
-    if element.length == 1 && Deputy.where('lastname LIKE ?', "#{element}%").empty?
-      " disabled"
-    elsif element == params[:search].capitalize || element == params[:search].upcase
-      " btn-success"
-    end
+    " disabled" if element.length == 1 && Deputy.where('lastname LIKE ?', "#{element}%").empty?
+  end
+
+  def is_current_page?(element)
+    element == params[:search].capitalize || element == params[:search].upcase
   end
 end
