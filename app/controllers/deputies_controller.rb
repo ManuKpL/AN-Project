@@ -68,7 +68,11 @@ class DeputiesController < ApplicationController
   end
 
   def check_status(element)
-    " disabled" if element.length == 1 && Deputy.where('lastname LIKE ?', "#{element}%").empty?
+    if element.length == 1 && Deputy.where('lastname LIKE ?', "#{element}%").empty?
+      ' disabled'
+    else
+      ''
+    end
   end
 
   def is_current_page?(element)

@@ -10,6 +10,6 @@
     <% end %>
   <% end %>
   <% @groups.each do |group| %>
-    <%= link_to group.sigle, deputies_path(search: group.sigle), class: "home-list-group btn #{(is_current_page?(group.sigle) ? 'btn-success disabled' : 'btn-primary') << check_status(group.sigle).to_s}" %>
+    <%= link_to group.sigle, deputies_path(search: group.sigle), class: "home-list-group btn #{(is_current_page?(group.sigle) ? 'btn-success disabled' : 'btn-primary') << check_status(group.sigle)}" %>
   <% end %>
 </div>
