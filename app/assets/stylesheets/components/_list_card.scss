@@ -2,12 +2,12 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  background-color: rgba(250,250,250,0.9);
   padding: 40px 0px;
   border-radius: 2px;
 }
 
 $card-margin: 10px;
+$hover-after-position: -$card-margin*2;
 
 .list-card {
   flex: 0 0 150px;
@@ -15,7 +15,6 @@ $card-margin: 10px;
   padding-bottom: $card-margin;
   position: relative;
   color: rgb(80,80,80);
-  border-radius: 2px;
   filter: grayscale(90%);
   &-text {
     height: 53px;
@@ -33,6 +32,7 @@ $card-margin: 10px;
     border-radius: 1.5px;
   }
   &:hover {
+    height: 246px - $card-margin;
     text-decoration: none;
     filter: grayscale(10%);
     background-color: rgb(250,250,250);
@@ -42,10 +42,10 @@ $card-margin: 10px;
     &::after {
       content: '';
       position: absolute;
-      top: -$card-margin*2;
-      right: -$card-margin*2;
-      bottom: 0px;
-      left: -$card-margin*2;
+      top: $hover-after-position;
+      right: $hover-after-position;
+      bottom: $hover-after-position;
+      left: $hover-after-position;
       z-index: 5;
       box-shadow: 0 0 $card-margin*2 0 rgba(0,0,0,0.2);
     }
