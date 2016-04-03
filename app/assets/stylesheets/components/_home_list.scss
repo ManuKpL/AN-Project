@@ -13,6 +13,11 @@
   &-group {
     margin: 2px;
   }
+  &-scrollable {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+  }
 }
 
 @media screen and (max-width: 768px) {

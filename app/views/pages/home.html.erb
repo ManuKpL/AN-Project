@@ -19,9 +19,4 @@
 
     </div>
   </div>
-  <div class="home-list" style='max-width: none'>
-    <% @departments.keys.sort.each do |department| %>
-      <%= link_to department, deputies_path(search: @departments[department]), class: "home-list-group btn #{(is_current_page?(@departments[department]) ? 'btn-success disabled' : 'btn-primary')}" %>
-    <% end %>
-  </div>
 </div>
