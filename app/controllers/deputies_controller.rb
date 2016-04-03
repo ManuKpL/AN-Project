@@ -71,12 +71,4 @@ class DeputiesController < ApplicationController
     end
     @groups = Group.order(:sigle)
   end
-
-  def set_departments
-    @departments = Hash.new
-    Circonscription.all.each do |circonscription|
-      departments[circonscription.department_num] = "#{circonscription.department_num} - #{circonscription.department}"
-    end
-    @departments.sort!
-  end
 end

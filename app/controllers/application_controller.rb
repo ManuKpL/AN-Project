@@ -17,4 +17,11 @@ class ApplicationController < ActionController::Base
   def is_current_page?(element)
     element == params[:search].to_s.capitalize || element == params[:search].to_s.upcase
   end
+
+  def set_departments
+    @departments = Hash.new
+    Circonscription.all.each do |circonscription|
+      @departments["#{circonscription.department_num} - #{circonscription.department}"] = circonscription.department_num
+    end
+  end
 end

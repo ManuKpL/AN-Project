@@ -1,6 +1,6 @@
 <div class="home-list">
   <% ('A'..'Z').to_a.each do |letter| %>
-    <%= link_to letter, deputies_path(search: letter), class: "home-list-item btn btn-primary#{check_status(letter)}" %>
+    <%= link_to letter, deputies_path(search: letter), class: "home-list-item btn #{(is_current_page?(letter) ? 'btn-success disabled' : 'btn-primary') << check_status(letter)}" %>
   <% end %>
 </div>
 <div class="home-list">
@@ -10,6 +10,6 @@
     <% end %>
   <% end %>
   <% @groups.each do |group| %>
-    <%= link_to group.sigle, deputies_path(search: group.sigle), class: "home-list-group btn #{(is_current_page?(group.sigle) ? 'btn-success disabled' : 'btn-primary') << check_status(group.sigle)}" %>
+    <%= link_to group.sigle, deputies_path(search: group.sigle), class: "home-list-group btn #{(is_current_page?(group.sigle) ? 'btn-success disabled' : 'btn-primary')}" %>
   <% end %>
 </div>
