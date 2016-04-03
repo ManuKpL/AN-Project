@@ -1,9 +1,14 @@
 class DeputiesController < ApplicationController
-  before_action :set_group, only: :index
+  before_action only: :index do
+    set_group
+    set_departments
+  end
+
   before_action only: :show do
     set_deputy
     set_previous_and_next
   end
+
   helper_method :set_next, :set_previous
 
   def show
@@ -30,6 +35,20 @@ class DeputiesController < ApplicationController
     @next_id = set_next(@deputy)
   end
 
+  def set_previous(deputy)
+    ids_list = @deputies.map(&:id)
+    return Deputy.find(ids_list[ids_list.find_index(deputy.id) - 1])
+  end
+
+  def set_next(deputy)
+    ids_list = @deputies.map(&:id)
+    if ids_list[ids_list.find_index(deputy.id) + 1]
+      return Deputy.find(ids_list[ids_list.find_index(deputy.id) + 1])
+    else
+      return Deputy.find(ids_list.first)
+    end
+  end
+
   def set_group
     search = params[:search]
     search = "Écologiste" if %w(ecologiste écologiste ECOLOGISTE).include?(params[:search])
@@ -53,17 +72,11 @@ class DeputiesController < ApplicationController
     @groups = Group.order(:sigle)
   end
 
-  def set_previous(deputy)
-    ids_list = @deputies.map(&:id)
-    return Deputy.find(ids_list[ids_list.find_index(deputy.id) - 1])
-  end
-
-  def set_next(deputy)
-    ids_list = @deputies.map(&:id)
-    if ids_list[ids_list.find_index(deputy.id) + 1]
-      return Deputy.find(ids_list[ids_list.find_index(deputy.id) + 1])
-    else
-      return Deputy.find(ids_list.first)
+  def set_departments
+    @departments = Hash.new
+    Circonscription.all.each do |circonscription|
+      departments[circonscription.department_num] = circonscription.department
     end
+    @departments.sort!
   end
 end
