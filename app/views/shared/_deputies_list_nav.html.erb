@@ -1,0 +1,29 @@
+<div class="home-list">
+  <% ('A'..'Z').to_a.each do |letter| %>
+    <%= link_to letter, deputies_path(search: letter), class: "home-list-item btn #{(is_current_page?(letter) ? 'btn-success disabled' : 'btn-primary') << check_status(letter)}" %>
+  <% end %>
+</div>
+<div class="home-list">
+  <% unless params['action'] == 'home' %>
+    <%= link_to root_path, class: 'home-list-group btn btn-primary' do %>
+      <i class="fa fa-home"></i>
+    <% end %>
+  <% end %>
+  <% @groups.each do |group| %>
+    <%= link_to group.sigle, deputies_path(search: group.sigle), class: "home-list-group btn #{(is_current_page?(group.sigle) ? 'btn-success disabled' : 'btn-primary')}" %>
+  <% end %>
+</div>
+<div class="home-list">
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+      Départements <i class="fa fa-caret-down"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-left home-list-scrollable">
+    <% @departments.keys.sort.each do |department| %>
+      <li>
+        <%= link_to department, deputies_path(search: @departments[department]) %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>

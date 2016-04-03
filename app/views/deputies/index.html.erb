@@ -1,49 +1,41 @@
 <div class="container">
   <div class="row padded">
-    <div class="home-list">
-      <% ('A'..'Z').to_a.each do |letter| %>
-        <%= link_to letter, deputies_path(search: letter), class: "home-list-item btn btn-primary#{check_status(letter)}" %>
-      <% end %>
+    <div class="col-xs-12 col-md-4">
+        <%= render 'shared/deputies_list_nav' %>
     </div>
-    <div class="home-list">
-      <%= link_to root_path, class: 'home-list-group btn btn-primary' do %>
-        <i class="fa fa-home"></i>
-      <% end %>
-      <% @groups.each do |group| %>
-        <%= link_to group.sigle, deputies_path(search: group.sigle), class: "home-list-group btn btn-primary#{check_status(group.sigle)}" %>
-      <% end %>
-    </div>
-  </div>
-  <div class="deputies-list">
-    <% @deputies.each do |deputy| %>
-      <% @previous_id = set_previous(deputy) %>
-      <% @deputy = deputy %>
-      <% @next_id = set_next(deputy) %>
-      <div class="list-card" data-toggle="modal" data-target="#deputy_nav_modal_<%= deputy.id %>" data-deputy=<%= deputy.id %>>
-        <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{deputy.original_tag[2..-1]}.jpg", class: 'list-card-picture' %>
-        <p class="list-card-name">
-          <%= "#{deputy.civ} #{deputy.firstname} #{deputy.lastname}" %>
-        </p>
-        <p class="list-card-sigle">
-          <%= deputy.group.sigle %>
-        </p>
-      </div>
-      <!-- MODAL -->
-      <div class="modal" id="deputy_nav_modal_<%= deputy.id %>" tabindex="-1" aria-labelledby="Deputy navigation">
-        <div class="modal-content">
-          <div class="modal-header hidden-xs">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <div class="col-xs-12 col-md-8">
+      <div class="deputies-list">
+        <% @deputies.each do |deputy| %>
+        <% @previous_id = set_previous(deputy) %>
+        <% @deputy = deputy %>
+        <% @next_id = set_next(deputy) %>
+        <div class="list-card" data-toggle="modal" data-target="#deputy_nav_modal_<%= deputy.id %>" data-deputy=<%= deputy.id %>>
+          <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{deputy.original_tag[2..-1]}.jpg", class: 'list-card-picture' %>
+          <div class="list-card-text">
+            <p class="list-card-name">
+              <%= "#{deputy.civ} #{deputy.firstname} #{deputy.lastname}" %>
+            </p>
+            <p class="list-card-sigle">
+              <%= deputy.group.sigle %>
+            </p>
           </div>
-          <div class="modal-body">
-            <div class="row deputy-modal-row">
-              <%= render 'shared/deputy_nav' %>
-            </div>
+        </div>
+    <!-- MODAL -->
+    <div class="modal" id="deputy_nav_modal_<%= deputy.id %>" tabindex="-1" aria-labelledby="Deputy navigation">
+      <div class="modal-content">
+        <div class="modal-header hidden-xs">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="row deputy-modal-row">
+            <%= render 'shared/deputy_nav' %>
           </div>
         </div>
       </div>
-      <!-- MODAL -->
+    </div>
+    <!-- MODAL -->
     <% end %>
+    </div>
   </div>
-  <% deputy = @deputies.first %>
 </div>
-
+<%# deputy = @deputies.first %>

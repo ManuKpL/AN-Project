@@ -1,10 +1,15 @@
 class DeputiesController < ApplicationController
-  before_action :set_group, only: :index
+  before_action only: :index do
+    set_group
+    set_departments
+  end
+
   before_action only: :show do
     set_deputy
     set_previous_and_next
   end
-  helper_method :check_status, :set_next, :set_previous
+
+  helper_method :set_next, :set_previous
 
   def show
     @mandate = @deputy.mandates.last
@@ -30,6 +35,20 @@ class DeputiesController < ApplicationController
     @next_id = set_next(@deputy)
   end
 
+  def set_previous(deputy)
+    ids_list = @deputies.map(&:id)
+    return Deputy.find(ids_list[ids_list.find_index(deputy.id) - 1])
+  end
+
+  def set_next(deputy)
+    ids_list = @deputies.map(&:id)
+    if ids_list[ids_list.find_index(deputy.id) + 1]
+      return Deputy.find(ids_list[ids_list.find_index(deputy.id) + 1])
+    else
+      return Deputy.find(ids_list.first)
+    end
+  end
+
   def set_group
     search = params[:search]
     search = "Écologiste" if %w(ecologiste écologiste ECOLOGISTE).include?(params[:search])
@@ -51,27 +70,5 @@ class DeputiesController < ApplicationController
       end
     end
     @groups = Group.order(:sigle)
-  end
-
-  def set_previous(deputy)
-    ids_list = @deputies.map(&:id)
-    return Deputy.find(ids_list[ids_list.find_index(deputy.id) - 1])
-  end
-
-  def set_next(deputy)
-    ids_list = @deputies.map(&:id)
-    if ids_list[ids_list.find_index(deputy.id) + 1]
-      return Deputy.find(ids_list[ids_list.find_index(deputy.id) + 1])
-    else
-      return Deputy.find(ids_list.first)
-    end
-  end
-
-  def check_status(element)
-    if element.length == 1 && Deputy.where('lastname LIKE ?', "#{element}%").empty?
-      " disabled"
-    elsif element == params[:search].capitalize || element == params[:search].upcase
-      " btn-success"
-    end
   end
 end
