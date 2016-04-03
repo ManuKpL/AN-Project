@@ -4,7 +4,7 @@ class DeputiesController < ApplicationController
     set_deputy
     set_previous_and_next
   end
-  helper_method :check_status, :set_next, :set_previous, :is_current_page?
+  helper_method :set_next, :set_previous
 
   def show
     @mandate = @deputy.mandates.last
@@ -65,17 +65,5 @@ class DeputiesController < ApplicationController
     else
       return Deputy.find(ids_list.first)
     end
-  end
-
-  def check_status(element)
-    if element.length == 1 && Deputy.where('lastname LIKE ?', "#{element}%").empty?
-      ' disabled'
-    else
-      ''
-    end
-  end
-
-  def is_current_page?(element)
-    element == params[:search].capitalize || element == params[:search].upcase
   end
 end
