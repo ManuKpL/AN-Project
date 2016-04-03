@@ -51,10 +51,11 @@ namespace :mandates do
 
     def find_circonscription_instance(mandate)
       location = mandate['election']['lieu']
+      department_num = location['numDepartement'] == '099' ? '99' : location['numDepartement']
       attributes = {
         former_region: location['region'],
         department: location['departement'],
-        department_num: location['numDepartement'],
+        department_num: department_num,
         circo_num: location['numCirco']
       }
       if Circonscription.where(attributes).empty?
