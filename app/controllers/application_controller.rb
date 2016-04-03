@@ -15,7 +15,8 @@ class ApplicationController < ActionController::Base
   end
 
   def is_current_page?(element)
-    element == params[:search].to_s.capitalize || element == params[:search].to_s.upcase
+    search = params[:search].nil? ? '' : params[:search]
+    element == search.capitalize || element == search.upcase
   end
 
   def set_departments
