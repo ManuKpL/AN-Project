@@ -1,15 +1,16 @@
 .deputies-list {
-  position: absolute;
   display: flex;
-  justify-content: left;
+  justify-content: center;
   flex-wrap: wrap;
   border-radius: 2px;
-  margin: 5vh 5vw;
   padding: 2vh 0;
-  background-color: rgba(250,250,250,0.4);
-  border: 5px solid rgb(250,250,250);
+  background-color: rgba(250,250,250,0.9);
+  border: 3px solid rgba(250,250,250,0.7);
   box-shadow: 0.5px 0.5px 3px 0px $brand-gray;
+  &::after {
+    content: '';
 
+  }
 }
 
 $card-margin: 10px;
