@@ -1,9 +1,9 @@
 .navigation-list {
   display: flex;
   justify-content: center;
-  margin: 3vw 2vw;
-  padding: 2vw;
   flex-wrap: wrap;
+  margin: 3vw 2vw;
+  padding: 2vw 0;
   max-width: 600px;
   z-index: 2;
   background-color: rgba(166,166,166,0.5);
@@ -30,8 +30,10 @@
 }
 
 .content-zone {
-  position: absolute;
-  left: 19vw;
+  position: relative;
+  left: 20vw;
+  width: 78vw;
+  min-height: 100vh;
 }
 
 .navigation-menu {
@@ -44,5 +46,5 @@
   top: 0;
   bottom: 0;
   width: 20vw;
-  box-shadow: 3px 0 3px $brand-gray;
+  box-shadow: 3px 0 3px 0 $brand-gray;
 }
