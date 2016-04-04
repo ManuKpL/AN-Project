@@ -18,13 +18,16 @@
   background: rgb(40,40,40);
 }
 .bg-grey {
-  background: rgb(100,100,100);
+  background: $brand-gray;
 }
 .bg-blue {
-  background: #00a3e1;
+  background: $light-blue;
+}
+.bg-red {
+  background: $red;
 }
 .bg-dark-blue {
-  background: #3b5998;
+  background: $blue;
 }
 
 // Absolute positions
