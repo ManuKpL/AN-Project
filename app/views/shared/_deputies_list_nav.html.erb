@@ -1,42 +1,54 @@
-<div class="home-list">
-  <% ('A'..'Z').to_a.each do |letter| %>
-    <%= link_to letter, deputies_path(search: letter), class: "home-list-item btn #{(is_current_page?(letter) ? 'btn-primary disabled' : 'btn-warning') << check_status(letter)}" %>
-  <% end %>
-</div>
-<div class="home-list">
+<div class="navigation-list">
   <% if params['action'] == 'home' %>
     <div class="btn-toolbar" role='toolbar'>
   <% else %>
-    <div class="btn-group btn-group-justified" role='group'>
+    <div class="btn-group btn-group-vertical" role='group'>
   <% end %>
+    <% unless params['action'] == 'home' %>
+      <%= link_to root_path, class: 'btn btn-primary' do %>
+        Accueil <i class="fa fa-home"></i>
+      <% end %>
+    <% end %>
     <div class="btn-group" role='group'>
       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-        Groupes <i class="fa fa-caret-down"></i>
+        Par nom <i class="fa fa-caret-down"></i>
       </button>
-      <ul class="dropdown-menu dropdown-menu-left home-list-scrollable">
+      <ul class="dropdown-menu dropdown-menu-left navigation-list-scrollable">
+      <% Deputy.order(:lastname).each do |deputy| %>
+        <li>
+          <%= link_to "#{deputy.civ} #{deputy.firstname} #{deputy.lastname}", deputy_path(deputy) %>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+    <div class="btn-group" role='group'>
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        Par groupe <i class="fa fa-caret-down"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-left navigation-list-scrollable">
       <% @groups.each do |group| %>
-        <li class=<%= "#{'disabled' if is_current_page?(group)}" %>>
+        <li class="<%= 'disabled' if is_current_page?(group.sigle) %>">
           <%= link_to group.sigle, deputies_path(search: group.sigle) %>
         </li>
       <% end %>
       </ul>
     </div>
-    <% unless params['action'] == 'home' %>
-      <%= link_to root_path, class: 'btn btn-default' do %>
-        <i class="fa fa-home"></i>
-      <% end %>
-    <% end %>
     <div class="btn-group" role='group'>
-      <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">
-        Départements <i class="fa fa-caret-down"></i>
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        Par département <i class="fa fa-caret-down"></i>
       </button>
-      <ul class="dropdown-menu dropdown-menu-left home-list-scrollable">
+      <ul class="dropdown-menu dropdown-menu-left navigation-list-scrollable">
       <% @departments.keys.sort.each do |department| %>
-        <li class=<%= "#{'disabled' if is_current_page?(@departments[department])}" %>>
+        <li class='<%= 'disabled' if is_current_page?(@departments[department]) %>'>
           <%= link_to department, deputies_path(search: @departments[department]) %>
         </li>
       <% end %>
       </ul>
     </div>
   </div>
+</div>
+<div class="navigation-list">
+  <% ('A'..'Z').to_a.each do |letter| %>
+    <%= link_to letter, deputies_path(search: letter), class: "navigation-list-item btn #{(is_current_page?(letter) ? 'btn-primary disabled' : 'btn-warning') << check_status(letter)}" %>
+  <% end %>
 </div>

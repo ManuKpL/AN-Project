@@ -1,40 +1,37 @@
 <div class="navigation-menu">
     <%= render 'shared/deputies_list_nav' %>
 </div>
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="deputies-list">
-        <% @deputies.each do |deputy| %>
-        <% @previous_id = set_previous(deputy) %>
-        <% @deputy = deputy %>
-        <% @next_id = set_next(deputy) %>
-        <div class="list-card" data-toggle="modal" data-target="#deputy_nav_modal_<%= deputy.id %>" data-deputy=<%= deputy.id %>>
-          <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{deputy.original_tag[2..-1]}.jpg", class: 'list-card-picture' %>
-          <div class="list-card-text">
-            <p class="list-card-name">
-              <%= "#{deputy.civ} #{deputy.firstname} #{deputy.lastname}" %>
-            </p>
-            <p class="list-card-sigle">
-              <%= deputy.group.sigle %>
-            </p>
-          </div>
+<div class="content-zone">
+  <div class="deputies-list">
+    <% @deputies.each do |deputy| %>
+      <% @previous_id = set_previous(deputy) %>
+      <% @deputy = deputy %>
+      <% @next_id = set_next(deputy) %>
+      <div class="list-card" data-toggle="modal" data-target="#deputy_nav_modal_<%= deputy.id %>" data-deputy="<%= deputy.id %>">
+        <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{deputy.original_tag[2..-1]}.jpg", class: 'list-card-picture' %>
+        <div class="list-card-text">
+          <p class="list-card-name">
+            <%= "#{deputy.civ} #{deputy.firstname} #{deputy.lastname}" %>
+          </p>
+          <p class="list-card-sigle">
+            <%= deputy.group.sigle %>
+          </p>
         </div>
+      </div>
     <!-- MODAL -->
-    <div class="modal" id="deputy_nav_modal_<%= deputy.id %>" tabindex="-1" aria-labelledby="Deputy navigation">
-      <div class="modal-content">
-        <div class="modal-header hidden-xs">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="modal-body">
-          <div class="row deputy-modal-row">
-            <%= render 'shared/deputy_nav' %>
+      <div class="modal" id="deputy_nav_modal_<%= deputy.id %>" tabindex="-1" aria-labelledby="Deputy navigation">
+        <div class="modal-content">
+          <div class="modal-header hidden-xs">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <div class="row deputy-modal-row">
+              <%= render 'shared/deputy_nav' %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     <!-- MODAL -->
     <% end %>
-    </div>
   </div>
 </div>
