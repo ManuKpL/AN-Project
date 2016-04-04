@@ -20,7 +20,7 @@
       </button>
       <ul class="dropdown-menu dropdown-menu-left navigation-list-scrollable">
       <% @groups.each do |group| %>
-        <li class=<%= "#{'disabled' if is_current_page?(group)}" %>>
+        <li class="<%= 'disabled' if is_current_page?(group.sigle) %>">
           <%= link_to group.sigle, deputies_path(search: group.sigle) %>
         </li>
       <% end %>
@@ -32,7 +32,7 @@
       </button>
       <ul class="dropdown-menu dropdown-menu-left navigation-list-scrollable">
       <% @departments.keys.sort.each do |department| %>
-        <li class=<%= "#{'disabled' if is_current_page?(@departments[department])}" %>>
+        <li class='<%= 'disabled' if is_current_page?(@departments[department]) %>'>
           <%= link_to department, deputies_path(search: @departments[department]) %>
         </li>
       <% end %>
