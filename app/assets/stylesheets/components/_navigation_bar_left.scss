@@ -36,5 +36,12 @@
   top: 0;
   bottom: 0;
   width: 20%;
-  box-shadow: 3px 0 3px 0 $brand-gray;
+  box-shadow: -1px 0 5px 0 $brand-gray;
+  &-title {
+    position: relative;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
 }
