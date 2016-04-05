@@ -1,7 +1,10 @@
 <div class="banner">
   <div class="banner-shadow"></div>
   <div class="banner-content">
-    <h1 class="text-center">AN Project</h1>
+    <h1 class="text-center">
+      AN Project
+      <div class="flag-border"></div>
+    </h1>
     <div class="banner-menu">
       <%= link_to t('.browse', default: 'Browse'), deputy_path(@deputy), class: "btn btn-primary btn-lg banner-menu-item" %>
       <% if user_signed_in? %>
