@@ -1,18 +1,3 @@
-.deputies-list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  border-radius: 2px;
-  padding: 2vh 0;
-  background-color: rgba(250,250,250,0.9);
-  border: 3px solid rgba(250,250,250,0.7);
-  box-shadow: 0.5px 0.5px 3px 0px $brand-gray;
-  &::after {
-    content: '';
-
-  }
-}
-
 $card-margin: 10px;
 $hover-after-position: -$card-margin*2;
 
