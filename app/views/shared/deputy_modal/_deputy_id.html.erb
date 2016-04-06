@@ -1,22 +1,29 @@
 <div class="profile-element">
   <div class="profile-card cover-position">
 
+    <!-- square top left -->
     <%= link_to deputies_path(search: @deputy.lastname[0]), class: 'profile-card-element bg-dark-blue' do %>
       <h3>
         <%= @deputy.lastname[0].capitalize %>
       </h3>
     <% end %>
+    <!-- square top left -->
+
+    <!-- square top right -->
     <div class="profile-picture-filling-bg" style='background-image: url(<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>)'>
       <div class="profile-picture-filling-bg-shadow cover-position"></div>
       <div class="profile-picture cover-position" style='background-image: url(<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>)'></div>
       <%= link_to '', deputy_path(@deputy), class: "cover-position profile-picture-linking", id: 'picture-linking' %>
     </div>
+    <!-- square top right -->
 
+    <!-- rectangle bottom (wdouble) -->
     <%= link_to deputies_path(search: @deputy.group.sigle), class: 'profile-card-element profile-card-element-wdouble bg-red' do %>
       <h3>
         <%= @deputy.group.sigle %>
       </h3>
     <% end %>
+    <!-- rectangle bottom (wdouble) -->
 
   </div>
 </div>

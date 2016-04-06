@@ -1,34 +1,54 @@
 <div class="profile-element">
   <div class="profile-card cover-position">
 
+    <!-- rectangle top (wdouble) -->
     <%= link_to deputy_path(@deputy), class: 'profile-card-element profile-card-element-wdouble bg-blue' do %>
       <p>
         <%= "#{@deputy.civ} #{@deputy.firstname} #{@deputy.lastname}" %>
       </p>
     <% end %>
+    <!-- rectangle top (wdouble) -->
 
     <% if params[:action] == 'index' %>
+<!-- MODAL -->
+
+      <!-- square bottom left -->
       <div class="profile-card-element profile-card-element-nav bg-gray"data-dismiss="modal" data-toggle="modal" data-target="#deputy_modal_<%= @previous_id.id %>" data-deputy=<%= @previous_id.id %>>
         <h3>
           <i class="fa fa-arrow-left"></i>
         </h3>
       </div>
+      <!-- square bottom left -->
+
+      <!-- square bottom right -->
       <div class="profile-card-element profile-card-element-nav bg-gray" data-dismiss="modal" data-toggle="modal" data-target="#deputy_modal_<%= @next_id.id %>" data-deputy=<%= @next_id.id %>>
         <h3>
           <i class="fa fa-arrow-right"></i>
         </h3>
       </div>
+      <!-- square bottom right -->
+
+<!-- MODAL -->
     <% else %>
+<!-- NORMAL VERSION (show) -->
+
+      <!-- square bottom left -->
       <%= link_to deputy_path(@previous_id), class: 'profile-card-element bg-gray' do %>
         <h3>
           <i class="fa fa-arrow-left"></i>
         </h3>
       <% end %>
+      <!-- square bottom left -->
+
+      <!-- square bottom right -->
       <%= link_to deputy_path(@next_id), class: 'profile-card-element bg-gray' do %>
         <h3>
           <i class="fa fa-arrow-right"></i>
         </h3>
       <% end %>
+      <!-- square bottom right -->
+
+<!-- NORMAL VERSION (show) -->
     <% end %>
 
   </div>
