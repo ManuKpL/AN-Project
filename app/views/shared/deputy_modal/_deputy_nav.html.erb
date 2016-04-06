@@ -1,0 +1,35 @@
+<div class="profile-element">
+  <div class="profile-card cover-position" id='nav'>
+
+    <%= link_to root_path, class: 'profile-card-element profile-card-element-hdouble bg-blue' do %>
+      <h3>
+        <i class="fa fa-home"></i>
+      </h3>
+    <% end %>
+
+    <% if params[:action] == 'index' %>
+      <div class="profile-card-element profile-card-element-nav bg-grey"data-dismiss="modal" data-toggle="modal" data-target="#deputy_modal_<%= @previous_id.id %>" data-deputy=<%= @previous_id.id %>>
+        <h3>
+          <i class="fa fa-arrow-left"></i>
+        </h3>
+      </div>
+      <div class="profile-card-element profile-card-element-nav bg-grey" data-dismiss="modal" data-toggle="modal" data-target="#deputy_modal_<%= @next_id.id %>" data-deputy=<%= @next_id.id %>>
+        <h3>
+          <i class="fa fa-arrow-right"></i>
+        </h3>
+      </div>
+    <% else %>
+      <%= link_to deputy_path(@previous_id), class: 'profile-card-element bg-grey' do %>
+        <h3>
+          <i class="fa fa-arrow-left"></i>
+        </h3>
+      <% end %>
+      <%= link_to deputy_path(@next_id), class: 'profile-card-element bg-grey' do %>
+        <h3>
+          <i class="fa fa-arrow-right"></i>
+        </h3>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>
