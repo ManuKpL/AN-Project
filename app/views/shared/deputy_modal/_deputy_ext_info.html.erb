@@ -1,11 +1,12 @@
 <div class="profile-element">
-  <div class="profile-card cover-position">
+  <div class="profile-card cover-position profile-card-column-direction">
 
-    <%= link_to deputies_path(search: @deputy.group.sigle), class: 'profile-card-element profile-card-element-wdouble bg-dark-blue' do %>
+    <%= link_to @deputy.mandates.last.hatvp_page, class: 'profile-card-element bg-red', target: '_blank' do %>
       <h3>
-        <%= @deputy.group.sigle %>
+        <i class="fa fa-file-text-o"></i>
       </h3>
     <% end %>
+
     <% if @deputy.screen_name.length == 0 %>
       <div class="profile-card-element" id='no-twitter-account'>
         <h3>
@@ -13,13 +14,14 @@
         </h3>
       </div>
     <% else %>
-      <%= link_to "https://twitter.com/#{@deputy.screen_name}", target: '_blank', class: 'profile-card-element bg-blue' do %>
+      <%= link_to "https://twitter.com/#{@deputy.screen_name}", target: '_blank', class: 'profile-card-element bg-light-blue' do %>
         <h3>
           <i class="fa fa-twitter"></i>
         </h3>
       <% end %>
     <% end %>
-    <%= link_to "http://www2.assemblee-nationale.fr/deputes/fiche/OMC_#{@deputy.original_tag}", target: '_blank', class: "profile-card-element bg-red" do %>
+
+    <%= link_to "http://www2.assemblee-nationale.fr/deputes/fiche/OMC_#{@deputy.original_tag}", target: '_blank', class: "profile-card-element profile-card-element-hdouble bg-dark-blue" do %>
       <h3>
         <i class="fa fa-university"></i>
       </h3>

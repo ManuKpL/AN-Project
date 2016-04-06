@@ -11,10 +11,11 @@
       <div class="profile-picture cover-position" style='background-image: url(<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>)'></div>
       <%= link_to '', deputy_path(@deputy), class: "cover-position profile-picture-linking", id: 'picture-linking' %>
     </div>
-    <%= link_to deputy_path(@deputy), class: 'profile-card-element profile-card-element-wdouble bg-red' do %>
-      <p>
-        <%= "#{@deputy.civ} #{@deputy.firstname} #{@deputy.lastname}" %>
-      </p>
+
+    <%= link_to deputies_path(search: @deputy.group.sigle), class: 'profile-card-element profile-card-element-wdouble bg-red' do %>
+      <h3>
+        <%= @deputy.group.sigle %>
+      </h3>
     <% end %>
 
   </div>

@@ -17,17 +17,20 @@
 .bg-black {
   background: rgb(40,40,40);
 }
-.bg-grey {
+.bg-gray {
   background: $brand-gray;
 }
 .bg-blue {
+  background: $blue;
+}
+.bg-light-blue {
   background: $light-blue;
+}
+.bg-dark-blue {
+  background: $brand-color;
 }
 .bg-red {
   background: $red;
-}
-.bg-dark-blue {
-  background: $blue;
 }
 
 // Absolute positions
