@@ -1,6 +1,6 @@
 <div class="navigation-list">
   <% if params['action'] == 'home' %>
-    <div class="btn-toolbar" role='toolbar'>
+    <div class="btn-group" role='group'>
   <% else %>
     <div class="btn-group btn-group-vertical" role='group'>
   <% end %>
@@ -9,6 +9,8 @@
         Accueil <i class="fa fa-home"></i>
       <% end %>
     <% end %>
+
+<!-- Name -->
     <div class="btn-group" role='group'>
       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
         Par nom <i class="fa fa-caret-down"></i>
@@ -21,6 +23,9 @@
       <% end %>
       </ul>
     </div>
+<!-- Name -->
+
+<!-- Groups -->
     <div class="btn-group" role='group'>
       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
         Par groupe <i class="fa fa-caret-down"></i>
@@ -33,6 +38,9 @@
       <% end %>
       </ul>
     </div>
+<!-- Groups -->
+
+<!-- Departements -->
     <div class="btn-group" role='group'>
       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
         Par département <i class="fa fa-caret-down"></i>
@@ -45,6 +53,9 @@
       <% end %>
       </ul>
     </div>
+<!-- Departements -->
+
+<!-- Age -->
     <div class="btn-group" role='group'>
       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
         Par âge <i class="fa fa-caret-down"></i>
@@ -57,6 +68,9 @@
       <% end %>
       </ul>
     </div>
+<!-- Age -->
+
+<!-- Profession -->
     <div class="btn-group" role='group'>
       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
         Par métier <i class="fa fa-caret-down"></i>
@@ -69,6 +83,8 @@
       <% end %>
       </ul>
     </div>
+<!-- Profession -->
+
   </div>
 </div>
 <div class="navigation-list">
