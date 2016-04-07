@@ -5,7 +5,7 @@ class DeputiesController < ApplicationController
     set_departments
   end
 
-  before_action :set_deputy, :set_mandate_and_circonscription, :set_age
+  before_action :set_deputy, :set_mandate_and_circonscription, :set_age, :set_address
   before_action :set_previous_and_next, only: :show
 
   helper_method :set_next, :set_previous, :find_website, :find_emails
@@ -86,5 +86,9 @@ class DeputiesController < ApplicationController
 
   def find_emails(deputy)
     deputy.e_addresses.where(label: 'Mèl').map(&:value)
+  end
+
+  def set_address
+    @address = @deputy.addresses.last
   end
 end
