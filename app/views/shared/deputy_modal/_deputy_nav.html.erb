@@ -20,14 +20,6 @@
       </div>
       <!-- square bottom left -->
 
-      <!-- square bottom right -->
-      <div class="profile-card-element profile-card-element-nav bg-gray" data-dismiss="modal" data-toggle="modal" data-target="#deputy_modal_<%= @next_id.id %>" data-deputy=<%= @next_id.id %>>
-        <h3>
-          <i class="fa fa-arrow-right"></i>
-        </h3>
-      </div>
-      <!-- square bottom right -->
-
 <!-- MODAL -->
     <% else %>
 <!-- NORMAL VERSION (show) -->
@@ -40,16 +32,15 @@
       <% end %>
       <!-- square bottom left -->
 
-      <!-- square bottom right -->
-      <%= link_to deputy_path(@next_id, search: params[:search]), class: 'profile-card-element bg-gray' do %>
-        <h3>
-          <i class="fa fa-arrow-right"></i>
-        </h3>
-      <% end %>
-      <!-- square bottom right -->
-
 <!-- NORMAL VERSION (show) -->
     <% end %>
 
+    <!-- square bottom right -->
+    <%= link_to root_path, class: 'profile-card-element bg-dark-blue' do %>
+      <h3>
+        <i class="fa fa-home"></i>
+      </h3>
+    <% end %>
+    <!-- square bottom right -->
   </div>
 </div>
