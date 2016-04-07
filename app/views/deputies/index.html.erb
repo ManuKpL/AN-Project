@@ -1,3 +1,6 @@
+<div class="index-pic"></div> <!-- Background picture for the page -->
+
+<!-- NAVIGATION (LEFT) -->
 <div class="navigation-menu">
   <h2 class='navigation-menu-title'>
       AN Project
@@ -5,16 +8,23 @@
   </h2>
     <%= render 'shared/deputies_list_nav' %>
 </div>
-<div class="index-pic"></div>
+<!-- NAVIGATION (LEFT) -->
+
 <div class="content-zone">
   <div class="deputies-list">
+    <!-- ITERATION -->
     <% @deputies.each do |deputy| %>
+
+      <!-- set every variable used by show and partials -->
       <% @deputy = deputy %>
       <% @previous_id = set_previous(deputy) %>
       <% @next_id = set_next(deputy) %>
       <% @address = deputy.addresses.last.label == 'NR' ? deputy.addresses[-1] :deputy.addresses.last %>
       <% @mandate = deputy.mandates.last %>
       <% @circo = @mandate.circonscription %>
+      <!-- set every variable used by show and partials -->
+
+      <!-- CARD -->
       <div class="list-card" data-toggle="modal" data-target="#deputy_modal_<%= deputy.id %>" data-deputy="<%= deputy.id %>">
         <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{deputy.original_tag[2..-1]}.jpg", class: 'list-card-picture' %>
         <div class="list-card-text">
@@ -26,6 +36,8 @@
           </p>
         </div>
       </div>
+      <!-- CARD -->
+
     <!-- MODAL -->
       <div class="modal" id="deputy_modal_<%= deputy.id %>" tabindex="-1" aria-labelledby="Deputy navigation">
         <div class="modal-content">
@@ -42,6 +54,8 @@
         </div>
       </div>
     <!-- MODAL -->
+
     <% end %>
+    <!-- ITERATION -->
   </div>
 </div>
