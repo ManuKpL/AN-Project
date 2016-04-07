@@ -1,0 +1,29 @@
+<div class="profile-element">
+  <div class="profile-card cover-position">
+
+    <!-- rectangle top (wdouble) -->
+    <%= link_to deputies_path(search: @deputy.job.category), class: 'profile-card-element profile-card-element-wdouble bg-blue' do %>
+      <p>
+        <%= @deputy.job.label %>
+      </p>
+    <% end %>
+    <!-- rectangle top (wdouble) -->
+
+    <!-- square bottom left -->
+    <%= link_to deputy_path(@deputy), class: 'profile-card-element bg-gray' do %>
+      <h3>
+        <i class="fa fa-arrow-left"></i>
+      </h3>
+    <% end %>
+    <!-- square bottom left -->
+
+    <!-- square bottom right -->
+    <%= link_to deputy_path(@next_id), class: 'profile-card-element bg-gray' do %>
+      <h3>
+        <i class="fa fa-arrow-right"></i>
+      </h3>
+    <% end %>
+    <!-- square bottom right -->
+
+  </div>
+</div>
