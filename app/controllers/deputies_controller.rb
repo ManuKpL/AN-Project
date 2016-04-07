@@ -8,7 +8,7 @@ class DeputiesController < ApplicationController
   before_action :set_deputy, :set_mandate_and_circonscription, :set_age
   before_action :set_previous_and_next, only: :show
 
-  helper_method :set_next, :set_previous, :find_website
+  helper_method :set_next, :set_previous, :find_website, :find_emails
 
   def show
   end
@@ -82,5 +82,9 @@ class DeputiesController < ApplicationController
   def find_website(deputy)
     websites = deputy.e_addresses.where(label: 'Site internet')
     websites.empty? ? '' : websites.first.value
+  end
+
+  def find_emails(deputy)
+    deputy.e_addresses.where(label: 'Mèl').map(&:value)
   end
 end
