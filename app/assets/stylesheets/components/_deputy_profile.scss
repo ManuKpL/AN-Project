@@ -2,11 +2,6 @@ $square-margin: 2%;
 $square-size: 50% - $square-margin * 2;
 $double-size: 100% - $square-margin * 2;
 
-.no-account {
-  background-color: rgb(150,150,150);
-  color: rgb(80,80,80);
-}
-
 .my-col {
   padding-left: 0px;
   padding-right: 0px;
@@ -24,7 +19,6 @@ $double-size: 100% - $square-margin * 2;
     display: flex;
     flex-wrap: wrap;
     &-element {
-      width: $square-size;
       margin: $square-margin;
       height: $square-size;
       width: $square-size;
@@ -51,8 +45,9 @@ $double-size: 100% - $square-margin * 2;
       &-nav {
         cursor: pointer;
         &:hover {
-          background-color: rgb(150,150,150);
+          // background-color: rgb(150,150,150);
           color: rgb(80,80,80);
+          filter: sepia(90%);
         }
       }
     }
@@ -60,8 +55,9 @@ $double-size: 100% - $square-margin * 2;
       color: white;
       &:hover {
         text-decoration: none;
-        background-color: rgb(150,150,150);
+        background-color: $brand-gray;
         color: rgb(80,80,80);
+        filter: sepia(90%);
       }
     }
     &-column-direction {
@@ -69,19 +65,13 @@ $double-size: 100% - $square-margin * 2;
     }
   }
   &-picture {
+    position: relative;
     background-repeat: no-repeat;
     background-position: center;
-    &-filling-bg {
-      width: $square-size;
-      height: $square-size;
-      margin: $square-margin;
-      border-radius: 3px;
-      position: relative;
-      background-size: cover;
-      background-position: center;
-      &-shadow {
-        background-color: rgba(200,200,200,0.7);
-      }
+    background-size: cover;
+    filter: grayscale(90%);
+    &:hover {
+      filter: sepia(90%);
     }
   }
   &-page {
@@ -91,11 +81,9 @@ $double-size: 100% - $square-margin * 2;
   }
 }
 
-#picture-linking {
-  z-index: 5;
-  &:hover {
-    background-color: rgba(80,80,80,0.4);
-  }
+.no-account {
+  background-color: rgb(150,150,150);
+  color: rgb(80,80,80);
 }
 
 @media screen and (max-width: 768px) {
