@@ -8,7 +8,7 @@ class DeputiesController < ApplicationController
   before_action :set_deputy, :set_mandate_and_circonscription, :set_age
   before_action :set_previous_and_next, only: :show
 
-  helper_method :set_next, :set_previous
+  helper_method :set_next, :set_previous, :find_website
 
   def show
   end
@@ -77,5 +77,10 @@ class DeputiesController < ApplicationController
   def set_age
     @age = Date.today.year - @deputy.birthday.year
     @age -= 1 if Date.today < @deputy.birthday + @age.years
+  end
+
+  def find_website(deputy)
+    websites = deputy.e_addresses.where(label: 'Site internet')
+    websites.empty? ? '' : websites.first.value
   end
 end
