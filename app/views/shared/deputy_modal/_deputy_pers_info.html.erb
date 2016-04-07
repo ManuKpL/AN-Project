@@ -10,7 +10,7 @@
     <!-- rectangle top (wdouble) -->
 
     <!-- square bottom left -->
-    <%= link_to deputies_path(search: @age), class: 'profile-card-element bg-gray' do %>
+    <%= link_to deputies_path(search: @age), class: 'profile-card-element bg-red' do %>
       <h3>
         <%= @age %>
       </h3>
@@ -21,10 +21,18 @@
     <!-- square bottom left -->
 
     <!-- square bottom right -->
-    <%= link_to deputy_path(@next_id), class: 'profile-card-element bg-gray' do %>
-      <h3>
-        <i class="fa fa-arrow-right"></i>
-      </h3>
+    <% if find_website(@deputy).length == 0 %>
+      <div class="profile-card-element no-account">
+        <h3>
+          <i class="fa fa-external-link"></i>
+        </h3>
+      </div>
+    <% else %>
+      <%= link_to "http://#{find_website(@deputy)}", target: '_blank', class: 'profile-card-element bg-gray' do %>
+        <h3>
+          <i class="fa fa-external-link"></i>
+        </h3>
+      <% end %>
     <% end %>
     <!-- square bottom right -->
 
