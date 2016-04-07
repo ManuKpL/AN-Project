@@ -9,8 +9,8 @@
 <div class="content-zone">
   <div class="deputies-list">
     <% @deputies.each do |deputy| %>
-      <% @previous_id = set_previous(deputy) %>
       <% @deputy = deputy %>
+      <% @previous_id = set_previous(deputy) %>
       <% @next_id = set_next(deputy) %>
       <% @address = deputy.addresses.last.label == 'NR' ? deputy.addresses[-1] :deputy.addresses.last %>
       <% @mandate = deputy.mandates.last %>

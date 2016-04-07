@@ -1,15 +1,16 @@
 class DeputiesController < ApplicationController
 
   before_action only: :index do
-    set_groups
-    set_departments
+    set_groups # prioritaire: détermine :set_deputy
+    set_departments #voir ApplicationController
   end
 
   before_action :set_deputy
+
   before_action only: :show do
-    set_previous_and_next
     set_address
     set_mandate_and_circonscription
+    set_previous_and_next
   end
 
   helper_method :set_next, :set_previous, :find_website, :find_emails, :find_age
@@ -22,33 +23,7 @@ class DeputiesController < ApplicationController
 
   private
 
-  def set_deputy
-    if params[:id]
-      @deputy = Deputy.find(params[:id].to_i)
-    else
-      @deputy = @deputies.first
-    end
-  end
-
-  def set_previous_and_next
-    @deputies = Deputy.order(:lastname)
-    @previous_id = set_previous(@deputy)
-    @next_id = set_next(@deputy)
-  end
-
-  def set_previous(deputy)
-    ids_list = @deputies.map(&:id)
-    return Deputy.find(ids_list[ids_list.find_index(deputy.id) - 1])
-  end
-
-  def set_next(deputy)
-    ids_list = @deputies.map(&:id)
-    if ids_list[ids_list.find_index(deputy.id) + 1]
-      return Deputy.find(ids_list[ids_list.find_index(deputy.id) + 1])
-    else
-      return Deputy.find(ids_list.first)
-    end
-  end
+# used only by index
 
   def set_groups
     search = params[:search]
@@ -73,9 +48,47 @@ class DeputiesController < ApplicationController
     @groups = Group.order(:sigle)
   end
 
+# used by both index and show
+
+  def set_deputy
+    if params[:id]
+      @deputy = Deputy.find(params[:id].to_i)
+    else
+      @deputy = @deputies.first
+    end
+  end
+
+# used by show
+
+  def set_address
+    @address = @deputy.addresses.last.label == 'NR' ? @deputy.addresses[-1] : @deputy.addresses.last
+  end
+
   def set_mandate_and_circonscription
     @mandate = @deputy.mandates.last
     @circo = @mandate.circonscription
+  end
+
+  def set_previous_and_next
+    @deputies = Deputy.order(:lastname)
+    @previous_id = set_previous(@deputy)
+    @next_id = set_next(@deputy)
+  end
+
+# helper methods
+
+  def set_previous(deputy)
+    ids_list = @deputies.map(&:id)
+    return Deputy.find(ids_list[ids_list.find_index(deputy.id) - 1])
+  end
+
+  def set_next(deputy)
+    ids_list = @deputies.map(&:id)
+    if ids_list[ids_list.find_index(deputy.id) + 1]
+      return Deputy.find(ids_list[ids_list.find_index(deputy.id) + 1])
+    else
+      return Deputy.find(ids_list.first)
+    end
   end
 
   def find_age(deputy)
@@ -92,7 +105,4 @@ class DeputiesController < ApplicationController
     deputy.e_addresses.where(label: 'Mèl').map(&:value)
   end
 
-  def set_address
-    @address = @deputy.addresses.last.label == 'NR' ? @deputy.addresses[-1] : @deputy.addresses.last
-  end
 end
