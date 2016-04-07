@@ -1,25 +1,27 @@
 class DeputiesController < ApplicationController
+
   before_action only: :index do
-    set_group
+    set_groups
     set_departments
   end
 
-  before_action only: :show do
-    set_deputy
-    set_previous_and_next
-  end
+  before_action :set_deputy, :set_mandate_and_circonscription
+  before_action :set_previous_and_next, only: :show
 
   helper_method :set_next, :set_previous
 
   def show
-    @mandate = @deputy.mandates.last
-    @circo = @mandate.circonscription
   end
 
   def index
   end
 
   private
+
+  def set_mandate_and_circonscription
+    @mandate = @deputy.mandates.last
+    @circo = @mandate.circonscription
+  end
 
   def set_deputy
     if params[:id]
@@ -49,7 +51,7 @@ class DeputiesController < ApplicationController
     end
   end
 
-  def set_group
+  def set_groups
     search = params[:search]
     search = "Écologiste" if %w(ecologiste écologiste ECOLOGISTE).include?(params[:search])
     if search.nil?
