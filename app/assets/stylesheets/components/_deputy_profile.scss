@@ -40,6 +40,7 @@ $double-size: 100% - $square-margin * 2;
       p {
         font-size: 1.5vw;
         margin: 0;
+        padding: 0 0.5em;
       }
       &-wdouble {
         width: $double-size;
