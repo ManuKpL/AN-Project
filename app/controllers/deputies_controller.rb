@@ -5,8 +5,11 @@ class DeputiesController < ApplicationController
     set_departments
   end
 
-  before_action :set_deputy, :set_mandate_and_circonscription, :set_age, :set_address
-  before_action :set_previous_and_next, only: :show
+  before_action :set_deputy, :set_mandate_and_circonscription, :set_age
+  before_action only: :show do
+    set_previous_and_next
+    set_address
+  end
 
   helper_method :set_next, :set_previous, :find_website, :find_emails
 
