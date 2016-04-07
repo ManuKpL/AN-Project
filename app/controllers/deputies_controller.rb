@@ -3,7 +3,7 @@ class DeputiesController < ApplicationController
   before_action only: :index do
     set_departments #voir ApplicationController
     set_groups #voir ApplicationController
-    analyse_search # prioritaire: détermine :set_deputy
+    analyse_search
   end
 
   before_action :set_deputy, :set_ages
@@ -24,21 +24,24 @@ class DeputiesController < ApplicationController
 
   private
 
-# strong param
-
-  def search_params
-    params.require(:search).permit(:grp, :dep, :ini, :age, :pro)
-  end
-
 # used only by index
 
   def analyse_search
-    select_by_age(search_params[:age])        if search_params[:age].present?
-    select_by_group(search_params[:grp])      if search_params[:grp].present?
-    select_by_initial(search_params[:ini])    if search_params[:ini].present?
-    select_by_department(search_params[:dep]) if search_params[:dep].present?
-    select_by_profession(search_params[:pro]) if search_params[:pro].present?
-    # redirect_to root_path
+    if params[:search].nil?
+      redirect_to root_path
+    elsif params[:search][:age].present?
+      select_by_age(params[:search][:age])
+    elsif params[:search][:grp].present?
+      select_by_group(params[:search][:grp])
+    elsif params[:search][:ini].present?
+      select_by_initial(params[:search][:ini])
+    elsif params[:search][:dep].present?
+      select_by_department(params[:search][:dep])
+    elsif params[:search][:pro].present?
+      select_by_profession(params[:search][:pro])
+    else
+      redirect_to root_path
+    end
   end
 
   def select_by_age(search)
@@ -160,8 +163,8 @@ class DeputiesController < ApplicationController
   end
 
   def is_current_page?(element, symbol)
-    search = search_params[symbol].nil? ? '' : search_params[symbol]
-    if search_params[:age].present?
+    search = params[:search][symbol].nil? ? '' : params[:search][symbol]
+    if params[:search][:age].present?
       element == search[0].to_i * 10
     else
       element == search.capitalize || element == search.upcase
