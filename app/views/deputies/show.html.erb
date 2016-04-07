@@ -13,14 +13,14 @@
     <%= link_to 'Back', :back, class: 'btn navigation-btn' %>
   </div>
   <div class="navigation margin-top hidden-xs">
-    <%= link_to deputy_path(@previous_id), class: 'btn navigation-btn' do %>
+    <%= link_to deputy_path(@previous_id, search: params[:search]), class: 'btn navigation-btn' do %>
       <i class="fa fa-arrow-left"></i>
       <%= "#{@previous_id.civ} #{@previous_id.firstname} #{@previous_id.lastname}" %>
     <% end %>
     <%= link_to root_path, class: 'btn navigation-btn navigation-btn-lg' do %>
       <i class="fa fa-university"></i>
     <% end %>
-    <%= link_to deputy_path(@next_id), class: 'btn navigation-btn' do %>
+    <%= link_to deputy_path(@next_id, search: params[:search]), class: 'btn navigation-btn' do %>
       <%= "#{@next_id.civ} #{@next_id.firstname} #{@next_id.lastname}" %>
       <i class="fa fa-arrow-right"></i>
     <% end %>

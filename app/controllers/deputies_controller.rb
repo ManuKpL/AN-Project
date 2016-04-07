@@ -1,12 +1,11 @@
 class DeputiesController < ApplicationController
 
   before_action only: :index do
-    set_departments #voir ApplicationController
     set_groups #voir ApplicationController
-    analyse_search
   end
 
-  before_action :set_deputy, :set_ages
+  before_action :set_departments, :analyse_search , :set_deputy, :set_ages
+   #voir ApplicationController pour set_ages et set_departments
 
   before_action only: :show do
     set_address
@@ -27,8 +26,10 @@ class DeputiesController < ApplicationController
 # used only by index
 
   def analyse_search
-    if params[:search].nil?
+    if params[:search].nil? && params['action'] == 'index'
       redirect_to root_path
+    elsif params[:search].nil? && params['action'] == 'show'
+      nil
     elsif params[:search][:age].present?
       select_by_age(params[:search][:age])
     elsif params[:search][:grp].present?
@@ -39,7 +40,7 @@ class DeputiesController < ApplicationController
       select_by_department(params[:search][:dep])
     elsif params[:search][:pro].present?
       select_by_profession(params[:search][:pro])
-    else
+    elsif params['action'] == 'index'
       redirect_to root_path
     end
   end
@@ -68,7 +69,7 @@ class DeputiesController < ApplicationController
   end
 
   def find_by_age(min, max)
-    Deputy.all.select { |d| d if find_age(d) >= min && find_age(d) < max }
+    Deputy.order(:lastname).select { |d| d if find_age(d) >= min && find_age(d) < max }
   end
 
   def select_by_group(search)
@@ -91,7 +92,7 @@ class DeputiesController < ApplicationController
   def select_by_department(search)
     if @departments.values.include?(search) || (search.length == 1 && search.to_i >= 1)
       search = "0#{search}" if search.length == 1 && search.to_i >= 1
-      @deputies = Deputy.all.select { |d| d if d.circonscriptions.last.department_num == search }
+      @deputies = Deputy.order(:lastname).select { |d| d if d.circonscriptions.last.department_num == search }
     else
       redirect_to root_path
     end
@@ -99,7 +100,7 @@ class DeputiesController < ApplicationController
 
   def select_by_profession(search)
     if Job.all.map(&:category).include?(search)
-      @deputies = Deputy.all.select { |d| d if d.job.category == search }
+      @deputies = Deputy.order(:lastname).select { |d| d if d.job.category == search }
     else
       redirect_to root_path
     end
@@ -127,7 +128,7 @@ class DeputiesController < ApplicationController
   end
 
   def set_previous_and_next
-    @deputies = Deputy.order(:lastname)
+    @deputies = Deputy.order(:lastname) if @deputies.nil?
     @previous_id = set_previous(@deputy)
     @next_id = set_next(@deputy)
   end

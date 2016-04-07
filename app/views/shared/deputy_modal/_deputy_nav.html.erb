@@ -2,7 +2,7 @@
   <div class="profile-card cover-position">
 
     <!-- rectangle top (wdouble) -->
-    <%= link_to @deputy, class: 'profile-card-element profile-card-element-wdouble bg-blue' do %>
+    <%= link_to deputy_path(@deputy, search: params[:search]), class: 'profile-card-element profile-card-element-wdouble bg-blue' do %>
       <p>
         <%= "#{@deputy.civ} #{@deputy.firstname} #{@deputy.lastname}" %>
       </p>
@@ -33,7 +33,7 @@
 <!-- NORMAL VERSION (show) -->
 
       <!-- square bottom left -->
-      <%= link_to @previous_id, class: 'profile-card-element bg-gray' do %>
+      <%= link_to deputy_path(@previous_id, search: params[:search]), class: 'profile-card-element bg-gray' do %>
         <h3>
           <i class="fa fa-arrow-left"></i>
         </h3>
@@ -41,7 +41,7 @@
       <!-- square bottom left -->
 
       <!-- square bottom right -->
-      <%= link_to @next_id, class: 'profile-card-element bg-gray' do %>
+      <%= link_to deputy_path(@next_id, search: params[:search]), class: 'profile-card-element bg-gray' do %>
         <h3>
           <i class="fa fa-arrow-right"></i>
         </h3>

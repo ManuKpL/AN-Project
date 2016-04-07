@@ -10,7 +10,7 @@
     <!-- square top left -->
 
     <!-- square top right -->
-    <%= link_to '', @deputy, class: 'profile-card-element profile-picture', style: "background-image: url('http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg')" %>
+    <%= link_to '', deputy_path(@deputy, search: params[:search]), class: 'profile-card-element profile-picture', style: "background-image: url('http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg')" %>
     <!-- square top right -->
 
     <!-- rectangle bottom (wdouble) -->

@@ -18,7 +18,7 @@
       <ul class="dropdown-menu dropdown-menu-left navigation-list-scrollable">
       <% Deputy.order(:lastname).each do |deputy| %>
         <li>
-          <%= link_to "#{deputy.civ} #{deputy.firstname} #{deputy.lastname}", deputy_path(deputy) %>
+          <%= link_to "#{deputy.civ} #{deputy.firstname} #{deputy.lastname}", deputy_path(deputy, search: params[:search]) %>
         </li>
       <% end %>
       </ul>

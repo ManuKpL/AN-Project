@@ -28,6 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_current_page?(element, symbol)
+    nil
   end
 
   def set_ages
