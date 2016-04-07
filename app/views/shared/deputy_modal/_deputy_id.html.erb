@@ -13,7 +13,7 @@
     <div class="profile-picture-filling-bg" style='background-image: url(<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>)'>
       <div class="profile-picture-filling-bg-shadow cover-position"></div>
       <div class="profile-picture cover-position" style='background-image: url(<%= "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>)'></div>
-      <%= link_to '', deputy_path(@deputy), class: "cover-position profile-picture-linking", id: 'picture-linking' %>
+      <%= link_to '', @deputy, class: "cover-position profile-picture-linking", id: 'picture-linking' %>
     </div>
     <!-- square top right -->
 

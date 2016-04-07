@@ -10,7 +10,7 @@
     <!-- rectangle top (wdouble) -->
 
     <!-- square bottom left -->
-    <%= link_to deputies_path(search: @age), class: 'profile-card-element bg-red' do %>
+    <%= link_to deputies_path(search: @age), class: 'profile-card-element bg-dark-blue' do %>
       <h3>
         <%= @age %>
       </h3>
@@ -28,7 +28,7 @@
         </h3>
       </div>
     <% else %>
-      <%= link_to "http://#{find_website(@deputy)}", target: '_blank', class: 'profile-card-element bg-gray' do %>
+      <%= link_to "http://#{find_website(@deputy)}", target: '_blank', class: 'profile-card-element bg-red' do %>
         <h3>
           <i class="fa fa-external-link"></i>
         </h3>
