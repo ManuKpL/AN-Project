@@ -1,0 +1,51 @@
+<div class="profile-element">
+  <div class="profile-card cover-position profile-card-column-direction">
+
+    <!-- rectangle left (hdouble) -->
+    <%= link_to "https://www.google.fr/maps/place/#{@address.value} #{@address.city}", target: '_blank', class: "profile-card-element profile-card-element-hdouble bg-red" do %>
+      <p>
+        <%= @address.value %>
+      </p>
+      <p>
+        <%= @address.postcode %>
+      </p>
+      <p>
+        <%= @address.city %>
+      </p>
+    <% end %>
+    <!-- rectangle left (hdouble) -->
+
+    <!-- square top right -->
+    <% if find_emails(@deputy).empty? %>
+      <div class="profile-card-element no-account">
+        <h3>
+          <i class="fa fa-at"></i>
+        </h3>
+      </div>
+    <% else %>
+      <%= mail_to find_emails(@deputy).first, class: 'profile-card-element bg-light-blue' do %>
+        <h3>
+          <i class="fa fa-at"></i>
+        </h3>
+      <% end %>
+    <% end %>
+    <!-- square top right -->
+
+    <!-- square bottom right -->
+    <% if find_emails(@deputy).count <= 1 %>
+      <div class="profile-card-element no-account">
+        <h3>
+          <i class="fa fa-at"></i>
+        </h3>
+      </div>
+    <% else %>
+      <%= mail_to find_emails(@deputy)[1], class: 'profile-card-element bg-gray' do %>
+        <h3>
+          <i class="fa fa-at"></i>
+        </h3>
+      <% end %>
+    <% end %>
+    <!-- square bottom right -->
+
+  </div>
+</div>

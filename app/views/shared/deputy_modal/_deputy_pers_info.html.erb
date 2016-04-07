@@ -1,0 +1,40 @@
+<div class="profile-element">
+  <div class="profile-card cover-position">
+
+    <!-- rectangle top (wdouble) -->
+    <%= link_to deputies_path(search: @deputy.job.category), class: 'profile-card-element profile-card-element-wdouble bg-blue' do %>
+      <p>
+        <%= @deputy.job.label %>
+      </p>
+    <% end %>
+    <!-- rectangle top (wdouble) -->
+
+    <!-- square bottom left -->
+    <%= link_to deputies_path(search: @age), class: 'profile-card-element bg-dark-blue' do %>
+      <h3>
+        <%= find_age(@deputy) %>
+      </h3>
+      <p>
+        ans
+      </p>
+    <% end %>
+    <!-- square bottom left -->
+
+    <!-- square bottom right -->
+    <% if find_website(@deputy).length == 0 %>
+      <div class="profile-card-element no-account">
+        <h3>
+          <i class="fa fa-external-link"></i>
+        </h3>
+      </div>
+    <% else %>
+      <%= link_to "http://#{find_website(@deputy)}", target: '_blank', class: 'profile-card-element bg-red' do %>
+        <h3>
+          <i class="fa fa-external-link"></i>
+        </h3>
+      <% end %>
+    <% end %>
+    <!-- square bottom right -->
+
+  </div>
+</div>

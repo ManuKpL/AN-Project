@@ -1,15 +1,6 @@
-$base-margin: 2%;
-$base-size: 50% - $base-margin * 2;
-$double-size: 100% - $base-margin * 2;
-
-#nav {
-  flex-direction: column;
-}
-
-#no-twitter-account {
-  background-color: rgb(150,150,150);
-  color: rgb(80,80,80);
-}
+$square-margin: 2%;
+$square-size: 50% - $square-margin * 2;
+$double-size: 100% - $square-margin * 2;
 
 .my-col {
   padding-left: 0px;
@@ -21,40 +12,37 @@ $double-size: 100% - $base-margin * 2;
     position: relative;
     height: 0;
     padding-top: 100%;
+    color: white;
   }
   &-card {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
     &-element {
-      width: $base-size;
-      margin: $base-margin;
-      height: $base-size;
-      width: $base-size;
+      margin: $square-margin;
+      height: $square-size;
+      width: $square-size;
       border-radius: 3px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: white;
       h3 {
-        font-size: 40px;
-        margin: 0px;
+        font-size: 2.5vw;
+        margin: 0;
       }
       p {
-        font-size: 22px;
-        margin: 0 10px;
+        font-size: 1.3vw;
+        margin: 0;
+        padding: 0 0.5em;
       }
-      &-wdouble {
-        width: $double-size;
-      }
-      &-hdouble {
-        height: $double-size;
-      }
+      &-wdouble { width: $double-size }
+      &-hdouble { height: $double-size }
       &-nav {
         cursor: pointer;
         &:hover {
-          background-color: rgb(150,150,150);
           color: rgb(80,80,80);
+          filter: sepia(90%);
         }
       }
     }
@@ -62,26 +50,18 @@ $double-size: 100% - $base-margin * 2;
       color: white;
       &:hover {
         text-decoration: none;
-        background-color: rgb(150,150,150);
+        background-color: $brand-gray;
         color: rgb(80,80,80);
+        filter: sepia(90%);
       }
     }
+    &-column-direction { flex-direction: column }
   }
   &-picture {
+    position: relative;
     background-repeat: no-repeat;
     background-position: center;
-    &-filling-bg {
-      width: $base-size;
-      height: $base-size;
-      margin: $base-margin;
-      border-radius: 3px;
-      position: relative;
-      background-size: cover;
-      background-position: center;
-      &-shadow {
-        background-color: rgba(200,200,200,0.7);
-      }
-    }
+    background-size: cover;
   }
   &-page {
     background-color: white;
@@ -90,20 +70,14 @@ $double-size: 100% - $base-margin * 2;
   }
 }
 
-#picture-linking {
-  z-index: 5;
-  &:hover {
-    background-color: rgba(80,80,80,0.4);
-  }
+.no-account {
+  background-color: rgb(150,150,150);
+  color: rgb(80,80,80);
 }
 
 @media screen and (max-width: 768px) {
   .profile-card-element {
-    p {
-      font-size: 18px;
-    }
-    h3 {
-      font-size: 35px;
-    }
+    p { font-size: 18px }
+    h3 { font-size: 35px }
   }
 }

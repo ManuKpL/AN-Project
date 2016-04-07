@@ -1,13 +1,31 @@
+<div class="index-pic"></div> <!-- Background picture for the page -->
+
+<!-- NAVIGATION (LEFT) -->
 <div class="navigation-menu">
+  <h2 class='navigation-menu-title'>
+      AN Project
+    <div class="flag-border"></div>
+  </h2>
     <%= render 'shared/deputies_list_nav' %>
 </div>
+<!-- NAVIGATION (LEFT) -->
+
 <div class="content-zone">
   <div class="deputies-list">
+    <!-- ITERATION -->
     <% @deputies.each do |deputy| %>
-      <% @previous_id = set_previous(deputy) %>
+
+      <!-- set every variable used by show and partials -->
       <% @deputy = deputy %>
+      <% @previous_id = set_previous(deputy) %>
       <% @next_id = set_next(deputy) %>
-      <div class="list-card" data-toggle="modal" data-target="#deputy_nav_modal_<%= deputy.id %>" data-deputy="<%= deputy.id %>">
+      <% @address = deputy.addresses.last.label == 'NR' ? deputy.addresses[-1] :deputy.addresses.last %>
+      <% @mandate = deputy.mandates.last %>
+      <% @circo = @mandate.circonscription %>
+      <!-- set every variable used by show and partials -->
+
+      <!-- CARD -->
+      <div class="list-card" data-toggle="modal" data-target="#deputy_modal_<%= deputy.id %>" data-deputy="<%= deputy.id %>">
         <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{deputy.original_tag[2..-1]}.jpg", class: 'list-card-picture' %>
         <div class="list-card-text">
           <p class="list-card-name">
@@ -18,20 +36,26 @@
           </p>
         </div>
       </div>
+      <!-- CARD -->
+
     <!-- MODAL -->
-      <div class="modal" id="deputy_nav_modal_<%= deputy.id %>" tabindex="-1" aria-labelledby="Deputy navigation">
+      <div class="modal" id="deputy_modal_<%= deputy.id %>" tabindex="-1" aria-labelledby="Deputy navigation">
         <div class="modal-content">
-          <div class="modal-header hidden-xs">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="modal-header text-right">
+            <button type="button" class="close-button" data-dismiss="modal" aria-label="Close">
+              <i class="fa fa-times-circle"></i>
+            </button>
           </div>
           <div class="modal-body">
-            <div class="row deputy-modal-row">
-              <%= render 'shared/deputy_nav' %>
+            <div class="row deputy-modal-row text-center">
+              <%= render 'shared/deputy_modal' %>
             </div>
           </div>
         </div>
       </div>
     <!-- MODAL -->
+
     <% end %>
+    <!-- ITERATION -->
   </div>
 </div>

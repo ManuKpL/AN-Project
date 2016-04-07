@@ -17,25 +17,27 @@
 .bg-black {
   background: rgb(40,40,40);
 }
-.bg-grey {
-  background: rgb(100,100,100);
+.bg-gray {
+  background: $brand-gray;
 }
 .bg-blue {
-  background: #00a3e1;
+  background: $blue;
+}
+.bg-light-blue {
+  background: $light-blue;
 }
 .bg-dark-blue {
-  background: #3b5998;
+  background: $brand-color;
+}
+.bg-red {
+  background: $red;
 }
 
 // Absolute positions
 .cover-position {
   position: absolute;
   top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
-}
-
-body {
-  // background: linear-gradient(25deg, rgb(200,200,200) 30%, rgb(240,240,240) 70%);
-  // min-height: 100vh;
 }

@@ -1,9 +1,14 @@
 @import 'alert';
 @import 'avatars';
 @import 'badges';
+@import 'flag_border';
+
 @import 'home_banner';
-@import 'navigation_menu';
-@import 'deputy_profile';
-@import 'navigation';
+
+@import 'navigation_bar_left';
+@import 'deputies_list';
 @import 'list_card';
 @import 'deputy_modal';
+
+@import 'navigation_menu';
+@import 'deputy_profile';

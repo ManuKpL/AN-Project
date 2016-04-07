@@ -1,0 +1,21 @@
+.flag-border {
+  position: absolute;
+  bottom: -15%;
+  left: 40%;
+  width: 20%;
+  border-bottom: 0.08em solid white;
+  &::before {
+    content: '';
+    position: absolute;
+    left: -100%;
+    width: 100%;
+    border-bottom: 0.08em solid $blue;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    right: -100%;
+    width: 100%;
+    border-bottom: 0.08em solid $red;
+  }
+}

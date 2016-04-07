@@ -1,17 +1,29 @@
-.deputy-modal-row {
-  padding: 0 13px;
-}
+.deputy-modal-row { padding: 0 13px }
 
 .modal-content {
   width: 75%;
   max-width: 1000px;
-  margin: 20vh auto;
+  margin: 10vh auto;
+  .fa-times-circle {
+    color: $brand-gray;
+    font-size: 24px;
+    &:hover { color: white }
+  }
+  .close-button {
+    background: none;
+    border: none;
+  }
+}
+
+.modal-header {
+  background-image: url('paint_flag');
+  background-position: center;
+  background-size: cover;
 }
 
 @media screen and (max-width: 768px) {
   .modal-content {
     width: 60%;
-    margin: 1% auto;
-    height: 98%;
+    margin: 1% auto 0 auto;
   }
 }
