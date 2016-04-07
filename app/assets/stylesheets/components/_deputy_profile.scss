@@ -17,6 +17,7 @@ $double-size: 100% - $square-margin * 2;
     position: relative;
     height: 0;
     padding-top: 100%;
+    color: white;
   }
   &-card {
     align-items: center;
@@ -32,7 +33,6 @@ $double-size: 100% - $square-margin * 2;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: white;
       h3 {
         font-size: 3vw;
         margin: 0;
