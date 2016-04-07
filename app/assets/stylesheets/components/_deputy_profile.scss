@@ -1,8 +1,8 @@
-$base-margin: 2%;
-$base-size: 50% - $base-margin * 2;
-$double-size: 100% - $base-margin * 2;
+$square-margin: 2%;
+$square-size: 50% - $square-margin * 2;
+$double-size: 100% - $square-margin * 2;
 
-#no-twitter-account {
+.no-twitter-account {
   background-color: rgb(150,150,150);
   color: rgb(80,80,80);
 }
@@ -23,12 +23,13 @@ $double-size: 100% - $base-margin * 2;
     display: flex;
     flex-wrap: wrap;
     &-element {
-      width: $base-size;
-      margin: $base-margin;
-      height: $base-size;
-      width: $base-size;
+      width: $square-size;
+      margin: $square-margin;
+      height: $square-size;
+      width: $square-size;
       border-radius: 3px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       color: white;
@@ -70,9 +71,9 @@ $double-size: 100% - $base-margin * 2;
     background-repeat: no-repeat;
     background-position: center;
     &-filling-bg {
-      width: $base-size;
-      height: $base-size;
-      margin: $base-margin;
+      width: $square-size;
+      height: $square-size;
+      margin: $square-margin;
       border-radius: 3px;
       position: relative;
       background-size: cover;
