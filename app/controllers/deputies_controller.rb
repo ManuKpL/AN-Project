@@ -93,7 +93,7 @@ class DeputiesController < ApplicationController
 
   def find_age(deputy)
     age = Date.today.year - deputy.birthday.year
-    age -= 1 if Date.today < deputy.birthday + age.years
+    age = Date.today < deputy.birthday + age.years ? age - 1 : age
   end
 
   def find_website(deputy)
