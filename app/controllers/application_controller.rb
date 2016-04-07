@@ -25,4 +25,12 @@ class ApplicationController < ActionController::Base
       @departments["#{circonscription.department_num} - #{circonscription.department}"] = circonscription.department_num
     end
   end
+
+  def ordinalize_FR(number, genre)
+    if genre == 'F'
+      number == 1 ? "#{number}ère" : "#{number}ème"
+    elsif genre == 'M'
+      number == 1 ? "#{number}er" : "#{number}ème"
+    end
+  end
 end
