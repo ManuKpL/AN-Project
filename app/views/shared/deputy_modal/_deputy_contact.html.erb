@@ -2,7 +2,7 @@
   <div class="profile-card cover-position profile-card-column-direction">
 
     <!-- rectangle left (hdouble) -->
-    <%= link_to "https://www.google.fr/maps/place/#{@address.value} #{@address.postcode} #{@address.city}", target: '_blank', class: "profile-card-element profile-card-element-hdouble bg-red" do %>
+    <%= link_to "https://www.google.fr/maps/place/#{@address.value} #{@address.city}", target: '_blank', class: "profile-card-element profile-card-element-hdouble bg-red" do %>
       <p>
         <%= @address.value %>
       </p>

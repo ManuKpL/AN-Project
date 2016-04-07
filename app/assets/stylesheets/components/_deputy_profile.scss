@@ -36,16 +36,11 @@ $double-size: 100% - $square-margin * 2;
         margin: 0;
         padding: 0 0.5em;
       }
-      &-wdouble {
-        width: $double-size;
-      }
-      &-hdouble {
-        height: $double-size;
-      }
+      &-wdouble { width: $double-size }
+      &-hdouble { height: $double-size }
       &-nav {
         cursor: pointer;
         &:hover {
-          // background-color: rgb(150,150,150);
           color: rgb(80,80,80);
           filter: sepia(90%);
         }
@@ -60,19 +55,13 @@ $double-size: 100% - $square-margin * 2;
         filter: sepia(90%);
       }
     }
-    &-column-direction {
-      flex-direction: column;
-    }
+    &-column-direction { flex-direction: column }
   }
   &-picture {
     position: relative;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    filter: grayscale(90%);
-    &:hover {
-      filter: sepia(90%);
-    }
   }
   &-page {
     background-color: white;
@@ -88,11 +77,7 @@ $double-size: 100% - $square-margin * 2;
 
 @media screen and (max-width: 768px) {
   .profile-card-element {
-    p {
-      font-size: 18px;
-    }
-    h3 {
-      font-size: 35px;
-    }
+    p { font-size: 18px }
+    h3 { font-size: 35px }
   }
 }
