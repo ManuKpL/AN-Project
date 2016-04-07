@@ -12,6 +12,9 @@
 
 <div class="content-zone">
   <div class="deputies-list">
+    <h4 class="deputies-list-result bg-dark-blue">
+      <%= @deputies.count %> résultat<%= @deputies.count <= 1 ? '' : 's' %>
+    </h4>
     <!-- ITERATION -->
     <% @deputies.each do |deputy| %>
 
