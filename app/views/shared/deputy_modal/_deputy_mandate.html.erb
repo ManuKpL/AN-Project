@@ -1,0 +1,35 @@
+<div class="profile-element">
+  <div class="profile-card cover-position">
+
+    <!-- square top left -->
+    <%= link_to "http://www2.assemblee-nationale.fr/deputes/fiche/OMC_#{@deputy.original_tag}", target: '_blank', class: 'profile-card-element bg-gray' do %>
+      <p>
+        Siège
+      </p>
+      <h3>
+        #<%= @mandate.seat_num %>
+      </h3>
+    <% end %>
+    <!-- square top left -->
+
+    <!-- square top right -->
+    <%= link_to deputies_path(search: @circo.department_num), class: 'profile-card-element bg-blue' do %>
+      <h3>
+        <%= @circo.department_num %>
+      </h3>
+    <% end %>
+    <!-- square top right -->
+
+    <!-- rectangle bottom (wdouble) -->
+    <%= link_to deputies_path(search: @deputy.group.sigle), class: 'profile-card-element profile-card-element-wdouble bg-blue' do %>
+      <p><strong>
+        <%= "#{@circo.department}" %>
+      </strong></p>
+      <p>
+        <%= "#{ordinalize_FR(@circo.circo_num, 'F')} circonscription" %>
+      </p>
+    <% end %>
+    <!-- rectangle bottom (wdouble) -->
+
+  </div>
+</div>
