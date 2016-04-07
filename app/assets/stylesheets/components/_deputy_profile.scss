@@ -34,12 +34,12 @@ $double-size: 100% - $square-margin * 2;
       justify-content: center;
       color: white;
       h3 {
-        font-size: 40px;
-        margin: 0px;
+        font-size: 3vw;
+        margin: 0;
       }
       p {
-        font-size: 22px;
-        margin: 0 10px;
+        font-size: 1.5vw;
+        margin: 0;
       }
       &-wdouble {
         width: $double-size;
