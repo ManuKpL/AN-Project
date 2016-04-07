@@ -13,7 +13,7 @@ class DeputiesController < ApplicationController
     set_previous_and_next
   end
 
-  helper_method :set_next, :set_previous, :find_website, :find_emails, :find_age, :is_current_page?
+  helper_method :set_next, :set_previous, :find_website, :find_emails, :find_age
 
   def show
   end
@@ -31,15 +31,15 @@ class DeputiesController < ApplicationController
     elsif params[:search].nil? && params['action'] == 'show'
       nil
     elsif params[:search][:age].present?
-      select_by_age(params[:search][:age])
+      @deputies = select_by_age(params[:search][:age])
     elsif params[:search][:grp].present?
-      select_by_group(params[:search][:grp])
+      @deputies = select_by_group(params[:search][:grp])
     elsif params[:search][:ini].present?
-      select_by_initial(params[:search][:ini])
+      @deputies = select_by_initial(params[:search][:ini])
     elsif params[:search][:dep].present?
-      select_by_department(params[:search][:dep])
+      @deputies = select_by_department(params[:search][:dep])
     elsif params[:search][:pro].present?
-      select_by_profession(params[:search][:pro])
+      @deputies = select_by_profession(params[:search][:pro])
     elsif params['action'] == 'index'
       redirect_to root_path
     end
@@ -48,18 +48,30 @@ class DeputiesController < ApplicationController
   def select_by_age(search)
     if search.match(/\d{2,3}/)
       search = search.to_i
-      if search >= 18 && search < 30
-        @deputies = find_by_age(18, 30)
-      elsif search >= 30 && search < 40
-        @deputies = find_by_age(30, 40)
-      elsif search >= 40 && search < 50
-        @deputies = find_by_age(40, 50)
-      elsif search >= 50 && search < 60
-        @deputies = find_by_age(50, 60)
-      elsif search >= 60 && search < 70
-        @deputies = find_by_age(60, 70)
-      elsif search >= 70 && search < 120
-        @deputies = find_by_age(70, 120)
+      if search >= 18 && search < 25
+        find_by_age(18, 25)
+      elsif search >= 25 && search < 30
+        find_by_age(25, 30)
+      elsif search >= 30 && search < 35
+        find_by_age(30, 35)
+      elsif search >= 35 && search < 40
+        find_by_age(35, 40)
+      elsif search >= 40 && search < 45
+        find_by_age(40, 45)
+      elsif search >= 45 && search < 50
+        find_by_age(45, 50)
+      elsif search >= 50 && search < 55
+        find_by_age(50, 55)
+      elsif search >= 55 && search < 60
+        find_by_age(55, 60)
+      elsif search >= 60 && search < 65
+        find_by_age(60, 65)
+      elsif search >= 65 && search < 70
+        find_by_age(65, 70)
+      elsif search >= 70 && search < 75
+        find_by_age(70, 75)
+      elsif search >= 75 && search < 120
+        find_by_age(75, 120)
       else
         redirect_to root_path
       end
@@ -75,7 +87,7 @@ class DeputiesController < ApplicationController
   def select_by_group(search)
     search = "Écologiste" if %w(ecologiste écologiste ECOLOGISTE ecologistes écologistes ECOLOGISTES).include?(search)
     if Group.all.map(&:sigle).include?(search) || Group.all.map(&:sigle).include?(search.upcase!)
-      @deputies = Deputy.where(group_id: Group.find_by(sigle: search).id).order(:lastname)
+      Deputy.where(group_id: Group.find_by(sigle: search).id).order(:lastname)
     else
       redirect_to root_path
     end
@@ -83,7 +95,7 @@ class DeputiesController < ApplicationController
 
   def select_by_initial(search)
     if search.to_s.match(/[a-zA-Z]/)
-      @deputies = Deputy.where('lastname LIKE ?', "#{search.capitalize}%").order(:lastname)
+      Deputy.where('lastname LIKE ?', "#{search.capitalize}%").order(:lastname)
     else
       redirect_to root_path
     end
@@ -92,7 +104,7 @@ class DeputiesController < ApplicationController
   def select_by_department(search)
     if @departments.values.include?(search) || (search.length == 1 && search.to_i >= 1)
       search = "0#{search}" if search.length == 1 && search.to_i >= 1
-      @deputies = Deputy.order(:lastname).select { |d| d if d.circonscriptions.last.department_num == search }
+      Deputy.order(:lastname).select { |d| d if d.circonscriptions.last.department_num == search }
     else
       redirect_to root_path
     end
@@ -100,7 +112,7 @@ class DeputiesController < ApplicationController
 
   def select_by_profession(search)
     if Job.all.map(&:category).include?(search)
-      @deputies = Deputy.order(:lastname).select { |d| d if d.job.category == search }
+      Deputy.order(:lastname).select { |d| d if d.job.category == search }
     else
       redirect_to root_path
     end
@@ -170,5 +182,9 @@ class DeputiesController < ApplicationController
     else
       element == search.capitalize || element == search.upcase
     end
+  end
+
+  def has_nobody?(age)
+    select_by_age(age.to_s).empty?
   end
 end

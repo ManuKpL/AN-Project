@@ -62,7 +62,7 @@
       </button>
       <ul class="dropdown-menu dropdown-menu-left navigation-list-scrollable">
       <% @ages.keys.each do |min| %>
-        <li class='<%= 'disabled' if is_current_page?(min, :age) %>'>
+        <li class='<%= 'disabled' if is_current_page?(min, :age) || has_nobody?(min) %>'>
           <%= link_to "#{min}#{@ages[min]}", deputies_path(search: { age: min }) %>
         </li>
       <% end %>

@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  helper_method :check_status, :is_current_page?, :ordinalize_FR
+  helper_method :check_status, :is_current_page?, :has_nobody?, :ordinalize_FR
 
   private
 
@@ -31,14 +31,24 @@ class ApplicationController < ActionController::Base
     nil
   end
 
+  def has_nobody?(age)
+    nil
+  end
+
   def set_ages
     @ages = {
-      18 => " - 29 ans",
-      30 => " - 39 ans",
-      40 => " - 49 ans",
-      50 => " - 59 ans",
-      60 => " - 69 ans",
-      70 => " ans et plus"
+      18 => " - 24 ans",
+      25 => " - 29 ans",
+      30 => " - 34 ans",
+      35 => " - 39 ans",
+      40 => " - 44 ans",
+      45 => " - 49 ans",
+      50 => " - 54 ans",
+      55 => " - 59 ans",
+      60 => " - 64 ans",
+      65 => " - 69 ans",
+      70 => " - 74 ans",
+      75 => " ans et plus"
     }
   end
 
