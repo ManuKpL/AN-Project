@@ -10,10 +10,13 @@
     <!-- rectangle top (wdouble) -->
 
     <!-- square bottom left -->
-    <%= link_to deputy_path(@deputy), class: 'profile-card-element bg-gray' do %>
+    <%= link_to deputies_path(search: @age), class: 'profile-card-element bg-gray' do %>
       <h3>
-        <i class="fa fa-arrow-left"></i>
+        <%= @age %>
       </h3>
+      <p>
+        ans
+      </p>
     <% end %>
     <!-- square bottom left -->
 
