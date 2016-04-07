@@ -13,6 +13,8 @@
       <% @deputy = deputy %>
       <% @next_id = set_next(deputy) %>
       <% @address = deputy.addresses.last.label == 'NR' ? deputy.addresses[-1] :deputy.addresses.last %>
+      <% @mandate = deputy.mandates.last %>
+      <% @circo = @mandate.circonscription %>
       <div class="list-card" data-toggle="modal" data-target="#deputy_modal_<%= deputy.id %>" data-deputy="<%= deputy.id %>">
         <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{deputy.original_tag[2..-1]}.jpg", class: 'list-card-picture' %>
         <div class="list-card-text">
@@ -27,8 +29,10 @@
     <!-- MODAL -->
       <div class="modal" id="deputy_modal_<%= deputy.id %>" tabindex="-1" aria-labelledby="Deputy navigation">
         <div class="modal-content">
-          <div class="modal-header hidden-xs">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="modal-header text-right">
+            <button type="button" class="close-button" data-dismiss="modal" aria-label="Close">
+              <i class="fa fa-times-circle"></i>
+            </button>
           </div>
           <div class="modal-body">
             <div class="row deputy-modal-row text-center">

@@ -12,7 +12,7 @@
     <!-- square bottom left -->
     <%= link_to deputies_path(search: @age), class: 'profile-card-element bg-dark-blue' do %>
       <h3>
-        <%= @age %>
+        <%= find_age(@deputy) %>
       </h3>
       <p>
         ans

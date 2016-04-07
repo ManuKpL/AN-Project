@@ -5,13 +5,14 @@ class DeputiesController < ApplicationController
     set_departments
   end
 
-  before_action :set_deputy, :set_mandate_and_circonscription, :set_age
+  before_action :set_deputy
   before_action only: :show do
     set_previous_and_next
     set_address
+    set_mandate_and_circonscription
   end
 
-  helper_method :set_next, :set_previous, :find_website, :find_emails
+  helper_method :set_next, :set_previous, :find_website, :find_emails, :find_age
 
   def show
   end
@@ -77,9 +78,9 @@ class DeputiesController < ApplicationController
     @circo = @mandate.circonscription
   end
 
-  def set_age
-    @age = Date.today.year - @deputy.birthday.year
-    @age -= 1 if Date.today < @deputy.birthday + @age.years
+  def find_age(deputy)
+    age = Date.today.year - deputy.birthday.year
+    age -= 1 if Date.today < deputy.birthday + age.years
   end
 
   def find_website(deputy)
