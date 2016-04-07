@@ -12,7 +12,7 @@
       <% @previous_id = set_previous(deputy) %>
       <% @deputy = deputy %>
       <% @next_id = set_next(deputy) %>
-      <% @address = deputy.addresses.last %>
+      <% @address = deputy.addresses.last.label == 'NR' ? deputy.addresses[-1] :deputy.addresses.last %>
       <div class="list-card" data-toggle="modal" data-target="#deputy_modal_<%= deputy.id %>" data-deputy="<%= deputy.id %>">
         <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{deputy.original_tag[2..-1]}.jpg", class: 'list-card-picture' %>
         <div class="list-card-text">

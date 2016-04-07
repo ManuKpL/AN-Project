@@ -92,6 +92,6 @@ class DeputiesController < ApplicationController
   end
 
   def set_address
-    @address = @deputy.addresses.last
+    @address = @deputy.addresses.last.label == 'NR' ? @deputy.addresses[-1] : @deputy.addresses.last
   end
 end
