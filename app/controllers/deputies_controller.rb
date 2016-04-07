@@ -5,7 +5,7 @@ class DeputiesController < ApplicationController
     set_departments
   end
 
-  before_action :set_deputy, :set_mandate_and_circonscription
+  before_action :set_deputy, :set_mandate_and_circonscription, :set_age
   before_action :set_previous_and_next, only: :show
 
   helper_method :set_next, :set_previous
@@ -17,11 +17,6 @@ class DeputiesController < ApplicationController
   end
 
   private
-
-  def set_mandate_and_circonscription
-    @mandate = @deputy.mandates.last
-    @circo = @mandate.circonscription
-  end
 
   def set_deputy
     if params[:id]
@@ -72,5 +67,15 @@ class DeputiesController < ApplicationController
       end
     end
     @groups = Group.order(:sigle)
+  end
+
+  def set_mandate_and_circonscription
+    @mandate = @deputy.mandates.last
+    @circo = @mandate.circonscription
+  end
+
+  def set_age
+    @age = Date.today.year - @deputy.birthday.year
+    @age -= 1 if Date.today < @deputy.birthday + @age.years
   end
 end
