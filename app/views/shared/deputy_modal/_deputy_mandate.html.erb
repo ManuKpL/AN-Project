@@ -2,7 +2,7 @@
   <div class="profile-card cover-position">
 
     <!-- square top left -->
-    <%= link_to "http://www2.assemblee-nationale.fr/deputes/fiche/OMC_#{@deputy.original_tag}", target: '_blank', class: 'profile-card-element bg-light-blue' do %>
+    <%= link_to "http://www2.assemblee-nationale.fr/deputes/fiche/OMC_#{@deputy.original_tag}", target: '_blank', class: 'profile-card-element bg-red' do %>
       <p>
         Siège
       </p>
@@ -12,18 +12,37 @@
     <% end %>
     <!-- square top left -->
 
-    <!-- square top right -->
-    <%= link_to deputies_path(search: @circo.department_num), class: 'profile-card-element bg-dark-blue' do %>
-      <h3>
-        <%= @circo.department_num %>
-      </h3>
+    <% if params[:action] == 'index' %>
+<!-- MODAL -->
+
+      <!-- square top right -->
+      <div class="profile-card-element profile-card-element-nav bg-gray" data-dismiss="modal" data-toggle="modal" data-target="#deputy_modal_<%= @next_id.id %>" data-deputy=<%= @next_id.id %>>
+        <h3>
+          <i class="fa fa-arrow-right"></i>
+        </h3>
+      </div>
+      <!-- square top right -->
+
+<!-- MODAL -->
+    <% else %>
+<!-- NORMAL VERSION (show) -->
+
+      <!-- square top right -->
+      <%= link_to deputy_path(@next_id, search: params[:search]), class: 'profile-card-element bg-gray' do %>
+        <h3>
+          <i class="fa fa-arrow-right"></i>
+        </h3>
+      <% end %>
+      <!-- square top right -->
+
+
+<!-- NORMAL VERSION (show) -->
     <% end %>
-    <!-- square top right -->
 
     <!-- rectangle bottom (wdouble) -->
-    <%= link_to deputies_path(search: @circo.department_num), class: 'profile-card-element profile-card-element-wdouble bg-dark-blue' do %>
+    <%= link_to deputies_path(search: { dep: @circo.department_num }), class: 'profile-card-element profile-card-element-wdouble bg-dark-blue' do %>
       <p><strong>
-        <%= "#{@circo.department}" %>
+        <%= "#{@circo.department} (#{@circo.department_num})" %>
       </strong></p>
       <p>
         <%= "#{ordinalize_FR(@circo.circo_num, 'F')} circonscription" %>
