@@ -6,6 +6,19 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def set_departments
+    @departments = Hash.new
+    Circonscription.all.each do |circonscription|
+      @departments["#{circonscription.department_num} - #{circonscription.department}"] = circonscription.department_num
+    end
+  end
+
+  def set_groups
+    @groups = Group.all.map(&:sigle)
+  end
+
+  # helper methods
+
   def check_status(element)
     if element.length == 1 && Deputy.where('lastname LIKE ?', "#{element}%").empty?
       ' disabled'
@@ -14,16 +27,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def is_current_page?(element)
-    search = params[:search].nil? ? '' : params[:search]
-    element == search.capitalize || element == search.upcase
+  def is_current_page?(element, symbol)
   end
 
-  def set_departments
-    @departments = Hash.new
-    Circonscription.all.each do |circonscription|
-      @departments["#{circonscription.department_num} - #{circonscription.department}"] = circonscription.department_num
-    end
+  def set_ages
+    @ages = {
+      18 => " - 29 ans",
+      30 => " - 39 ans",
+      40 => " - 49 ans",
+      50 => " - 59 ans",
+      60 => " - 69 ans",
+      70 => " ans et plus"
+    }
   end
 
   def ordinalize_FR(number, genre)

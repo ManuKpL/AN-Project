@@ -27,8 +27,8 @@
       </button>
       <ul class="dropdown-menu dropdown-menu-left navigation-list-scrollable">
       <% @groups.each do |group| %>
-        <li class="<%= 'disabled' if is_current_page?(group.sigle) %>">
-          <%= link_to group.sigle, deputies_path(search: group.sigle) %>
+        <li class="<%= 'disabled' if is_current_page?(group, :grp) %>">
+          <%= link_to group, deputies_path(search: { grp: group }) %>
         </li>
       <% end %>
       </ul>
@@ -39,8 +39,20 @@
       </button>
       <ul class="dropdown-menu dropdown-menu-left navigation-list-scrollable">
       <% @departments.keys.sort.each do |department| %>
-        <li class='<%= 'disabled' if is_current_page?(@departments[department]) %>'>
-          <%= link_to department, deputies_path(search: @departments[department]) %>
+        <li class='<%= 'disabled' if is_current_page?(@departments[department], :dep) %>'>
+          <%= link_to department, deputies_path(search: { dep: @departments[department] }) %>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+    <div class="btn-group" role='group'>
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        Par âge <i class="fa fa-caret-down"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-left navigation-list-scrollable">
+      <% @ages.keys.each do |min| %>
+        <li class='<%= 'disabled' if is_current_page?(min, :age) %>'>
+          <%= link_to "#{min}#{@ages[min]}", deputies_path(search: { age: min }) %>
         </li>
       <% end %>
       </ul>
@@ -49,6 +61,6 @@
 </div>
 <div class="navigation-list">
   <% ('A'..'Z').to_a.each do |letter| %>
-    <%= link_to letter, deputies_path(search: letter), class: "navigation-list-item btn #{(is_current_page?(letter) ? 'btn-primary disabled' : 'btn-warning') << check_status(letter)}" %>
+    <%= link_to letter, deputies_path(search: { ini: letter }), class: "navigation-list-item btn #{(is_current_page?(letter, :ini) ? 'btn-primary disabled' : 'btn-warning') << check_status(letter)}" %>
   <% end %>
 </div>
