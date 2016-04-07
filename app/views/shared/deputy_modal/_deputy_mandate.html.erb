@@ -13,7 +13,7 @@
     <!-- square top left -->
 
     <!-- square top right -->
-    <%= link_to deputies_path(search: @circo.department_num), class: 'profile-card-element bg-blue' do %>
+    <%= link_to deputies_path(search: @circo.department_num), class: 'profile-card-element bg-dark-blue' do %>
       <h3>
         <%= @circo.department_num %>
       </h3>
@@ -21,7 +21,7 @@
     <!-- square top right -->
 
     <!-- rectangle bottom (wdouble) -->
-    <%= link_to deputies_path(search: @deputy.group.sigle), class: 'profile-card-element profile-card-element-wdouble bg-blue' do %>
+    <%= link_to deputies_path(search: @deputy.group.sigle), class: 'profile-card-element profile-card-element-wdouble bg-dark-blue' do %>
       <p><strong>
         <%= "#{@circo.department}" %>
       </strong></p>
