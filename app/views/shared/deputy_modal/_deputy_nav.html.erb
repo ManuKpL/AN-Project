@@ -1,46 +1,44 @@
-<div class="profile-element">
-  <div class="profile-card cover-position">
+<div class="tartan-card cover-position">
 
-    <!-- rectangle top (wdouble) -->
-    <%= link_to deputy_path(@deputy, search: params[:search]), class: 'profile-card-element profile-card-element-wdouble bg-blue' do %>
-      <p>
-        <%= "#{@deputy.civ} #{@deputy.firstname} #{@deputy.lastname}" %>
-      </p>
-    <% end %>
-    <!-- rectangle top (wdouble) -->
+  <!-- rectangle top (wdouble) -->
+  <%= link_to deputy_path(@deputy, search: params[:search]), class: 'tartan-element tartan-element-wdouble bg-blue' do %>
+    <p>
+      <%= "#{@deputy.civ} #{@deputy.firstname} #{@deputy.lastname}" %>
+    </p>
+  <% end %>
+  <!-- rectangle top (wdouble) -->
 
-    <% if params[:action] == 'index' %>
+  <% if params[:action] == 'index' %>
 <!-- MODAL -->
 
-      <!-- square bottom left -->
-      <div class="profile-card-element profile-card-element-nav bg-gray"data-dismiss="modal" data-toggle="modal" data-target="#deputy_modal_<%= @previous_id.id %>" data-deputy=<%= @previous_id.id %>>
-        <h3>
-          <i class="fa fa-arrow-left"></i>
-        </h3>
-      </div>
-      <!-- square bottom left -->
-
-<!-- MODAL -->
-    <% else %>
-<!-- NORMAL VERSION (show) -->
-
-      <!-- square bottom left -->
-      <%= link_to deputy_path(@previous_id, search: params[:search]), class: 'profile-card-element bg-gray' do %>
-        <h3>
-          <i class="fa fa-arrow-left"></i>
-        </h3>
-      <% end %>
-      <!-- square bottom left -->
-
-<!-- NORMAL VERSION (show) -->
-    <% end %>
-
-    <!-- square bottom right -->
-    <%= link_to root_path, class: 'profile-card-element bg-dark-blue' do %>
+    <!-- square bottom left -->
+    <div class="tartan-element tartan-modal-nav bg-gray"data-dismiss="modal" data-toggle="modal" data-target="#deputy_modal_<%= @previous_id.id %>" data-deputy=<%= @previous_id.id %>>
       <h3>
-        <i class="fa fa-home"></i>
+        <i class="fa fa-arrow-left"></i>
+      </h3>
+    </div>
+    <!-- square bottom left -->
+
+<!-- MODAL -->
+  <% else %>
+<!-- NORMAL VERSION (show) -->
+
+    <!-- square bottom left -->
+    <%= link_to deputy_path(@previous_id, search: params[:search]), class: 'tartan-element bg-gray' do %>
+      <h3>
+        <i class="fa fa-arrow-left"></i>
       </h3>
     <% end %>
-    <!-- square bottom right -->
-  </div>
+    <!-- square bottom left -->
+
+<!-- NORMAL VERSION (show) -->
+  <% end %>
+
+  <!-- square bottom right -->
+  <%= link_to root_path, class: 'tartan-element bg-dark-blue' do %>
+    <h3>
+      <i class="fa fa-home"></i>
+    </h3>
+  <% end %>
+  <!-- square bottom right -->
 </div>

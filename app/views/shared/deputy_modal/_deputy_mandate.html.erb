@@ -1,54 +1,52 @@
-<div class="profile-element">
-  <div class="profile-card cover-position">
+<div class="tartan-card cover-position">
 
-    <!-- square top left -->
-    <%= link_to "http://www2.assemblee-nationale.fr/deputes/fiche/OMC_#{@deputy.original_tag}", target: '_blank', class: 'profile-card-element bg-red' do %>
-      <p>
-        Siège
-      </p>
+  <!-- square top left -->
+  <%= link_to "http://www2.assemblee-nationale.fr/deputes/fiche/OMC_#{@deputy.original_tag}", target: '_blank', class: 'tartan-element bg-red' do %>
+    <p>
+      Siège
+    </p>
+    <h3>
+      #<%= @mandate.seat_num %>
+    </h3>
+  <% end %>
+  <!-- square top left -->
+
+  <% if params[:action] == 'index' %>
+<!-- MODAL -->
+
+    <!-- square top right -->
+    <div class="tartan-element tartan-modal-nav bg-gray" data-dismiss="modal" data-toggle="modal" data-target="#deputy_modal_<%= @next_id.id %>" data-deputy=<%= @next_id.id %>>
       <h3>
-        #<%= @mandate.seat_num %>
+        <i class="fa fa-arrow-right"></i>
+      </h3>
+    </div>
+    <!-- square top right -->
+
+<!-- MODAL -->
+  <% else %>
+<!-- NORMAL VERSION (show) -->
+
+    <!-- square top right -->
+    <%= link_to deputy_path(@next_id, search: params[:search]), class: 'tartan-element bg-gray' do %>
+      <h3>
+        <i class="fa fa-arrow-right"></i>
       </h3>
     <% end %>
-    <!-- square top left -->
-
-    <% if params[:action] == 'index' %>
-<!-- MODAL -->
-
-      <!-- square top right -->
-      <div class="profile-card-element profile-card-element-nav bg-gray" data-dismiss="modal" data-toggle="modal" data-target="#deputy_modal_<%= @next_id.id %>" data-deputy=<%= @next_id.id %>>
-        <h3>
-          <i class="fa fa-arrow-right"></i>
-        </h3>
-      </div>
-      <!-- square top right -->
-
-<!-- MODAL -->
-    <% else %>
-<!-- NORMAL VERSION (show) -->
-
-      <!-- square top right -->
-      <%= link_to deputy_path(@next_id, search: params[:search]), class: 'profile-card-element bg-gray' do %>
-        <h3>
-          <i class="fa fa-arrow-right"></i>
-        </h3>
-      <% end %>
-      <!-- square top right -->
+    <!-- square top right -->
 
 
 <!-- NORMAL VERSION (show) -->
-    <% end %>
+  <% end %>
 
-    <!-- rectangle bottom (wdouble) -->
-    <%= link_to deputies_path(search: { dep: @circo.department_num }), class: 'profile-card-element profile-card-element-wdouble bg-dark-blue' do %>
-      <p><strong>
-        <%= "#{@circo.department} (#{@circo.department_num})" %>
-      </strong></p>
-      <p>
-        <%= "#{ordinalize_FR(@circo.circo_num, 'F')} circonscription" %>
-      </p>
-    <% end %>
-    <!-- rectangle bottom (wdouble) -->
+  <!-- rectangle bottom (wdouble) -->
+  <%= link_to deputies_path(search: { dep: @circo.department_num }), class: 'tartan-element tartan-element-wdouble bg-dark-blue' do %>
+    <p><strong>
+      <%= "#{@circo.department} (#{@circo.department_num})" %>
+    </strong></p>
+    <p>
+      <%= "#{ordinalize_FR(@circo.circo_num, 'F')} circonscription" %>
+    </p>
+  <% end %>
+  <!-- rectangle bottom (wdouble) -->
 
-  </div>
 </div>

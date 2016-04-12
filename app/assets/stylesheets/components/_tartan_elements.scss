@@ -2,50 +2,16 @@ $square-margin: 2%;
 $square-size: 50% - $square-margin * 2;
 $double-size: 100% - $square-margin * 2;
 
-.my-col {
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-.profile {
-  &-element {
+.tartan {
+  &-col { padding: 0 }
+  &-container {
     position: relative;
-    height: 0;
     padding-top: 100%;
-    color: white;
   }
   &-card {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    &-element {
-      margin: $square-margin;
-      height: $square-size;
-      width: $square-size;
-      border-radius: 3px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      h3 {
-        font-size: 2.5vw;
-        margin: 0;
-      }
-      p {
-        font-size: 1.3vw;
-        margin: 0;
-        padding: 0 0.5em;
-      }
-      &-wdouble { width: $double-size }
-      &-hdouble { height: $double-size }
-      &-nav {
-        cursor: pointer;
-        &:hover {
-          color: rgb(80,80,80);
-          filter: sepia(90%);
-        }
-      }
-    }
     a {
       color: white;
       &:hover {
@@ -57,22 +23,40 @@ $double-size: 100% - $square-margin * 2;
     }
     &-column-direction { flex-direction: column }
   }
+  &-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: $square-size;
+    width: $square-size;
+    margin: $square-margin;
+    border-radius: 3px;
+    color: rgb(80,80,80);
+    background-color: rgb(150,150,150);
+    h3, p { margin: 0 }
+    h3 { font-size: 2.5vw }
+    p {
+      font-size: 1.3vw;
+      padding: 0 0.5em;
+    }
+    &-wdouble { width: $double-size }
+    &-hdouble { height: $double-size }
+  }
+  &-modal-nav {
+    cursor: pointer;
+    color: white;
+    &:hover {
+      color: rgb(80,80,80);
+      filter: sepia(90%);
+    }
+  }
   &-picture {
     position: relative;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
   }
-  &-page {
-    background-color: white;
-    padding: 2em;
-    box-shadow: 1px 1px 1px rgb(230,230,230);
-  }
-}
-
-.no-account {
-  background-color: rgb(150,150,150);
-  color: rgb(80,80,80);
 }
 
 @media screen and (max-width: 768px) {
