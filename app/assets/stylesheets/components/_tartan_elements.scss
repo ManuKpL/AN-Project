@@ -1,0 +1,67 @@
+$square-margin: 2%;
+$square-size: 50% - $square-margin * 2;
+$double-size: 100% - $square-margin * 2;
+
+.tartan {
+  &-col { padding: 0 }
+  &-container {
+    position: relative;
+    padding-top: 100%;
+  }
+  &-card {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    a {
+      color: white;
+      &:hover {
+        text-decoration: none;
+        background-color: $brand-gray;
+        color: rgb(80,80,80);
+        filter: sepia(90%);
+      }
+    }
+    &-column-direction { flex-direction: column }
+  }
+  &-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: $square-size;
+    width: $square-size;
+    margin: $square-margin;
+    border-radius: 3px;
+    color: rgb(80,80,80);
+    background-color: rgb(150,150,150);
+    h3, p { margin: 0 }
+    h3 { font-size: 2.5vw }
+    p {
+      font-size: 1.3vw;
+      padding: 0 0.5em;
+    }
+    &-wdouble { width: $double-size }
+    &-hdouble { height: $double-size }
+  }
+  &-modal-nav {
+    cursor: pointer;
+    color: white;
+    &:hover {
+      color: rgb(80,80,80);
+      filter: sepia(90%);
+    }
+  }
+  &-picture {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile-card-element {
+    p { font-size: 18px }
+    h3 { font-size: 35px }
+  }
+}

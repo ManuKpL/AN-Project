@@ -13,12 +13,12 @@
         <% end %>
         <%= link_to t('.logout', default: 'Log out'), destroy_user_session_path, method: :delete, class: "btn btn-warning btn-lg banner-menu-item" %>
       <% else %>
-        <%= link_to t('.login', default: 'Login'), new_user_session_path, class: "btn btn-info btn-lg banner-menu-item" %>
+        <%= link_to t('.login', default: 'Login'), new_user_session_path, class: "btn btn-success btn-lg banner-menu-item" %>
       <% end %>
     </div>
     <div class="padded">
 
-      <%= render 'shared/deputies_list_nav' %>
+      <%= render 'shared/deputies_search_links' %>
 
     </div>
   </div>
