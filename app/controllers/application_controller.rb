@@ -38,18 +38,13 @@ class ApplicationController < ActionController::Base
   def set_ages
     @ages = {
       18 => " - 24 ans",
-      25 => " - 29 ans",
-      30 => " - 34 ans",
-      35 => " - 39 ans",
-      40 => " - 44 ans",
-      45 => " - 49 ans",
-      50 => " - 54 ans",
-      55 => " - 59 ans",
-      60 => " - 64 ans",
-      65 => " - 69 ans",
-      70 => " - 74 ans",
-      75 => " ans et plus"
     }
+    x = 25
+    while x < 70 do
+      @ages[x] = " - #{x + 4} ans"
+      x += 5
+    end
+    @ages[75] = " ans et plus"
   end
 
   def ordinalize_FR(number, genre)
