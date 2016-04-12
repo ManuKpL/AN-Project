@@ -177,8 +177,15 @@ class DeputiesController < ApplicationController
 
   def is_current_page?(element, symbol)
     search = params[:search][symbol].nil? ? '' : params[:search][symbol]
-    if params[:search][:age].present?
-      element == search[0].to_i * 10
+    if params[:search][:age].present? && symbol == :age
+      if element == 18
+        marge = 7
+      elsif element == 75
+        marge = 45
+      else
+        marge = 5
+      end
+      search.to_i >= element && search.to_i < element + marge
     else
       element == search.capitalize || element == search.upcase
     end
