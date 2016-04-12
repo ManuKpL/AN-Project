@@ -1,16 +1,16 @@
-<div class="index-pic"></div> <!-- Background picture for the page -->
+<div class="index-bg"></div> <!-- Background picture for the page -->
 
 <!-- NAVIGATION (LEFT) -->
-<div class="navigation-menu">
-  <h2 class='navigation-menu-title'>
+<div class="fixed-left-menu">
+  <h2 class='fixed-left-menu-title'>
       AN Project
     <div class="flag-border"></div>
   </h2>
-    <%= render 'shared/deputies_list_nav' %>
+    <%= render 'shared/deputies_search_links' %>
 </div>
 <!-- NAVIGATION (LEFT) -->
 
-<div class="content-zone">
+<div class="right-content-zone"> <!-- see: fixed_left_menu.scss -->
   <div class="deputies-list">
     <h4 class="deputies-list-result bg-dark-blue">
       <%= @deputies.count %> résultat<%= @deputies.count <= 1 ? '' : 's' %>
@@ -50,7 +50,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <div class="row deputy-modal-row text-center">
+            <div class="row modal-row text-center">
               <%= render 'shared/deputy_modal' %>
             </div>
           </div>

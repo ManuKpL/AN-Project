@@ -1,14 +1,11 @@
+// COMPONENTS
 @import 'alert';
 @import 'avatars';
 @import 'badges';
 @import 'flag_border';
+@import 'modal';
 
+// PAGE ORGANIZERS
+@import 'fixed_left_menu';
+@import 'tartan_elements';
 @import 'home_banner';
-
-@import 'navigation_bar_left';
-@import 'deputies_list';
-@import 'list_card';
-@import 'deputy_modal';
-
-@import 'navigation_menu';
-@import 'deputy_profile';
