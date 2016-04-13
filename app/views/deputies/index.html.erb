@@ -44,12 +44,8 @@
     <!-- MODAL -->
       <div class="modal" id="deputy_modal_<%= deputy.id %>" tabindex="-1" aria-labelledby="Deputy navigation">
         <div class="modal-content">
-          <div class="modal-header text-right">
-            <button type="button" class="close-button" data-dismiss="modal" aria-label="Close">
-              <i class="fa fa-times-circle"></i>
-            </button>
-          </div>
           <div class="modal-body">
+            <i class="fa fa-times-circle modal-close-button" data-dismiss="modal"></i>
             <div class="row modal-row text-center">
               <%= render 'shared/deputy_modal' %>
             </div>
