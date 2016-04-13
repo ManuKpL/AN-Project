@@ -1,29 +1,31 @@
-.modal{
+.modal {
   &-row { padding: 0 13px }
   &-content {
     width: 75%;
     max-width: 1000px;
-    margin: 10vh auto;
-    .fa-times-circle {
-      color: $brand-gray;
-      font-size: 24px;
-      &:hover { color: white }
-    }
-    .close-button {
-      background: none;
-      border: none;
-    }
+    margin: 12vh auto;
   }
-  &-header {
-    background-image: url('paint_flag');
-    background-position: center;
-    background-size: cover;
+  &-close-button {
+    position: absolute;
+    top: 5px;
+    right: -40px;
+    color: $brand-gray;
+    font-size: 24px;
+    cursor: pointer;
+    &:hover { color: white }
   }
 }
 
 @media screen and (max-width: 768px) {
-  .modal-content {
-    width: 60%;
-    margin: 1% auto 0 auto;
+  .modal {
+    &-content {
+      width: 65%;
+      margin: 5% auto;
+    }
+    &-close-button {
+      position: fixed;
+      top: 3%;
+      right: 6%;
+    }
   }
 }
