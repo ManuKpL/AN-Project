@@ -22,7 +22,12 @@
 }
 
 @media screen and (max-width: 768px) {
-  .search-links { width: 90% }
+  .search-links {
+    margin: 20px 40px;
+    padding: 40px 60px;
+    .btn-group { display: block }
+    .btn-group, .btn { width: 100% }
+  }
 }
 
 // USED IN: views/shared/deputies_list_nav.html.erb (=> deputies:index & pages:home)
