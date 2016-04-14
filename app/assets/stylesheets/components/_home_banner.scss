@@ -1,8 +1,9 @@
 .banner {
-  height: 100vh;
+  min-height: 100vh;
   color: white;
-  position: relative;
-  &-shadow { background: linear-gradient(75deg, rgba(46,86,134,0.4) 30%, rgba(50,90,140,0.3) 70%) }
+  background: -webkit-linear-gradient(345deg, rgba(46,86,134,0.4) 30%, rgba(50,90,140,0.3) 70%);
+  background: -o-linear-gradient(345deg, rgba(46,86,134,0.4) 30%, rgba(50,90,140,0.3) 70%);
+  background: linear-gradient(75deg, rgba(46,86,134,0.4) 30%, rgba(50,90,140,0.3) 70%);
   &-content {
     display: flex;
     flex-direction: column;

@@ -1,12 +1,11 @@
 <div class="fixed-bg" style="background-image: url(<%= image_url('columns_AN') %>)"></div> <!-- Background picture for the page -->
 <div class="banner">
-  <div class="banner-shadow cover-position"></div>
   <div class="banner-content cover-position">
     <h1 class="text-center">
       AN Project
       <div class="flag-border"></div>
     </h1>
-    <div class="banner-menu hidden-xs">
+    <div class="banner-menu hidden">
       <%= link_to t('.browse', default: 'Browse'), deputy_path(@deputy), class: "btn btn-primary btn-lg banner-menu-item" %>
       <% if user_signed_in? %>
         <% if current_user.admin? %>
