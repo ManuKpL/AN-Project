@@ -21,12 +21,10 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1200px) {
   .search-links {
-    margin: 20px 40px;
-    padding: 40px 60px;
-    .btn-group { display: block }
-    .btn-group, .btn { width: 100% }
+    margin: 20px;
+    padding: 40px 20px;
   }
 }
 
