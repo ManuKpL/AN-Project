@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
       18 => " - 24 ans",
     }
     x = 25
-    while x < 70 do
+    while x <= 70 do
       @ages[x] = " - #{x + 4} ans"
       x += 5
     end
