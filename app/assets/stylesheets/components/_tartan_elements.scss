@@ -35,9 +35,9 @@ $double-size: 100% - $square-margin * 2;
     color: rgb(80,80,80);
     background-color: rgb(150,150,150);
     h3, p { margin: 0 }
-    h3 { font-size: 2.5vw }
+    h3 { font-size: 2.5vmax }
     p {
-      font-size: 1.3vw;
+      font-size: 1.3vmax;
       padding: 0 0.5em;
     }
     &-wdouble { width: $double-size }
@@ -59,9 +59,9 @@ $double-size: 100% - $square-margin * 2;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .tartan-element {
-    p { font-size: 18px }
-    h3 { font-size: 35px }
+    p { font-size: 3vmax }
+    h3 { font-size: 5vmax }
   }
 }
