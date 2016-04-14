@@ -5,33 +5,16 @@
  * ------------------------------------- */
 
 // Paddings
-.padded {
-  padding-top: 3em;
-}
-
-.margin-top {
-  margin-top: 3em;
-}
+.padded { padding-top: 3em }
+.margin-top { margin-top: $navbar-height + 10px }
 
 // Backgrounds
-.bg-black {
-  background: rgb(40,40,40);
-}
-.bg-gray {
-  background: $brand-gray;
-}
-.bg-blue {
-  background: $blue;
-}
-.bg-light-blue {
-  background: $light-blue;
-}
-.bg-dark-blue {
-  background: $brand-color;
-}
-.bg-red {
-  background: $red;
-}
+.bg-black      { background: rgb(40,40,40) }
+.bg-gray       { background: $brand-gray }
+.bg-light-blue { background: $light-blue }
+.bg-blue       { background: $blue }
+.bg-dark-blue  { background: $brand-color }
+.bg-red        { background: $red }
 
 // Absolute positions
 .cover-position {

@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar navbar-fixed">
   <div class="container navbar-container">
 
     <a href="">
@@ -7,21 +7,7 @@
 
     <div class="navbar-pusher"></div>
 
-    <form action="" class="navbar-search hidden-xs hidden-sm">
-      <input type="text" class="navbar-search-input" placeholder="Search something">
-      <button type="submit" class="navbar-search-btn">
-        <i class="fa fa-search"></i>
-      </button>
-    </form>
-    <hr class="hidden-xs hidden-sm">
     <% if user_signed_in? %>
-      <%= link_to "#", class: "navbar-item navbar-link hidden-xs" do %>
-        <div class="icon-badge-container">
-          <i class="fa fa-envelope-o"></i>
-          <div class="icon-badge icon-badge-blue">3</div>
-        </div>
-      <% end %>
-      <hr>
       <div class="navbar-item">
         <div class="dropdown">
           <%= image_tag "http://placehold.it/30x30", class: "avatar dropdown-toggle", id: "navbar-menu", "data-toggle" => "dropdown" %>
@@ -47,7 +33,5 @@
     <% else %>
       <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-item navbar-link" %>
     <% end %>
-    <hr>
-    <%= link_to t(".top_call_to_action", default: "Post stuff"), "#", class: "navbar-item navbar-button btn" %>
   </div>
 </nav>

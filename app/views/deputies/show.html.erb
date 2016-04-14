@@ -9,10 +9,10 @@
 <!-- bootstrap version -->
 
 <div class="container">
-  <div class="navigation margin-top hidden-xs">
+  <div class="navigation hidden-xs">
     <%= link_to 'Back', :back, class: 'btn navigation-btn' %>
   </div>
-  <div class="navigation margin-top hidden-xs">
+  <div class="navigation hidden-xs">
     <%= link_to deputy_path(@previous_id, search: params[:search]), class: 'btn navigation-btn' do %>
       <i class="fa fa-arrow-left"></i>
       <%= "#{@previous_id.civ} #{@previous_id.firstname} #{@previous_id.lastname}" %>
