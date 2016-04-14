@@ -1,11 +1,12 @@
+<div class="fixed-bg" style="background-image: url(<%= image_url('columns_AN') %>)"></div> <!-- Background picture for the page -->
 <div class="banner">
-  <div class="banner-shadow"></div>
-  <div class="banner-content">
+  <div class="banner-shadow cover-position"></div>
+  <div class="banner-content cover-position">
     <h1 class="text-center">
       AN Project
       <div class="flag-border"></div>
     </h1>
-    <div class="banner-menu">
+    <div class="banner-menu hidden-xs">
       <%= link_to t('.browse', default: 'Browse'), deputy_path(@deputy), class: "btn btn-primary btn-lg banner-menu-item" %>
       <% if user_signed_in? %>
         <% if current_user.admin? %>
@@ -16,7 +17,7 @@
         <%= link_to t('.login', default: 'Login'), new_user_session_path, class: "btn btn-success btn-lg banner-menu-item" %>
       <% end %>
     </div>
-    <div class="padded">
+    <div class="padded hidden-xs">
 
       <%= render 'shared/deputies_search_links' %>
 
