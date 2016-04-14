@@ -1,22 +1,13 @@
 .banner {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  height: 100vh;
   color: white;
-  background-image: image-url('columns_AN');
-  background-size: cover;
-  background-position: center;
   position: relative;
-  &-shadow {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(75deg, rgba(46,86,134,0.4) 30%, rgba(50,90,140,0.3) 70%);
-  }
+  &-shadow { background: linear-gradient(75deg, rgba(46,86,134,0.4) 30%, rgba(50,90,140,0.3) 70%) }
   &-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     z-index: 2;
   }
   &-menu {
@@ -34,7 +25,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .banner-menu {
     flex-direction: column;
   }
