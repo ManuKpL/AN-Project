@@ -1,14 +1,15 @@
 <!-- bootstrap version -->
-<div class="container padded">
+<!-- <div class="container padded">
   <div class="row text-center">
-
-    <%= render 'shared/deputy_modal' %>
-
+ -->
+    <%#= render 'shared/deputy_modal' %>
+<!--
   </div>
-</div>
+</div> -->
 <!-- bootstrap version -->
 
-<div class="container">
+<!-- NAVIGATION -->
+<div class="container margin-top">
   <div class="navigation hidden-xs">
     <%= link_to 'Back', :back, class: 'btn navigation-btn' %>
   </div>
@@ -25,6 +26,9 @@
       <i class="fa fa-arrow-right"></i>
     <% end %>
   </div>
+<!-- NAVIGATION -->
+
+<!-- PROFILE -->
   <div class="profile-page">
     <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{@deputy.original_tag[2..-1]}.jpg" %>
     <h1>
@@ -98,3 +102,4 @@
     <% end %>
   </div>
 </div>
+<!-- PROFILE -->
