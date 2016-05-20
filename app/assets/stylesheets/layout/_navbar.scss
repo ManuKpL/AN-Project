@@ -25,6 +25,10 @@ $navbar-height: 60px;
     cursor: pointer;
     padding: 0 10px;
   }
+  &-title {
+    position: relative;
+    flex: 0 1 auto;
+  }
   hr {
     height: 12px;
     width: 1px;

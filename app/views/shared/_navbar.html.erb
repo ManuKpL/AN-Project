@@ -1,9 +1,13 @@
 <nav class="navbar navbar-fixed">
   <div class="container navbar-container">
 
-    <a href="">
-      <%= image_tag "logo.png", class: "navbar-logo" %>
-    </a>
+    <%= link_to root_path do %>
+      <%#= image_tag "logo.png", class: "navbar-logo" %>
+      <h3 class="navbar-title">
+        AN PROJECT
+        <div class="flag-border"></div>
+      </h3>
+    <% end %>
 
     <div class="navbar-pusher"></div>
 
@@ -31,7 +35,7 @@
         </div>
       </div>
     <% else %>
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-item navbar-link" %>
+      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "btn btn-primary navbar-item" %>
     <% end %>
   </div>
 </nav>
