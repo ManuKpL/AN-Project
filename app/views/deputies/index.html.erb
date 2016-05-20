@@ -1,60 +1,61 @@
 <div class="fixed-bg" style="background-image: url(<%= image_url('AN_empty2') %>)"></div> <!-- Background picture for the page -->
+<div class="margin-top">
 
-<!-- NAVIGATION (LEFT) -->
-<div class="fixed-left-menu hidden-xs">
-  <h2 class='fixed-left-menu-title'>
-      AN Project
-    <div class="flag-border"></div>
-  </h2>
-  <%= render 'shared/deputies_search_links' %>
-</div>
-<!-- NAVIGATION (LEFT) -->
+  <!-- NAVIGATION (LEFT) -->
+  <div class="fixed-left-menu hidden-xs">
+    <h2 class='fixed-left-menu-title'>
+        AN Project
+      <div class="flag-border"></div>
+    </h2>
+    <%= render 'shared/deputies_search_links' %>
+  </div>
+  <!-- NAVIGATION (LEFT) -->
+  <div class="right-content-zone"> <!-- see: fixed_left_menu.scss -->
+    <div class="deputies-list">
+      <h4 class="deputies-list-result bg-dark-blue">
+        <%= @deputies.count %> résultat<%= @deputies.count <= 1 ? '' : 's' %>
+      </h4>
+      <!-- ITERATION -->
+      <% @deputies.each do |deputy| %>
 
-<div class="right-content-zone"> <!-- see: fixed_left_menu.scss -->
-  <div class="deputies-list">
-    <h4 class="deputies-list-result bg-dark-blue">
-      <%= @deputies.count %> résultat<%= @deputies.count <= 1 ? '' : 's' %>
-    </h4>
-    <!-- ITERATION -->
-    <% @deputies.each do |deputy| %>
+        <!-- set every variable used by show and partials -->
+        <% @deputy = deputy %>
+        <% @previous_id = set_previous(deputy) %>
+        <% @next_id = set_next(deputy) %>
+        <% @address = deputy.addresses.last.label == 'NR' ? deputy.addresses[-1] :deputy.addresses.last %>
+        <% @mandate = deputy.mandates.last %>
+        <% @circo = @mandate.circonscription %>
+        <!-- set every variable used by show and partials -->
 
-      <!-- set every variable used by show and partials -->
-      <% @deputy = deputy %>
-      <% @previous_id = set_previous(deputy) %>
-      <% @next_id = set_next(deputy) %>
-      <% @address = deputy.addresses.last.label == 'NR' ? deputy.addresses[-1] :deputy.addresses.last %>
-      <% @mandate = deputy.mandates.last %>
-      <% @circo = @mandate.circonscription %>
-      <!-- set every variable used by show and partials -->
-
-      <!-- CARD -->
-      <div class="list-card" data-toggle="modal" data-target="#deputy_modal_<%= deputy.id %>" data-deputy="<%= deputy.id %>">
-        <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{deputy.original_tag[2..-1]}.jpg", class: 'list-card-picture' %>
-        <div class="list-card-text">
-          <p class="list-card-name">
-            <%= "#{deputy.civ} #{deputy.firstname} #{deputy.lastname}" %>
-          </p>
-          <p class="list-card-sigle">
-            <%= deputy.group.sigle %>
-          </p>
+        <!-- CARD -->
+        <div class="list-card" data-toggle="modal" data-target="#deputy_modal_<%= deputy.id %>" data-deputy="<%= deputy.id %>">
+          <%= image_tag "http://www2.assemblee-nationale.fr/static/tribun/14/photos/#{deputy.original_tag[2..-1]}.jpg", class: 'list-card-picture' %>
+          <div class="list-card-text">
+            <p class="list-card-name">
+              <%= "#{deputy.civ} #{deputy.firstname} #{deputy.lastname}" %>
+            </p>
+            <p class="list-card-sigle">
+              <%= deputy.group.sigle %>
+            </p>
+          </div>
         </div>
-      </div>
-      <!-- CARD -->
+        <!-- CARD -->
 
-    <!-- MODAL -->
-      <div class="modal" id="deputy_modal_<%= deputy.id %>" tabindex="-1" aria-labelledby="Deputy navigation">
-        <div class="modal-content">
-          <div class="modal-body">
-            <i class="fa fa-times-circle modal-close-button" data-dismiss="modal"></i>
-            <div class="row modal-row text-center">
-              <%= render 'shared/deputy_modal' %>
+      <!-- MODAL -->
+        <div class="modal" id="deputy_modal_<%= deputy.id %>" tabindex="-1" aria-labelledby="Deputy navigation">
+          <div class="modal-content">
+            <div class="modal-body">
+              <i class="fa fa-times-circle modal-close-button" data-dismiss="modal"></i>
+              <div class="row modal-row text-center">
+                <%= render 'shared/deputy_modal' %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    <!-- MODAL -->
+      <!-- MODAL -->
 
-    <% end %>
-    <!-- ITERATION -->
+      <% end %>
+      <!-- ITERATION -->
+    </div>
   </div>
 </div>
