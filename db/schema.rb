@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227144235) do
+ActiveRecord::Schema.define(version: 20160520141151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,11 +62,20 @@ ActiveRecord::Schema.define(version: 20151227144235) do
     t.date     "birthday"
     t.string   "birthdep"
     t.integer  "job_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "original_tag"
     t.string   "screen_name"
     t.integer  "group_id"
+    t.string   "twid"
+    t.json     "followers"
+    t.json     "followings"
+    t.json     "tweets"
+    t.json     "lists"
+    t.json     "favourites"
+    t.boolean  "verified"
+    t.datetime "creation_date"
+    t.boolean  "screen_name_valid"
   end
 
   add_index "deputies", ["group_id"], name: "index_deputies_on_group_id", using: :btree
