@@ -34,22 +34,35 @@ namespace :twitter do
       Deputy.find_by(screen_name: data[:screen_name]).update_attributes(attr)
     end
 
-    def scan_for_invalid_screen_name
+    def scan_for_invalid_screen_name(total, subtotal)
+      puts 'Starting to scan for invalid screen_name'
       Deputy.where(screen_name_valid: nil).where.not(screen_name: "").each do |deputy|
+        print "Deputy with screen_name error ##{subtotal}/#{total}: "
         deputy.screen_name_valid = false
         deputy.save
+        puts 'done'
+        subtotal += 1
       end
+      return subtotal
     end
 
     def run
+      total = Deputy.where.not(screen_name: "").count
+      puts 'Seed starting'
+      subtotal = 1
       stringify_screen_names.each do |screen_names_string|
         call_API(screen_names_string).each do |twitter_data|
+          print "Twitter data for deputy ##{subtotal}/#{total}: "
           update_deputy(twitter_data)
+          puts 'done'
+          subtotal += 1
         end
       end
-      scan_for_invalid_screen_name
+      result = scan_for_invalid_screen_name(total, subtotal)
+      puts "Done! #{result} out of #{total} seeded"
     end
 
+    run
   end
 
 end
