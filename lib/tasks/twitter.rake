@@ -36,7 +36,7 @@ namespace :twitter do
         profile_picture: data[:profile_image_url_https].gsub('normal', '400x400'),
         screen_name_valid: true
       }
-      Deputy.find_by(screen_name: data[:screen_name]).update_attributes(attr)
+      Deputy.find_by(screen_name: data[:screen_name].downcase).update_attributes(attr)
     end
 
     def scan_for_invalid_screen_name(total, subtotal)
@@ -48,7 +48,7 @@ namespace :twitter do
         puts 'done'
         subtotal += 1
       end
-      return subtotal
+      return subtotal - 1
     end
 
     def run

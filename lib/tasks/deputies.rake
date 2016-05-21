@@ -155,7 +155,7 @@ namespace :deputies do
         print "Twitter for deputy ##{x}: "
         deputy = Deputy.where(lastname: row['Nom'], firstname: row['Prénom']).first
         unless deputy.nil?
-          deputy.screen_name = row['At'].to_s
+          deputy.screen_name = row['At'].to_s.downcase
           deputy.save
         end
         puts 'done'
