@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520141151) do
+ActiveRecord::Schema.define(version: 20160521163512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,9 @@ ActiveRecord::Schema.define(version: 20160520141151) do
     t.boolean  "verified"
     t.datetime "creation_date"
     t.boolean  "screen_name_valid"
+    t.text     "description"
+    t.string   "picture"
+    t.string   "profile_picture"
   end
 
   add_index "deputies", ["group_id"], name: "index_deputies_on_group_id", using: :btree
