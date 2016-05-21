@@ -25,20 +25,20 @@ namespace :twitter do
     def update_deputy data
       deputy = Deputy.find_by(screen_name: data[:screen_name].downcase)
       attr = {
-        twid: data[:id_str],
-        creation_date: data[:created_at],
-        verified: data[:verified],
-        description: data[:description],
-        profile_picture: data[:profile_image_url_https].gsub('normal', '400x400'),
+        twid:              data[:id_str],
+        creation_date:     data[:created_at],
+        verified:          data[:verified],
+        description:       data[:description],
+        profile_picture:   data[:profile_image_url_https].gsub('normal', '400x400'),
         screen_name_valid: true
       }
       deputy.update_attributes(attr)
 
       equivalences = {
-        followers: :followers_count,
+        followers:  :followers_count,
         followings: :friends_count,
-        tweets: :statuses_count,
-        lists: :listed_count,
+        tweets:     :statuses_count,
+        lists:      :listed_count,
         favourites: :favourites_count
       }
       update_json_attributes(deputy, data, equivalences)
