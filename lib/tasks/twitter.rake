@@ -1,5 +1,10 @@
 namespace :twitter do
 
+  desc 'seed DB by calling all twitter seeding rake tasks'
+  task :seed => :environment do
+    Rake::Task['twitter:seed_deputies'].invoke
+  end
+
   desc 'call API and get basic infos into deputies instances'
   task :seed_deputies => :environment do
 
