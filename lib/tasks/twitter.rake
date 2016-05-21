@@ -23,25 +23,45 @@ namespace :twitter do
     end
 
     def update_deputy data
+      deputy = Deputy.find_by(screen_name: data[:screen_name].downcase)
       attr = {
         twid: data[:id_str],
-        followers: { Date.today => data[:followers_count] }.to_json,
-        followings: { Date.today => data[:friends_count] }.to_json,
-        tweets: { Date.today => data[:statuses_count] }.to_json,
-        lists: { Date.today => data[:listed_count] }.to_json,
-        favourites: { Date.today => data[:favourites_count] }.to_json,
         creation_date: data[:created_at],
         verified: data[:verified],
         description: data[:description],
         profile_picture: data[:profile_image_url_https].gsub('normal', '400x400'),
         screen_name_valid: true
       }
-      Deputy.find_by(screen_name: data[:screen_name].downcase).update_attributes(attr)
+      deputy.update_attributes(attr)
+
+      equivalences = {
+        followers: :followers_count,
+        followings: :friends_count,
+        tweets: :statuses_count,
+        lists: :listed_count,
+        favourites: :favourites_count
+      }
+      update_json_attributes(deputy, data, equivalences)
+    end
+
+    def update_json_attributes(deputy, data, equivalences)
+      equivalences.keys.each do |key|
+        if deputy[key].nil?
+          deputy.update_attributes(key => { Date.today.to_s => data[equivalences[key]] })
+        else
+          deputy[key][Date.today.to_s] = data[equivalences[key]]
+          deputy.save
+        end
+      end
     end
 
     def scan_for_invalid_screen_name(total, subtotal)
       puts 'Starting to scan for invalid screen_name'
-      Deputy.where(screen_name_valid: nil).where.not(screen_name: "").each do |deputy|
+      deputies = Deputy.where(screen_name_valid: nil).where.not(screen_name: "")
+      Deputy.where(screen_name_valid: false).each do |deputy|
+        deputies << deputy
+      end
+      deputies.each do |deputy|
         print "Deputy with screen_name error ##{subtotal}/#{total}: "
         deputy.screen_name_valid = false
         deputy.save
