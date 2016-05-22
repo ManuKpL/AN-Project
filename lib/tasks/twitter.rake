@@ -90,6 +90,34 @@ namespace :twitter do
     run
   end
 
+  desc 'prompt console for missing screen_names and register given ones'
+  task :manual_screen_names => :environment do
+
+    def run
+      deputies = Deputy.where(screen_name_valid: false)
+      total = deputies.count
+      subtotal = 0
+      deputies.each do |deputy|
+        subtotal += 1
+        puts "Deputy ##{subtotal} out of #{total}: #{deputy.full_name}"
+        print "Screen name: "
+        screen_name = STDIN.gets.chomp
+        if screen_name.length > 1
+          deputy.screen_name = screen_name.downcase
+          deputy.screen_name_valid = true
+          deputy.save
+          puts "Saved! Screen_name : #{deputy.screen_name}"
+        elsif screen_name == "q"
+          puts "See you next time!"
+          break
+        else
+          puts "No screen_name added"
+        end
+      end
+    end
+
+    run
+  end
 end
 
 
