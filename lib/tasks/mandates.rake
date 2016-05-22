@@ -1,8 +1,8 @@
 namespace :mandates do
   desc 'seed DB by calling all mandates rake tasks'
   task :seed => :environment do
-    Rake::Task['mandates:mandates'].invoke
     Rake::Task['mandates:organes'].invoke
+    Rake::Task['mandates:mandates'].invoke
     Rake::Task['mandates:groups'].invoke
     # Rake::Task['mandates:functions'].invoke
   end
@@ -20,7 +20,12 @@ namespace :mandates do
         label: organe['libelle'],
         current: organe['viMoDe']['dateFin'].nil?
       }
-      Organe.create(attributes)
+      find_organe = Organe.find_by(original_tag: organe['uid'])
+      if find_organe
+        find_organe.update_attributes(attributes)
+      else
+        Organe.create(attributes)
+      end
     end
 
     def run
@@ -58,12 +63,9 @@ namespace :mandates do
         department_num: department_num,
         circo_num: location['numCirco']
       }
-      if Circonscription.where(attributes).empty?
-        Circonscription.create(attributes)
-        return Circonscription.last
-      else
-        return Circonscription.where(attributes).first
-      end
+      search_circo = Circonscription.where(attributes)
+      Circonscription.create(attributes) if search_circo.empty?
+      return search_circo.first
     end
 
     def create_mandate_instance(mandate, deputy)
@@ -83,7 +85,12 @@ namespace :mandates do
         seat_num: mandate['mandature']['placeHemicycle'].to_i,
         hatvp_page: mandate['InfosHorsSIAN']['HATVP_URI']
       }
-      Mandate.create(attributes)
+      find_mandate = Mandate.find_by(original_tag: mandate['uid'])
+      if find_mandate
+        find_mandate.update_attributes(attributes)
+      else
+        Mandate.create(attributes)
+      end
     end
 
     def run
@@ -138,12 +145,9 @@ namespace :mandates do
         sigle: siglify(organe.label),
         organe_id: organe.id
       }
-      if Group.where(attributes).empty?
-        Group.create(attributes)
-        return Group.last
-      else
-        return Group.where(attributes).first
-      end
+      search_group = Group.where(attributes)
+      Group.create(attributes) if search_group.empty?
+      return search_group.first
     end
 
     def run
