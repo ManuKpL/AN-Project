@@ -8,8 +8,9 @@
 </div> -->
 <!-- bootstrap version -->
 
-<!-- NAVIGATION -->
 <div class="container margin-top">
+
+<!-- NAVIGATION -->
   <div class="navigation hidden-xs">
     <%= link_to 'Back', :back, class: 'btn navigation-btn' %>
   </div>
@@ -28,12 +29,44 @@
   </div>
 <!-- NAVIGATION -->
 
+<h1>
+  <%= "#{@deputy.civ} #{@deputy.firstname} #{@deputy.lastname}" %>
+</h1>
+
+<!-- TWITTER -->
+<% if @deputy.screen_name.length > 0 %>
+<% banner_image = @deputy.profile_banner.nil? ? image_url('AN_full') : @deputy.profile_banner %>
+<div class="margin-top" style="background-image: url(<%= banner_image %>)">
+  <%= image_tag @deputy.profile_picture %>
+</div>
+<h4>Account</h4>
+<ul>
+  <li>Name: <%= @deputy.twitter_name %></li>
+  <li><%= link_to "@#{@deputy.screen_name}", "https://twitter.com/#{@deputy.screen_name}", target: "_blank" %></li>
+  <% if @deputy.verified %>
+    <li>Account verified</li>
+  <% end %>
+  <li>Created on : <%= @deputy.creation_date.strftime("%B the #{@deputy.birthday.day.ordinalize}, %Y") %></li>
+  <li>Bio: <%= @deputy.description %></li>
+</ul>
+<hr>
+<h4>
+  <% format = "%B the #{Date.parse(@deputy.followers.keys.last).day.ordinalize}" %>
+  <%= "Data (on #{Date.parse(@deputy.followers.keys.last).strftime(format)})" %>
+</h4>
+<ul>
+  <li><%="Followers: #{@deputy.followers[@deputy.followers.keys.last]}" %></li>
+  <li><%="Followings: #{@deputy.followings[@deputy.followings.keys.last]}" %></li>
+  <li><%="Tweets: #{@deputy.tweets[@deputy.tweets.keys.last]}" %></li>
+  <li><%="Lists: #{@deputy.lists[@deputy.lists.keys.last]}" %></li>
+  <li><%="Favourites: #{@deputy.favourites[@deputy.favourites.keys.last]}" %></li>
+</ul>
+<% end %>
+<!-- TWITTER -->
+
 <!-- PROFILE -->
   <div class="profile-page">
-    <%= image_tag "#{@deputy.picture}" %>
-    <h1>
-      <%= "#{@deputy.civ} #{@deputy.firstname} #{@deputy.lastname}" %>
-    </h1>
+    <%= image_tag @deputy.picture %>
     <p>
       <%= @deputy.group.sigle %>
     </p>
@@ -101,5 +134,6 @@
       <% end %>
     <% end %>
   </div>
-</div>
 <!-- PROFILE -->
+
+</div>

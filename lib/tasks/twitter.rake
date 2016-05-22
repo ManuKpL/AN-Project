@@ -30,6 +30,7 @@ namespace :twitter do
       deputy = Deputy.find_by(screen_name: data[:screen_name].downcase)
       attr = {
         twid:              data[:id_str],
+        twitter_name:      data[:name],
         creation_date:     data[:created_at],
         verified:          data[:verified],
         description:       data[:description],
