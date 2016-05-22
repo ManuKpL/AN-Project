@@ -4,7 +4,7 @@ namespace :deputies do
   desc 'seed DB by calling all deputies rake tasks'
   task :seed => :environment do
     Rake::Task['deputies:deputies'].invoke
-    Rake::Task['deputies:twitter'].invoke
+    Rake::Task['deputies:add_screen_names'].invoke
   end
 
   desc 'open AN JSON and seed DB'
@@ -144,7 +144,7 @@ namespace :deputies do
   end
 
   desc 'open my CSV and seed screen_names'
-  task :twitter => :environment do
+  task :add_screen_names => :environment do
 
     def run
       puts 'Twitter seed starting'
@@ -155,7 +155,7 @@ namespace :deputies do
         print "Twitter for deputy ##{x}: "
         deputy = Deputy.where(lastname: row['Nom'], firstname: row['Prénom']).first
         unless deputy.nil?
-          deputy.screen_name = row['At']
+          deputy.screen_name = row['At'].to_s.downcase
           deputy.save
         end
         puts 'done'
@@ -168,7 +168,7 @@ namespace :deputies do
   end
 
   desc 'save the modified values in another CSV'
-  task :save => :environment do
+  task :save_screen_names => :environment do
 
     def run
       puts 'Saving...'
