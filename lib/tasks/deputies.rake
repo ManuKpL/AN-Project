@@ -43,7 +43,8 @@ namespace :deputies do
         birthday: status['infoNaissance']['dateNais'],
         birthdep: status['infoNaissance']['depNais'],
         job_id: @job.id,
-        original_tag: deputy['uid']['#text']
+        original_tag: deputy['uid']['#text'],
+        current: true
       }
       find_deputy = Deputy.find_by(original_tag: deputy['uid']['#text'])
       if find_deputy
@@ -138,6 +139,7 @@ namespace :deputies do
     end
 
     def run
+      Deputy.where(current: true).update_all(current: false)
       puts 'Seed starting'
       x = 1
       open_json['export']['acteurs']['acteur'].each do |deputy|
