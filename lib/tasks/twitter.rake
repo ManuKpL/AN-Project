@@ -8,6 +8,10 @@ namespace :twitter do
   desc 'call API and get basic infos into deputies instances'
   task :seed_deputies => :environment do
 
+    def reset_screen_name_valid
+      Deputy.update_all(screen_name_valid: nil)
+    end
+
     def stringify_screen_names
       screen_names = Deputy.where.not(screen_name: "").map(&:screen_name)
       result = Array.new
@@ -59,33 +63,34 @@ namespace :twitter do
     def scan_for_invalid_screen_name(total, subtotal)
       puts 'Starting to scan for invalid screen_name'
       deputies = Deputy.where(screen_name_valid: nil).where.not(screen_name: "")
-      Deputy.where(screen_name_valid: false).each do |deputy|
-        deputies << deputy
-      end
       deputies.each do |deputy|
+        subtotal += 1
         print "Deputy with screen_name error ##{subtotal}/#{total}: "
         deputy.screen_name_valid = false
         deputy.save
         puts 'done'
-        subtotal += 1
       end
-      return subtotal - 1
+      return subtotal
     end
 
     def run
+      reset_screen_name_valid
       total = Deputy.where.not(screen_name: "").count
       puts 'Seed starting'
-      subtotal = 1
+      subtotal = 0
+      request_total = 0
       stringify_screen_names.each do |screen_names_string|
+        request_total += 1
+        puts "API call ##{request_total}"
         call_API(screen_names_string).each do |twitter_data|
+          subtotal += 1
           print "Twitter data for deputy ##{subtotal}/#{total}: "
           update_deputy(twitter_data)
           puts 'done'
-          subtotal += 1
         end
       end
       result = scan_for_invalid_screen_name(total, subtotal)
-      puts "Done! #{result} out of #{total} seeded"
+      puts "Done! #{result} out of #{total} seeded (#{request_total} calls to API)"
     end
 
     run
@@ -94,8 +99,11 @@ namespace :twitter do
   desc 'prompt console for missing screen_names and register given ones'
   task :manual_screen_names => :environment do
 
-    def run
-      deputies = Deputy.where(screen_name_valid: false)
+    def select_deputies state
+      Deputy.where(screen_name_valid: state)
+    end
+
+    def prompt_all deputies
       total = deputies.count
       subtotal = 0
       deputies.each do |deputy|
@@ -115,6 +123,14 @@ namespace :twitter do
           puts "No screen_name added"
         end
       end
+    end
+
+    def run
+      puts "Deputies with invalid screen_names"
+      prompt_all(select_deputies(false))
+      puts "Deputies without any screen_name"
+      prompt_all(select_deputies(nil))
+      puts "All Done!"
     end
 
     run
