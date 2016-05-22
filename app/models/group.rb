@@ -3,4 +3,8 @@ class Group < ActiveRecord::Base
   has_many :deputies
 
   validates_presence_of :sigle, :organe_id
+
+  def name
+    sigle
+  end
 end
