@@ -29,12 +29,9 @@ namespace :deputies do
           family: job['socProcINSEE']['famSocPro']
         }
       end
-      if Job.where(attributes).empty?
-        Job.create(attributes)
-        @job = Job.last
-      else
-        @job = Job.where(attributes).first
-      end
+      search_job = Job.where(attributes)
+      Job.create(attributes) if search_job.empty?
+      @job = search_job.first
     end
 
     def create_deputy_instance(deputy)
@@ -48,7 +45,12 @@ namespace :deputies do
         job_id: @job.id,
         original_tag: deputy['uid']['#text']
       }
-      Deputy.create(attributes)
+      find_deputy = Deputy.find_by(original_tag: deputy['uid']['#text'])
+      if find_deputy
+        find_deputy.update_attributes(attributes)
+      else
+        Deputy.create(attributes)
+      end
     end
 
     def dispatch_address_info(deputy)
@@ -87,7 +89,12 @@ namespace :deputies do
       attributes[:value].chop! if attributes[:value][-1] == ","
       attributes[:description].chop! if attributes[:description][-1] == ","
       attributes[:more_info].chop! if attributes[:more_info] != nil && attributes[:more_info][-1] == ","
-      Address.create(attributes)
+      find_address = Address.find_by(original_tag: address['uid'])
+      if find_address
+        find_address.update_attributes(attributes)
+      else
+        Address.create(attributes)
+      end
     end
 
     def create_e_address_instance(address)
@@ -96,14 +103,17 @@ namespace :deputies do
         value: address['valElec'],
         deputy_id: Deputy.last.id
       }
-      EAddress.create(attributes)
+      search_e_address = EAddress.where(attributes)
+      EAddress.create(attributes) if search_e_address.nil?
     end
 
     def create_phone_instance(address)
-      if Address.find_by_original_tag(address['adresseDeRattachement'])
-        attached = Address.find_by_original_tag(address['adresseDeRattachement'])
-      elsif Address.where(deputy_id: Deputy.last.id).where(label: 'NR') != []
-        attached = Address.where(deputy_id: Deputy.last.id).where(label: 'NR').first
+      find_linked_address = Address.find_by(original_tag: address['adresseDeRattachement'])
+      find_blank_address = Address.where(deputy_id: Deputy.last.id).where(label: 'NR')
+      if find_linked_address
+        attached = find_linked_address
+      elsif find_blank_address.any?
+        attached = find_blank_address.first
       else
         attributes = {
           label: 'NR',
@@ -123,7 +133,8 @@ namespace :deputies do
         value: address['numeroTelephone'],
         address_id: attached.id
       }
-      Phone.create(attributes)
+      search_phone = Phone.where(attributes)
+      Phone.create(attributes) if search_phone.empty?
     end
 
     def run

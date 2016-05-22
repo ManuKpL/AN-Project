@@ -63,8 +63,9 @@ namespace :mandates do
         department_num: department_num,
         circo_num: location['numCirco']
       }
-      Circonscription.create(attributes) if Circonscription.where(attributes).empty?
-      return Circonscription.where(attributes).first
+      search_circo = Circonscription.where(attributes)
+      Circonscription.create(attributes) if search_circo.empty?
+      return search_circo.first
     end
 
     def create_mandate_instance(mandate, deputy)
@@ -144,8 +145,9 @@ namespace :mandates do
         sigle: siglify(organe.label),
         organe_id: organe.id
       }
-      Group.create(attributes) if Group.where(attributes).empty?
-      return Group.where(attributes).first
+      search_group = Group.where(attributes)
+      Group.create(attributes) if search_group.empty?
+      return search_group.first
     end
 
     def run
