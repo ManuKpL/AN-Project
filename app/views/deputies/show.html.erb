@@ -41,6 +41,7 @@
 </div>
 <h4>Account</h4>
 <ul>
+  <li>Name: <%= @deputy.twitter_name %></li>
   <li><%= link_to "@#{@deputy.screen_name}", "https://twitter.com/#{@deputy.screen_name}", target: "_blank" %></li>
   <% if @deputy.verified %>
     <li>Account verified</li>
