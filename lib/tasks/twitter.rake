@@ -30,6 +30,7 @@ namespace :twitter do
         verified:          data[:verified],
         description:       data[:description],
         profile_picture:   data[:profile_image_url_https].gsub('normal', '400x400'),
+        profile_banner:    data[:profile_banner_url],
         screen_name_valid: true
       }
       deputy.update_attributes(attr)
